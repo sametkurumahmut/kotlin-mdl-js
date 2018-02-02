@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-mdl-js.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-mdl-js.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-mdl-js_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-mdl-js_main.iml" group="kotlin-mdl-js" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-mdl-js_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-mdl-js_test.iml" group="kotlin-mdl-js" />
+    </modules>
+  </component>
+</project>
