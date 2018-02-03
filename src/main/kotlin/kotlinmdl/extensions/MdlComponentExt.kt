@@ -62,6 +62,27 @@ fun <E : Element> MdlComponent<E>.invertToggleClassAndOn(
     }
 }
 
+fun <E : Element> MdlComponent<E>.setTextContentOf(
+        reference: Element,
+        textContent: String = String.empty,
+        runOnInit: Boolean = true) = object : ReadWriteProperty<Any, String> {
+
+    private var text: String = textContent
+
+    init { if (runOnInit) reference.textContent = textContent }
+
+    override fun getValue(thisRef: Any, property: KProperty<*>): String = this.text
+
+    override fun setValue(thisRef: Any, property: KProperty<*>, value: String) {
+        reference.textContent = value
+        this.text = value
+    }
+}
+
+fun <E : Element> MdlComponent<E>.setTextContentOfThis(
+        textContent: String = String.empty,
+        runOnInit: Boolean = true) = this.setTextContentOf(this.element, textContent, runOnInit)
+
 fun <E : Element> MdlComponent<E>.toggleClass(
         cssClass: String,
         initialValue: Boolean = false,
