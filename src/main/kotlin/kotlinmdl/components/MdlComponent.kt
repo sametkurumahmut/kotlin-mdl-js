@@ -28,4 +28,6 @@ abstract class MdlComponent<T> protected constructor(val element: T, classes: St
     open operator fun String.unaryPlus() = this@MdlComponent.element.appendText(this)
 
     open operator fun <T : Element> T.unaryPlus() = this@MdlComponent.element + this
+
+    open operator fun <T : MdlComponent<E>, E : Element> T.unaryPlus() = this@MdlComponent + this
 }
