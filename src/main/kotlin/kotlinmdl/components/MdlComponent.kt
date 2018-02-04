@@ -12,22 +12,22 @@ abstract class MdlComponent<T> protected constructor(val element: T, classes: St
         if (classes.isNotEmpty()) this.element.className = classes attributeSeparator this.element.className
     }
 
-    open fun <T : MdlComponent<E>, E : Element> append(component: T) = this + component
+    open fun <Comp : MdlComponent<E>, E : Element> append(component: Comp) = this + component
 
-    open fun <T : Element> append(element: T) = this + element
+    open fun <E : Element> append(element: E) = this + element
 
     infix fun String.to(value: String) {
         this@MdlComponent.element.setAttribute(this, value)
     }
 
-    open operator fun <T : MdlComponent<E>, E : Element> plus(component: T)
+    open operator fun <Comp : MdlComponent<E>, E : Element> plus(component: Comp)
             = component.also { this.element + component.element }
 
-    open operator fun <T : Element> plus(element: T) = this.element + element
+    open operator fun <E : Element> plus(element: E) = this.element + element
 
     open operator fun String.unaryPlus() = this@MdlComponent.element.appendText(this)
 
-    open operator fun <T : Element> T.unaryPlus() = this@MdlComponent.element + this
+    open operator fun <E : Element> E.unaryPlus() = this@MdlComponent.element + this
 
-    open operator fun <T : MdlComponent<E>, E : Element> T.unaryPlus() = this@MdlComponent + this
+    open operator fun <Comp : MdlComponent<E>, E : Element> Comp.unaryPlus() = this@MdlComponent + this
 }
