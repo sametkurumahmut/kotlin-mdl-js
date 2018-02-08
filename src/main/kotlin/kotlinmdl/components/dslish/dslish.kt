@@ -3,6 +3,7 @@ package kotlinmdl.components.dslish
 import kotlinmdl.components.*
 import kotlinmdl.extensions.empty
 import kotlinmdl.extensions.plus
+import kotlinx.html.ATarget
 import org.w3c.dom.Element
 
 //region Mdl Component Extensions
@@ -22,6 +23,17 @@ fun MdlLayoutDrawer.layoutTitle(
         classes: String = String.empty,
         block: MdlLayoutTitle.() -> Unit = {})
         = this + MdlLayoutTitle(title, classes).also { this.layoutTitle = it; it.block() }
+
+fun MdlLayoutNav.link(
+        href: String? = null,
+        target: String? = null,
+        classes: String = String.empty,
+        block: MdlNavLink.() -> Unit = {}) = this + MdlNavLink(href, target, classes).apply(block)
+
+fun MdlLayoutNav.externalLink(
+        href: String? = null,
+        classes: String = String.empty,
+        block: MdlNavLink.() -> Unit = {}) = this + MdlNavLink(href, ATarget.blank, classes).apply(block)
 //endregion
 
 //region Element Extensions
