@@ -24,6 +24,15 @@ fun MdlLayoutDrawer.layoutTitle(
         block: MdlLayoutTitle.() -> Unit = {})
         = this + MdlLayoutTitle(title, classes).also { this.layoutTitle = it; it.block() }
 
+fun MdlLayoutHeader.row(classes: String = String.empty, block: MdlLayoutHeaderRow.() -> Unit = {})
+        = this + MdlLayoutHeaderRow(classes).apply(block)
+
+fun MdlLayoutHeaderRow.layoutTitle(
+        title: String,
+        classes: String = String.empty,
+        block: MdlLayoutTitle.() -> Unit = {})
+        = this + MdlLayoutTitle(title, classes).also { this.layoutTitle = it; it.block() }
+
 fun MdlLayoutNav.link(
         href: String? = null,
         target: String? = null,
