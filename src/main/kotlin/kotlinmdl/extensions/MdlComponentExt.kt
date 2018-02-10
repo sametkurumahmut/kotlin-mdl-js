@@ -62,6 +62,38 @@ fun <E : Element> MdlComponent<E>.invertToggleClassAndOn(
     }
 }
 
+fun <T : MdlComponent<E2>, P : MdlComponent<E3>?, E1 : Element, E2 : Element, E3 : Element> MdlComponent<E1>.replaceChildOf(
+        component: T,
+        initialComponentValue: P,
+        runOnInit: Boolean = true) = this.replaceChildOf(component.element, initialComponentValue, runOnInit)
+
+fun <T : Element, P : MdlComponent<E2>?, E1 : Element, E2 : Element> MdlComponent<E1>.replaceChildOf(
+        element: T,
+        initialComponentValue: P,
+        runOnInit: Boolean = true) = object : ReadWriteProperty<Any, P> {
+
+    private var comp = initialComponentValue
+
+    init {
+        if (runOnInit && initialComponentValue != null) element + initialComponentValue.element
+    }
+
+    override fun getValue(thisRef: Any, property: KProperty<*>) = this.comp
+
+    override fun setValue(thisRef: Any, property: KProperty<*>, value: P) {
+        value?.let {
+            this.comp?.let { element.replaceChild(value.element, this.comp!!.element) }
+                    ?: element + value.element
+        } ?: this.comp?.let { element.removeChild(this.comp!!.element) }
+
+        this.comp = value
+    }
+}
+
+fun <T : MdlComponent<E2>?, E1 : Element, E2 : Element> MdlComponent<E1>.replaceChildOfThis(
+        initialComponentValue: T,
+        runOnInit: Boolean = true) = this.replaceChildOf(this, initialComponentValue, runOnInit)
+
 fun <E : Element> MdlComponent<E>.setTextContentOf(
         reference: Element,
         textContent: String = String.empty,
