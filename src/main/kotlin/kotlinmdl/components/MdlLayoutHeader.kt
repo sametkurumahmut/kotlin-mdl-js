@@ -1,7 +1,7 @@
 package kotlinmdl.components
 
-import kotlinmdl.extensions.empty
-import kotlinmdl.extensions.toggleClass
+import kotlinmdl.internal.extensions.empty
+import kotlinmdl.internal.extensions.toggleClass
 import kotlinx.html.dom.create
 import kotlinx.html.js.header
 import org.w3c.dom.HTMLElement

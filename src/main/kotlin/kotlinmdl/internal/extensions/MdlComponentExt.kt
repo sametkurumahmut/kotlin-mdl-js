@@ -1,6 +1,7 @@
-package kotlinmdl.extensions
+package kotlinmdl.internal.extensions
 
 import kotlinmdl.components.MdlComponent
+import kotlinmdl.extensions.plus
 import org.w3c.dom.Element
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty

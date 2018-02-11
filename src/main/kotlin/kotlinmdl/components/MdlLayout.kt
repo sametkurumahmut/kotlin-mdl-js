@@ -1,9 +1,9 @@
 package kotlinmdl.components
 
-import kotlinmdl.extensions.empty
-import kotlinmdl.extensions.invertToggleClass
-import kotlinmdl.extensions.replaceChildOfThis
-import kotlinmdl.extensions.toggleClass
+import kotlinmdl.internal.extensions.empty
+import kotlinmdl.internal.extensions.invertToggleClass
+import kotlinmdl.internal.extensions.replaceChildOfThis
+import kotlinmdl.internal.extensions.toggleClass
 import kotlinx.html.dom.create
 import kotlinx.html.js.div
 import org.w3c.dom.HTMLDivElement

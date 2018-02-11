@@ -1,7 +1,7 @@
 package kotlinmdl.components
 
-import kotlinmdl.extensions.empty
-import kotlinmdl.extensions.toggleClass
+import kotlinmdl.internal.extensions.empty
+import kotlinmdl.internal.extensions.toggleClass
 import org.w3c.dom.Element
 
 abstract class MdlLayoutElement<T>(element: T, classes: String = String.empty)

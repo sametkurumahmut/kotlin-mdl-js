@@ -1,8 +1,8 @@
 package kotlinmdl.components.dslish
 
 import kotlinmdl.components.*
-import kotlinmdl.extensions.empty
 import kotlinmdl.extensions.plus
+import kotlinmdl.internal.extensions.empty
 import kotlinx.html.ATarget
 import org.w3c.dom.Element
 

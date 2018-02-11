@@ -1,6 +1,6 @@
 package kotlinmdl.components
 
-import kotlinmdl.extensions.empty
+import kotlinmdl.internal.extensions.empty
 
 open class MdlScrollableLayoutHeader(isTransparent: Boolean = false, classes: String = String.empty)
     : MdlLayoutHeader(isTransparent, classes) {
