@@ -1,10 +1,6 @@
 package kotlinmdl.extensions
 
-/**
- * The empty holds empty string value.
- */
-val String.Companion.empty: String
-    get() = ""
+import kotlinmdl.internal.extensions.empty
 
 infix fun String?.attributeSeparator(append: String?): String {
     val thisFlag = !this.isNullOrBlank()

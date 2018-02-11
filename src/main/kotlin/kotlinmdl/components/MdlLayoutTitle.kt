@@ -1,7 +1,7 @@
 package kotlinmdl.components
 
-import kotlinmdl.extensions.empty
-import kotlinmdl.extensions.setTextContentOfThis
+import kotlinmdl.internal.extensions.empty
+import kotlinmdl.internal.extensions.setTextContentOfThis
 import kotlinx.html.dom.create
 import kotlinx.html.js.span
 import org.w3c.dom.HTMLSpanElement

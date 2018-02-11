@@ -1,8 +1,8 @@
 package kotlinmdl.components
 
 import kotlinmdl.extensions.attributeSeparator
-import kotlinmdl.extensions.empty
 import kotlinmdl.extensions.plus
+import kotlinmdl.internal.extensions.empty
 import org.w3c.dom.Element
 import kotlin.dom.appendText
 

@@ -1,7 +1,7 @@
 package kotlinmdl.components
 
-import kotlinmdl.extensions.empty
-import kotlinmdl.extensions.toggleClass
+import kotlinmdl.internal.extensions.empty
+import kotlinmdl.internal.extensions.toggleClass
 
 open class MdlFixedLayoutHeader(
         isSeamed: Boolean = false,

@@ -1,6 +1,6 @@
 package kotlinmdl.components
 
-import kotlinmdl.extensions.empty
+import kotlinmdl.internal.extensions.empty
 import kotlinx.html.dom.create
 import kotlinx.html.js.nav
 import org.w3c.dom.HTMLElement
