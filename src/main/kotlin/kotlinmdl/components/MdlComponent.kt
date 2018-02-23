@@ -3,31 +3,45 @@ package kotlinmdl.components
 import kotlinmdl.extensions.attributeSeparator
 import kotlinmdl.extensions.plus
 import kotlinmdl.internal.extensions.empty
+import kotlinmdl.material.style.IMaterialIcon
+import kotlinmdl.style.IMdlStyle
 import org.w3c.dom.Element
-import kotlin.dom.appendText
+import org.w3c.dom.Node
 
-abstract class MdlComponent<T> protected constructor(val element: T, classes: String = String.empty) where T : Element {
+abstract class MdlComponent<out T : Element> protected constructor(element: T, classes: String = String.empty)
+    : IMdlComponent<T> {
 
     init {
-        if (classes.isNotEmpty()) this.element.className = classes attributeSeparator this.element.className
+        if (classes.isNotEmpty()) element.className = classes attributeSeparator element.className
     }
 
-    open fun <Comp : MdlComponent<E>, E : Element> append(component: Comp) = this + component
+    override val element = element
 
-    open fun <E : Element> append(element: E) = this + element
+    override fun <Comp : IMdlComponent<E>, E : Element> append(component: Comp) = +component
 
-    infix fun String.to(value: String) {
-        this@MdlComponent.element.setAttribute(this, value)
-    }
+    override fun <N : Node> append(node: N) = +node
 
-    open operator fun <Comp : MdlComponent<E>, E : Element> plus(component: Comp)
-            = component.also { this.element + component.element }
+    override fun toString() = this.element.outerHTML
 
-    open operator fun <E : Element> plus(element: E) = this.element + element
+    override infix fun String.to(value: Number) = this to value.toString()
 
-    open operator fun String.unaryPlus() = this@MdlComponent.element.appendText(this)
+    override infix fun String.to(value: String) = this@MdlComponent.also { it.element.setAttribute(this, value) }
 
-    open operator fun <E : Element> E.unaryPlus() = this@MdlComponent.element + this
+    override operator fun <Comp : IMdlComponent<E>, E : Element> plus(component: Comp) = +component
 
-    open operator fun <Comp : MdlComponent<E>, E : Element> Comp.unaryPlus() = this@MdlComponent + this
+    override operator fun <N : Node> plus(node: N) = +node
+
+    override operator fun IMaterialIcon.unaryPlus() = +this.ligature
+
+    override operator fun IMdlStyle.unaryPlus() = this@MdlComponent.also { it.element.classList.add(this.toString()) }
+
+    override operator fun Number.unaryPlus() = +this.toString()
+
+    override operator fun String.unaryPlus()
+            = this@MdlComponent.element.appendChild(element.ownerDocument!!.createTextNode(this))
+
+    override operator fun <N : Node> N.unaryPlus() = this@MdlComponent.element + this
+
+    override operator fun <Comp : IMdlComponent<E>, E : Element> Comp.unaryPlus()
+            = this.also { this@MdlComponent.element + it.element }
 }
