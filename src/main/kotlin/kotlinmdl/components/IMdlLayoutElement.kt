@@ -1,6 +1,8 @@
 package kotlinmdl.components
 
-interface IMdlLayoutElement {
+import org.w3c.dom.Element
+
+interface IMdlLayoutElement<out T : Element> : IMdlComponent<T> {
 
     var isLargeScreenOnly: Boolean
     var isSmallScreenOnly: Boolean
