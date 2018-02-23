@@ -1,7 +1,7 @@
 package kotlinmdl.components
 
 import kotlinmdl.internal.extensions.empty
-import kotlinmdl.internal.extensions.toggleClass
+import kotlinmdl.internal.extensions.toggleClassOfThis
 
 open class MdlWaterfallLayoutHeader(
         isTopHideable: Boolean = false,
@@ -12,7 +12,7 @@ open class MdlWaterfallLayoutHeader(
         this.element.classList.add(MODIFIER_NAME)
     }
 
-    open var isTopHideable by this.toggleClass(HIDE_TOP_MODIFIER_NAME, isTopHideable)
+    open var isTopHideable by this.toggleClassOfThis(HIDE_TOP_MODIFIER_NAME, isTopHideable)
 
     companion object {
 
