@@ -7,18 +7,18 @@ import kotlinx.html.ATarget
 import org.w3c.dom.Element
 
 //region Mdl Component Extensions
-fun <T : Element> MdlComponent<T>.layout(classes: String = kotlin.String.empty, block: MdlLayout.() -> Unit = {})
+fun <T : Element> IMdlComponent<T>.layout(classes: String = kotlin.String.empty, block: MdlLayout.() -> Unit = {})
         = this + kotlinmdl.components.MdlLayout(classes).apply(block)
 
-fun <T : Element> MdlComponent<T>.layoutSpacer(classes: String = String.empty, block: MdlLayoutSpacer.() -> Unit = {})
+fun <T : Element> IMdlComponent<T>.layoutSpacer(classes: String = String.empty, block: MdlLayoutSpacer.() -> Unit = {})
         = this + MdlLayoutSpacer(classes).apply(block)
 
-fun <T : Element> MdlComponent<T>.layoutTitle(
+fun <T : Element> IMdlComponent<T>.layoutTitle(
         title: String,
         classes: String = String.empty,
         block: MdlLayoutTitle.() -> Unit = {}) = this + MdlLayoutTitle(title, classes).apply(block)
 
-fun <T : Element> MdlComponent<T>.nav(classes: String = kotlin.String.empty, block: MdlLayoutNav.() -> Unit = {})
+fun <T : Element> IMdlComponent<T>.nav(classes: String = kotlin.String.empty, block: MdlLayoutNav.() -> Unit = {})
         = this + MdlLayoutNav(classes).apply(block)
 
 fun MdlLayout.content(

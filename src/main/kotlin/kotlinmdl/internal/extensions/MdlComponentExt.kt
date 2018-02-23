@@ -1,12 +1,12 @@
 package kotlinmdl.internal.extensions
 
-import kotlinmdl.components.MdlComponent
+import kotlinmdl.components.IMdlComponent
 import kotlinmdl.extensions.plus
 import org.w3c.dom.Element
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-fun <E : Element> MdlComponent<E>.invertToggleClass(
+fun <E : Element> IMdlComponent<E>.invertToggleClass(
         cssClass: String,
         initialValue: Boolean = false,
         runOnInit: Boolean = true) = object : ReadWriteProperty<Any, Boolean> {
@@ -31,7 +31,7 @@ fun <E : Element> MdlComponent<E>.invertToggleClass(
     }
 }
 
-fun <E : Element> MdlComponent<E>.invertToggleClassAndOn(
+fun <E : Element> IMdlComponent<E>.invertToggleClassAndOn(
         cssClass: String,
         initialValue: Boolean = false,
         runOnInit: Boolean = true,
@@ -63,12 +63,12 @@ fun <E : Element> MdlComponent<E>.invertToggleClassAndOn(
     }
 }
 
-fun <T : MdlComponent<E2>, P : MdlComponent<E3>?, E1 : Element, E2 : Element, E3 : Element> MdlComponent<E1>.replaceChildOf(
+fun <T : IMdlComponent<E2>, P : IMdlComponent<E3>?, E1 : Element, E2 : Element, E3 : Element> IMdlComponent<E1>.replaceChildOf(
         component: T,
         initialComponentValue: P,
         runOnInit: Boolean = true) = this.replaceChildOf(component.element, initialComponentValue, runOnInit)
 
-fun <T : Element, P : MdlComponent<E2>?, E1 : Element, E2 : Element> MdlComponent<E1>.replaceChildOf(
+fun <T : Element, P : IMdlComponent<E2>?, E1 : Element, E2 : Element> IMdlComponent<E1>.replaceChildOf(
         element: T,
         initialComponentValue: P,
         runOnInit: Boolean = true) = object : ReadWriteProperty<Any, P> {
@@ -91,11 +91,11 @@ fun <T : Element, P : MdlComponent<E2>?, E1 : Element, E2 : Element> MdlComponen
     }
 }
 
-fun <T : MdlComponent<E2>?, E1 : Element, E2 : Element> MdlComponent<E1>.replaceChildOfThis(
+fun <T : IMdlComponent<E2>?, E1 : Element, E2 : Element> IMdlComponent<E1>.replaceChildOfThis(
         initialComponentValue: T,
         runOnInit: Boolean = true) = this.replaceChildOf(this, initialComponentValue, runOnInit)
 
-fun <E : Element> MdlComponent<E>.setTextContentOf(
+fun <E : Element> IMdlComponent<E>.setTextContentOf(
         reference: Element,
         textContent: String = String.empty,
         runOnInit: Boolean = true) = object : ReadWriteProperty<Any, String> {
@@ -109,11 +109,11 @@ fun <E : Element> MdlComponent<E>.setTextContentOf(
     }
 }
 
-fun <E : Element> MdlComponent<E>.setTextContentOfThis(
+fun <E : Element> IMdlComponent<E>.setTextContentOfThis(
         textContent: String = String.empty,
         runOnInit: Boolean = true) = this.setTextContentOf(this.element, textContent, runOnInit)
 
-fun <E : Element> MdlComponent<E>.toggleClass(
+fun <E : Element> IMdlComponent<E>.toggleClass(
         cssClass: String,
         initialValue: Boolean = false,
         runOnInit: Boolean = true) = object : ReadWriteProperty<Any, Boolean> {
@@ -137,7 +137,7 @@ fun <E : Element> MdlComponent<E>.toggleClass(
     }
 }
 
-fun <E : Element> MdlComponent<E>.toggleClassAndOn(
+fun <E : Element> IMdlComponent<E>.toggleClassAndOn(
         cssClass: String,
         initialValue: Boolean = false,
         runOnInit: Boolean = true,
