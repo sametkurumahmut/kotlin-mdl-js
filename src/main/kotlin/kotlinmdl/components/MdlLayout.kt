@@ -1,9 +1,9 @@
 package kotlinmdl.components
 
 import kotlinmdl.internal.extensions.empty
-import kotlinmdl.internal.extensions.invertToggleClass
-import kotlinmdl.internal.extensions.replaceChildOfThis
-import kotlinmdl.internal.extensions.toggleClass
+import kotlinmdl.internal.extensions.invertToggleClassOfThis
+import kotlinmdl.internal.extensions.replaceOrAppendExistingChildOfThis
+import kotlinmdl.internal.extensions.toggleClassOfThis
 import kotlinx.html.dom.create
 import kotlinx.html.js.div
 import org.w3c.dom.HTMLDivElement
@@ -12,14 +12,14 @@ import kotlin.browser.document
 open class MdlLayout(classes: String = String.empty)
     : MdlComponent<HTMLDivElement>(document.create.div(BLOCK_NAME), classes) {
 
-    open var drawer: MdlLayoutDrawer? by this.replaceChildOfThis(null)
-    open var header: MdlLayoutHeader? by this.replaceChildOfThis(null)
-    open var content: MdlLayoutContent? by this.replaceChildOfThis(null)
+    open var drawer: MdlLayoutDrawer? by this.replaceOrAppendExistingChildOfThis(initialComponent = null)
+    open var header: MdlLayoutHeader? by this.replaceOrAppendExistingChildOfThis(initialComponent = null)
+    open var content: MdlLayoutContent? by this.replaceOrAppendExistingChildOfThis(initialComponent = null)
 
-    open var hasDesktopDrawerButton by this.invertToggleClass(NO_DESKTOP_DRAWER_BUTTON_MODIFIER_NAME, true)
-    open var hasDrawerButton by this.invertToggleClass(NO_DRAWER_BUTTON_MODIFIER_NAME, true)
-    open var hasFixedDrawer by this.toggleClass(FIXED_DRAWER_MODIFIER_NAME)
-    open var hasFixedHeader by this.toggleClass(FIXED_HEADER_MODIFIER_NAME)
+    open var hasDesktopDrawerButton by this.invertToggleClassOfThis(NO_DESKTOP_DRAWER_BUTTON_MODIFIER_NAME, true)
+    open var hasDrawerButton by this.invertToggleClassOfThis(NO_DRAWER_BUTTON_MODIFIER_NAME, true)
+    open var hasFixedDrawer by this.toggleClassOfThis(FIXED_DRAWER_MODIFIER_NAME)
+    open var hasFixedHeader by this.toggleClassOfThis(FIXED_HEADER_MODIFIER_NAME)
 
     companion object {
 
