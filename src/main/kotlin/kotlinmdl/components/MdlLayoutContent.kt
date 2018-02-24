@@ -7,17 +7,15 @@ import org.w3c.dom.HTMLDivElement
 import kotlin.browser.document
 
 open class MdlLayoutContent(
-        open var title: String = String.empty,
+        element: HTMLDivElement,
+        title: String = String.empty,
         classes: String = String.empty,
-        body: MdlLayoutContent.() -> Unit = {})
-    : MdlLayoutElement<HTMLDivElement>(document.create.div(ELEMENT_NAME), classes) {
+        body: MdlLayoutContent.() -> Unit = {}) : MdlLayoutContentBase<HTMLDivElement>(element, title, classes) {
+
+    constructor(title: String = String.empty, classes: String = String.empty, body: MdlLayoutContent.() -> Unit = {})
+            : this(document.create.div(), title, classes, body)
 
     init {
         this.body()
-    }
-
-    companion object {
-
-        const val ELEMENT_NAME = "mdl-layout__content"
     }
 }

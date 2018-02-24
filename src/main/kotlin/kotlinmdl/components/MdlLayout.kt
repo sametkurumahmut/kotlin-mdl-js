@@ -15,7 +15,7 @@ open class MdlLayout(classes: String = String.empty)
 
     open var drawer: IMdlLayoutDrawer<Element>? by this.replaceOrAppendExistingChildOfThis(initialComponent = null)
     open var header: IMdlLayoutHeader<Element>? by this.replaceOrAppendExistingChildOfThis(initialComponent = null)
-    open var content: MdlLayoutContent? by this.replaceOrAppendExistingChildOfThis(initialComponent = null)
+    open var content: IMdlLayoutContent<Element>? by this.replaceOrAppendExistingChildOfThis(initialComponent = null)
 
     open var hasDesktopDrawerButton by this.invertToggleClassOfThis(NO_DESKTOP_DRAWER_BUTTON_MODIFIER_NAME, true)
     open var hasDrawerButton by this.invertToggleClassOfThis(NO_DRAWER_BUTTON_MODIFIER_NAME, true)
