@@ -33,6 +33,13 @@ fun MdlLayout.drawer(classes: String = String.empty, block: MdlLayoutDrawer.() -
 fun MdlLayout.fixedDrawer(classes: String = String.empty, block: MdlLayoutDrawer.() -> Unit = {})
         = this + MdlLayoutDrawer(classes).also { this.drawer = it; this.hasFixedDrawer = true; it.block() }
 
+fun <T : Element> MdlLayout.header(
+        element: T,
+        isTransparent: Boolean = false,
+        classes: String = kotlin.String.empty,
+        block: IMdlLayoutHeader<T>.() -> Unit = {}): IMdlLayoutHeader<T>
+        = this + object : MdlLayoutHeader<T>(element, isTransparent, classes) {}.also { this.header = it; it.block() }
+
 fun MdlLayout.fixedHeader(
         isSeamed: Boolean = false,
         isTransparent: Boolean = false,
