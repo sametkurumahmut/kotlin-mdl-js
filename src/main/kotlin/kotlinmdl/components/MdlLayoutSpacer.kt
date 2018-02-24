@@ -6,11 +6,8 @@ import kotlinx.html.js.div
 import org.w3c.dom.HTMLDivElement
 import kotlin.browser.document
 
-open class MdlLayoutSpacer(classes: String = String.empty)
-    : MdlLayoutElement<HTMLDivElement>(document.create.div(BLOCK_NAME), classes) {
+open class MdlLayoutSpacer(element: HTMLDivElement, classes: String = String.empty)
+    : MdlLayoutSpacerBase<HTMLDivElement>(element, classes) {
 
-    companion object {
-
-        const val BLOCK_NAME = "mdl-layout-spacer"
-    }
+    constructor(classes: String = String.empty) : this(document.create.div(), classes)
 }
