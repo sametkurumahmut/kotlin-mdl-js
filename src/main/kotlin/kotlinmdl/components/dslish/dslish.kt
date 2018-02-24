@@ -31,8 +31,8 @@ fun <T : Element, E : Element> IMdlComponent<E>.layoutTitle(
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.apply(block)
 
-fun <T : Element> IMdlComponent<T>.nav(classes: String = kotlin.String.empty, block: MdlLayoutNav.() -> Unit = {})
-        = this + MdlLayoutNav(classes).apply(block)
+fun <T : Element> IMdlComponent<T>.nav(classes: String = kotlin.String.empty, block: MdlNav.() -> Unit = {})
+        = this + MdlNav(classes).apply(block)
 
 fun MdlLayout.content(
         title: String = String.empty,
@@ -167,13 +167,13 @@ fun <T : Element> MdlLayoutHeaderRow.layoutTitle(
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.also { this.layoutTitle = it; it.block() }
 
-fun MdlLayoutNav.link(
+fun MdlNav.link(
         href: String? = null,
         target: String? = null,
         classes: String = String.empty,
         block: MdlNavLink.() -> Unit = {}) = this + MdlNavLink(href, target, classes).apply(block)
 
-fun MdlLayoutNav.externalLink(
+fun MdlNav.externalLink(
         href: String? = null,
         classes: String = String.empty,
         block: MdlNavLink.() -> Unit = {}) = this + MdlNavLink(href, ATarget.blank, classes).apply(block)
@@ -202,6 +202,6 @@ fun <T : Element> Element.mdlLayoutTitle(
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.apply(block)
 
-fun Element.mdlNav(classes: String = String.empty, block: MdlLayoutNav.() -> Unit = {})
-        = this + MdlLayoutNav(classes).apply(block)
+fun Element.mdlNav(classes: String = String.empty, block: MdlNav.() -> Unit = {})
+        = this + MdlNav(classes).apply(block)
 //endregion
