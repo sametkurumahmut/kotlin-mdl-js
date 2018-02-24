@@ -13,6 +13,12 @@ fun <T : Element> IMdlComponent<T>.layout(classes: String = kotlin.String.empty,
 fun <T : Element> IMdlComponent<T>.layoutSpacer(classes: String = String.empty, block: MdlLayoutSpacer.() -> Unit = {})
         = this + MdlLayoutSpacer(classes).apply(block)
 
+fun <T : Element, E : Element> IMdlComponent<E>.layoutSpacer(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlLayoutSpacer<T>.() -> Unit = {}): IMdlLayoutSpacer<T>
+        = this + object : MdlLayoutSpacerBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.layoutTitle(
         title: String,
         classes: String = String.empty,
@@ -172,6 +178,12 @@ fun Element.mdlLayout(classes: String = String.empty, block: MdlLayout.() -> Uni
 
 fun Element.mdlLayoutSpacer(classes: String = String.empty, block: MdlLayoutSpacer.() -> Unit = {})
         = this + MdlLayoutSpacer(classes).apply(block)
+
+fun <T : Element> Element.mdlLayoutSpacer(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlLayoutSpacer<T>.() -> Unit = {}): IMdlLayoutSpacer<T>
+        = this + object : MdlLayoutSpacerBase<T>(element, classes) {}.apply(block)
 
 fun Element.mdlLayoutTitle(title: String, classes: String = String.empty, block: MdlLayoutTitle.() -> Unit = {})
         = this + MdlLayoutTitle(title, classes).apply(block)
