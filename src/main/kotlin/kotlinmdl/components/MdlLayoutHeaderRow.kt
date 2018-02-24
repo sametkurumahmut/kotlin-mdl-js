@@ -3,17 +3,11 @@ package kotlinmdl.components
 import kotlinmdl.internal.extensions.empty
 import kotlinx.html.dom.create
 import kotlinx.html.js.div
-import org.w3c.dom.Element
 import org.w3c.dom.HTMLDivElement
 import kotlin.browser.document
 
-open class MdlLayoutHeaderRow(classes: String = String.empty)
-    : MdlLayoutElement<HTMLDivElement>(document.create.div(ELEMENT_NAME), classes) {
+open class MdlLayoutHeaderRow(element: HTMLDivElement, classes: String = String.empty)
+    : MdlLayoutHeaderRowBase<HTMLDivElement>(element, classes) {
 
-    open var layoutTitle: IMdlLayoutTitle<Element>? = null
-
-    companion object {
-
-        const val ELEMENT_NAME = "mdl-layout__header-row"
-    }
+    constructor(classes: String = String.empty) : this(document.create.div(), classes)
 }
