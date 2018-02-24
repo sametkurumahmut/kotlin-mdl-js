@@ -7,8 +7,14 @@ import kotlinx.html.ATarget
 import org.w3c.dom.Element
 
 //region Mdl Component Extensions
-fun <T : Element> IMdlComponent<T>.layout(classes: String = kotlin.String.empty, block: MdlLayout.() -> Unit = {})
-        = this + kotlinmdl.components.MdlLayout(classes).apply(block)
+fun <T : Element> IMdlComponent<T>.layout(classes: String = String.empty, block: MdlLayout.() -> Unit = {})
+        = this + MdlLayout(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.layout(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlLayout<T>.() -> Unit = {}): IMdlLayout<T>
+        = this + object : MdlLayoutBase<T>(element, classes) {}.apply(block)
 
 fun <T : Element> IMdlComponent<T>.layoutSpacer(classes: String = String.empty, block: MdlLayoutSpacer.() -> Unit = {})
         = this + MdlLayoutSpacer(classes).apply(block)
@@ -193,6 +199,12 @@ fun <T : Element> IMdlNav<T>.externalLink(
 //region Element Extensions
 fun Element.mdlLayout(classes: String = String.empty, block: MdlLayout.() -> Unit = {})
         = this + MdlLayout(classes).apply(block)
+
+fun <T : Element> Element.mdlLayout(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlLayout<T>.() -> Unit = {}) : IMdlLayout<T>
+        = this + object : MdlLayoutBase<T>(element, classes) {}.apply(block)
 
 fun Element.mdlLayoutSpacer(classes: String = String.empty, block: MdlLayoutSpacer.() -> Unit = {})
         = this + MdlLayoutSpacer(classes).apply(block)
