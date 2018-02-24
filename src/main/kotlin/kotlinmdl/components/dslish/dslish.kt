@@ -39,32 +39,32 @@ fun <T : Element, E : Element> IMdlComponent<E>.nav(
         classes: String = String.empty,
         block: IMdlNav<T>.() -> Unit = {}): IMdlNav<T> = this + object : MdlNavBase<T>(element, classes) {}.apply(block)
 
-fun MdlLayout.content(
+fun <T : Element> IMdlLayout<T>.content(
         title: String = String.empty,
         classes: String = String.empty,
         body: MdlLayoutContent.() -> Unit = {})
         = this + MdlLayoutContent(title, classes, { this@content.content = this; body() })
 
-fun <T : Element> MdlLayout.content(
+fun <T : Element, E : Element> IMdlLayout<E>.content(
         element: T,
         title: String = String.empty,
         classes: String = String.empty,
         block: IMdlLayoutContent<T>.() -> Unit = {}): IMdlLayoutContent<T>
         = this + object : MdlLayoutContentBase<T>(element, title, classes) {}.also { this.content = it; it.block() }
 
-fun MdlLayout.drawer(classes: String = String.empty, block: MdlLayoutDrawer.() -> Unit = {})
+fun <T : Element> IMdlLayout<T>.drawer(classes: String = String.empty, block: MdlLayoutDrawer.() -> Unit = {})
         = this + MdlLayoutDrawer(classes).also { this.drawer = it; it.block() }
 
-fun <T : Element> MdlLayout.drawer(
+fun <T : Element, E : Element> IMdlLayout<E>.drawer(
         element: T,
         classes: String = String.empty,
         block: IMdlLayoutDrawer<T>.() -> Unit = {}): IMdlLayoutDrawer<T>
         = this + object : MdlLayoutDrawerBase<T>(element, classes) {}.also { this.drawer = it; it.block() }
 
-fun MdlLayout.fixedDrawer(classes: String = String.empty, block: MdlLayoutDrawer.() -> Unit = {})
+fun <T : Element> IMdlLayout<T>.fixedDrawer(classes: String = String.empty, block: MdlLayoutDrawer.() -> Unit = {})
         = this + MdlLayoutDrawer(classes).also { this.drawer = it; this.hasFixedDrawer = true; it.block() }
 
-fun <T : Element> MdlLayout.fixedDrawer(
+fun <T : Element, E : Element> IMdlLayout<E>.fixedDrawer(
         element: T,
         classes: String = String.empty,
         block: IMdlLayoutDrawer<T>.() -> Unit = {}): IMdlLayoutDrawer<T> =
@@ -75,14 +75,14 @@ fun <T : Element> MdlLayout.fixedDrawer(
                     it.block()
                 }
 
-fun <T : Element> MdlLayout.header(
+fun <T : Element, E : Element> IMdlLayout<E>.header(
         element: T,
         isTransparent: Boolean = false,
         classes: String = String.empty,
         block: IMdlLayoutHeader<T>.() -> Unit = {}): IMdlLayoutHeader<T>
         = this + object : MdlLayoutHeader<T>(element, isTransparent, classes) {}.also { this.header = it; it.block() }
 
-fun MdlLayout.fixedHeader(
+fun <T : Element> IMdlLayout<T>.fixedHeader(
         isSeamed: Boolean = false,
         isTransparent: Boolean = false,
         classes: String = String.empty,
@@ -94,7 +94,7 @@ fun MdlLayout.fixedHeader(
                     it.block()
                 }
 
-fun <T : Element> MdlLayout.fixedHeader(
+fun <T : Element, E : Element> IMdlLayout<E>.fixedHeader(
         element: T,
         isSeamed: Boolean = false,
         isTransparent: Boolean = false,
@@ -107,13 +107,13 @@ fun <T : Element> MdlLayout.fixedHeader(
                     it.block()
                 }
 
-fun MdlLayout.scrollableHeader(
+fun <T : Element> IMdlLayout<T>.scrollableHeader(
         isTransparent: Boolean = false,
         classes: String = String.empty,
         block: MdlScrollableLayoutHeader.() -> Unit = {})
         = this + MdlScrollableLayoutHeader(isTransparent, classes).also { this.header = it; it.block() }
 
-fun <T : Element> MdlLayout.scrollableHeader(
+fun <T : Element, E : Element> IMdlLayout<E>.scrollableHeader(
         element: T,
         isTransparent: Boolean = false,
         classes: String = String.empty,
@@ -124,14 +124,14 @@ fun <T : Element> MdlLayout.scrollableHeader(
                     it.block()
                 }
 
-fun MdlLayout.waterfallHeader(
+fun <T : Element> IMdlLayout<T>.waterfallHeader(
         isTopHideable: Boolean = false,
         isTransparent: Boolean = false,
         classes: String = String.empty,
         block: MdlWaterfallLayoutHeader.() -> Unit = {})
         = this + MdlWaterfallLayoutHeader(isTopHideable, isTransparent, classes).also { this.header = it; it.block() }
 
-fun <T : Element> MdlLayout.waterfallHeader(
+fun <T : Element, E : Element> IMdlLayout<E>.waterfallHeader(
         element: T,
         isTopHideable: Boolean = false,
         isTransparent: Boolean = false,
