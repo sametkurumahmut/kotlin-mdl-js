@@ -69,10 +69,18 @@ fun MdlLayout.scrollableHeader(
         isTransparent: Boolean = false,
         classes: String = String.empty,
         block: MdlScrollableLayoutHeader.() -> Unit = {})
-        = this + MdlScrollableLayoutHeader(isTransparent, classes).also {
-    this.header = it
-    it.block()
-}
+        = this + MdlScrollableLayoutHeader(isTransparent, classes).also { this.header = it; it.block() }
+
+fun <T : Element> MdlLayout.scrollableHeader(
+        element: T,
+        isTransparent: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlScrollableLayoutHeader<T>.() -> Unit = {}): IMdlScrollableLayoutHeader<T> =
+        this +
+                object : MdlScrollableLayoutHeaderBase<T>(element, isTransparent, classes) {}.also {
+                    this.header = it
+                    it.block()
+                }
 
 fun MdlLayout.waterfallHeader(
         isTopHideable: Boolean = false,

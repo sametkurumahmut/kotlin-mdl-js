@@ -10,5 +10,4 @@ abstract class MdlScrollableLayoutHeaderBase<out T : Element> protected construc
     : MdlLayoutHeader<T>(
         element.apply { classList.add(IMdlScrollableLayoutHeader.MODIFIER_NAME) },
         isTransparent,
-        classes), IMdlScrollableLayoutHeader<T> {
-}
+        classes), IMdlScrollableLayoutHeader<T>
