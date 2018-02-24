@@ -37,8 +37,25 @@ fun MdlLayout.content(
 fun MdlLayout.drawer(classes: String = String.empty, block: MdlLayoutDrawer.() -> Unit = {})
         = this + MdlLayoutDrawer(classes).also { this.drawer = it; it.block() }
 
+fun <T : Element> MdlLayout.drawer(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlLayoutDrawer<T>.() -> Unit = {}): IMdlLayoutDrawer<T>
+        = this + object : MdlLayoutDrawerBase<T>(element, classes) {}.also { this.drawer = it; it.block() }
+
 fun MdlLayout.fixedDrawer(classes: String = String.empty, block: MdlLayoutDrawer.() -> Unit = {})
         = this + MdlLayoutDrawer(classes).also { this.drawer = it; this.hasFixedDrawer = true; it.block() }
+
+fun <T : Element> MdlLayout.fixedDrawer(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlLayoutDrawer<T>.() -> Unit = {}): IMdlLayoutDrawer<T> =
+        this +
+                object : MdlLayoutDrawerBase<T>(element, classes) {}.also {
+                    this.drawer = it
+                    this.hasFixedDrawer = true
+                    it.block()
+                }
 
 fun <T : Element> MdlLayout.header(
         element: T,
@@ -108,13 +125,13 @@ fun <T : Element> MdlLayout.waterfallHeader(
                     it.block()
                 }
 
-fun MdlLayoutDrawer.layoutTitle(
+fun <T : Element> IMdlLayoutDrawer<T>.layoutTitle(
         title: String,
         classes: String = String.empty,
         block: MdlLayoutTitle.() -> Unit = {})
         = this + MdlLayoutTitle(title, classes).also { this.layoutTitle = it; it.block() }
 
-fun <T : Element> MdlLayoutDrawer.layoutTitle(
+fun <T : Element, E : Element> IMdlLayoutDrawer<E>.layoutTitle(
         element: T,
         title: String,
         classes: String = String.empty,
