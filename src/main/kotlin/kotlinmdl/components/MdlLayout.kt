@@ -6,6 +6,7 @@ import kotlinmdl.internal.extensions.replaceOrAppendExistingChildOfThis
 import kotlinmdl.internal.extensions.toggleClassOfThis
 import kotlinx.html.dom.create
 import kotlinx.html.js.div
+import org.w3c.dom.Element
 import org.w3c.dom.HTMLDivElement
 import kotlin.browser.document
 
@@ -13,7 +14,7 @@ open class MdlLayout(classes: String = String.empty)
     : MdlComponent<HTMLDivElement>(document.create.div(BLOCK_NAME), classes) {
 
     open var drawer: MdlLayoutDrawer? by this.replaceOrAppendExistingChildOfThis(initialComponent = null)
-    open var header: MdlLayoutHeader? by this.replaceOrAppendExistingChildOfThis(initialComponent = null)
+    open var header: IMdlLayoutHeader<Element>? by this.replaceOrAppendExistingChildOfThis(initialComponent = null)
     open var content: MdlLayoutContent? by this.replaceOrAppendExistingChildOfThis(initialComponent = null)
 
     open var hasDesktopDrawerButton by this.invertToggleClassOfThis(NO_DESKTOP_DRAWER_BUTTON_MODIFIER_NAME, true)

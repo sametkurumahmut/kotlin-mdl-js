@@ -2,19 +2,15 @@ package kotlinmdl.components
 
 import kotlinmdl.internal.extensions.empty
 import kotlinmdl.internal.extensions.toggleClassOfThis
-import kotlinx.html.dom.create
-import kotlinx.html.js.header
-import org.w3c.dom.HTMLElement
-import kotlin.browser.document
+import org.w3c.dom.Element
 
-abstract class MdlLayoutHeader(isTransparent: Boolean = false, classes: String = String.empty)
-    : MdlLayoutElement<HTMLElement>(document.create.header(ELEMENT_NAME), classes) {
+abstract class MdlLayoutHeader<out T : Element> protected constructor(
+        element: T,
+        isTransparent: Boolean = false,
+        classes: String = String.empty)
+    : MdlLayoutElement<T>(element.apply { classList.add(IMdlLayoutHeader.ELEMENT_NAME) }, classes),
+        IMdlLayoutHeader<T> {
 
-    open var isTransparent by this.toggleClassOfThis(TRANSPARENT_MODIFIER_NAME, isTransparent)
-
-    companion object {
-
-        const val ELEMENT_NAME = "mdl-layout__header"
-        const val TRANSPARENT_MODIFIER_NAME = "mdl-layout__header--transparent"
-    }
+    override var isTransparent
+            by this.toggleClassOfThis(element, IMdlLayoutHeader.TRANSPARENT_MODIFIER_NAME, isTransparent)
 }
