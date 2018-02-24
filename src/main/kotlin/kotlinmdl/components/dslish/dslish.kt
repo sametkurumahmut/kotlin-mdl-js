@@ -36,7 +36,7 @@ fun MdlLayout.fixedDrawer(classes: String = String.empty, block: MdlLayoutDrawer
 fun <T : Element> MdlLayout.header(
         element: T,
         isTransparent: Boolean = false,
-        classes: String = kotlin.String.empty,
+        classes: String = String.empty,
         block: IMdlLayoutHeader<T>.() -> Unit = {}): IMdlLayoutHeader<T>
         = this + object : MdlLayoutHeader<T>(element, isTransparent, classes) {}.also { this.header = it; it.block() }
 
@@ -44,12 +44,26 @@ fun MdlLayout.fixedHeader(
         isSeamed: Boolean = false,
         isTransparent: Boolean = false,
         classes: String = String.empty,
-        block: MdlFixedLayoutHeader.() -> Unit = {})
-        = this + MdlFixedLayoutHeader(isSeamed, isTransparent, classes).also {
-    this.header = it
-    this.hasFixedHeader = true
-    it.block()
-}
+        block: MdlFixedLayoutHeader.() -> Unit = {}) =
+        this +
+                MdlFixedLayoutHeader(isSeamed, isTransparent, classes).also {
+                    this.header = it
+                    this.hasFixedHeader = true
+                    it.block()
+                }
+
+fun <T : Element> MdlLayout.fixedHeader(
+        element: T,
+        isSeamed: Boolean = false,
+        isTransparent: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlFixedLayoutHeader<T>.() -> Unit = {}): IMdlFixedLayoutHeader<T> =
+        this +
+                object : MdlFixedLayoutHeaderBase<T>(element, isSeamed, isTransparent, classes) {}.also {
+                    this.header = it
+                    this.hasFixedHeader = true
+                    it.block()
+                }
 
 fun MdlLayout.scrollableHeader(
         isTransparent: Boolean = false,
