@@ -87,10 +87,19 @@ fun MdlLayout.waterfallHeader(
         isTransparent: Boolean = false,
         classes: String = String.empty,
         block: MdlWaterfallLayoutHeader.() -> Unit = {})
-        = this + MdlWaterfallLayoutHeader(isTopHideable, isTransparent, classes).also {
-    this.header = it
-    it.block()
-}
+        = this + MdlWaterfallLayoutHeader(isTopHideable, isTransparent, classes).also { this.header = it; it.block() }
+
+fun <T : Element> MdlLayout.waterfallHeader(
+        element: T,
+        isTopHideable: Boolean = false,
+        isTransparent: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlWaterfallLayoutHeader<T>.() -> Unit = {}): IMdlWaterfallLayoutHeader<T> =
+        this +
+                object : MdlWaterfallLayoutHeaderBase<T>(element, isTopHideable, isTransparent, classes) {}.also {
+                    this.header = it
+                    it.block()
+                }
 
 fun MdlLayoutDrawer.layoutTitle(
         title: String = String.empty,
