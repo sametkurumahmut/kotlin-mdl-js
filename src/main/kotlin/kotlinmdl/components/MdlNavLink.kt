@@ -6,11 +6,10 @@ import kotlinx.html.js.a
 import org.w3c.dom.HTMLAnchorElement
 import kotlin.browser.document
 
-open class MdlNavLink(href: String? = null, target: String? = null, classes: String = String.empty)
-    : MdlComponent<HTMLAnchorElement>(document.create.a(href, target, ELEMENT_NAME), classes) {
+open class MdlNavLink(element: HTMLAnchorElement, classes: String = String.empty)
+    : MdlComponent<HTMLAnchorElement>(element.apply { classList.add(IMdlNavLink.ELEMENT_NAME) }, classes),
+        IMdlNavLink<HTMLAnchorElement> {
 
-    companion object {
-
-        const val ELEMENT_NAME = "mdl-navigation__link"
-    }
+    constructor(href: String? = null, target: String? = null, classes: String = String.empty)
+            : this(document.create.a(href, target), classes)
 }
