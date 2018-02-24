@@ -31,8 +31,13 @@ fun <T : Element, E : Element> IMdlComponent<E>.layoutTitle(
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.apply(block)
 
-fun <T : Element> IMdlComponent<T>.nav(classes: String = kotlin.String.empty, block: MdlNav.() -> Unit = {})
+fun <T : Element> IMdlComponent<T>.nav(classes: String = String.empty, block: MdlNav.() -> Unit = {})
         = this + MdlNav(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.nav(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlNav<T>.() -> Unit = {}): IMdlNav<T> = this + object : MdlNavBase<T>(element, classes) {}.apply(block)
 
 fun MdlLayout.content(
         title: String = String.empty,
@@ -167,13 +172,13 @@ fun <T : Element> MdlLayoutHeaderRow.layoutTitle(
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.also { this.layoutTitle = it; it.block() }
 
-fun MdlNav.link(
+fun <T : Element> IMdlNav<T>.link(
         href: String? = null,
         target: String? = null,
         classes: String = String.empty,
         block: MdlNavLink.() -> Unit = {}) = this + MdlNavLink(href, target, classes).apply(block)
 
-fun MdlNav.externalLink(
+fun <T : Element> IMdlNav<T>.externalLink(
         href: String? = null,
         classes: String = String.empty,
         block: MdlNavLink.() -> Unit = {}) = this + MdlNavLink(href, ATarget.blank, classes).apply(block)
@@ -202,6 +207,10 @@ fun <T : Element> Element.mdlLayoutTitle(
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.apply(block)
 
-fun Element.mdlNav(classes: String = String.empty, block: MdlNav.() -> Unit = {})
-        = this + MdlNav(classes).apply(block)
+fun Element.mdlNav(classes: String = String.empty, block: MdlNav.() -> Unit = {}) = this + MdlNav(classes).apply(block)
+
+fun <T : Element> Element.mdlNav(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlNav<T>.() -> Unit = {}): IMdlNav<T> = this + object : MdlNavBase<T>(element, classes) {}.apply(block)
 //endregion
