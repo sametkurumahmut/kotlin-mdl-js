@@ -18,6 +18,13 @@ fun <T : Element> IMdlComponent<T>.layoutTitle(
         classes: String = String.empty,
         block: MdlLayoutTitle.() -> Unit = {}) = this + MdlLayoutTitle(title, classes).apply(block)
 
+fun <T : Element, E : Element> IMdlComponent<E>.layoutTitle(
+        element: T,
+        title: String,
+        classes: String = String.empty,
+        block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
+        = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.nav(classes: String = kotlin.String.empty, block: MdlLayoutNav.() -> Unit = {})
         = this + MdlLayoutNav(classes).apply(block)
 
@@ -102,10 +109,17 @@ fun <T : Element> MdlLayout.waterfallHeader(
                 }
 
 fun MdlLayoutDrawer.layoutTitle(
-        title: String = String.empty,
+        title: String,
         classes: String = String.empty,
         block: MdlLayoutTitle.() -> Unit = {})
         = this + MdlLayoutTitle(title, classes).also { this.layoutTitle = it; it.block() }
+
+fun <T : Element> MdlLayoutDrawer.layoutTitle(
+        element: T,
+        title: String,
+        classes: String = String.empty,
+        block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
+        = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.also { this.layoutTitle = it; it.block() }
 
 fun <T : Element> IMdlLayoutHeader<T>.row(classes: String = String.empty, block: MdlLayoutHeaderRow.() -> Unit = {})
         = this + MdlLayoutHeaderRow(classes).apply(block)
@@ -115,6 +129,13 @@ fun MdlLayoutHeaderRow.layoutTitle(
         classes: String = String.empty,
         block: MdlLayoutTitle.() -> Unit = {})
         = this + MdlLayoutTitle(title, classes).also { this.layoutTitle = it; it.block() }
+
+fun <T : Element> MdlLayoutHeaderRow.layoutTitle(
+        element: T,
+        title: String,
+        classes: String = String.empty,
+        block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
+        = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.also { this.layoutTitle = it; it.block() }
 
 fun MdlLayoutNav.link(
         href: String? = null,
@@ -135,10 +156,15 @@ fun Element.mdlLayout(classes: String = String.empty, block: MdlLayout.() -> Uni
 fun Element.mdlLayoutSpacer(classes: String = String.empty, block: MdlLayoutSpacer.() -> Unit = {})
         = this + MdlLayoutSpacer(classes).apply(block)
 
-fun Element.mdlLayoutTitle(
+fun Element.mdlLayoutTitle(title: String, classes: String = String.empty, block: MdlLayoutTitle.() -> Unit = {})
+        = this + MdlLayoutTitle(title, classes).apply(block)
+
+fun <T : Element> Element.mdlLayoutTitle(
+        element: T,
         title: String,
         classes: String = String.empty,
-        block: MdlLayoutTitle.() -> Unit = {}) = this + MdlLayoutTitle(title, classes).apply(block)
+        block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
+        = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.apply(block)
 
 fun Element.mdlNav(classes: String = String.empty, block: MdlLayoutNav.() -> Unit = {})
         = this + MdlLayoutNav(classes).apply(block)
