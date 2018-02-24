@@ -159,6 +159,12 @@ fun <T : Element, E : Element> IMdlLayoutDrawer<E>.layoutTitle(
 fun <T : Element> IMdlLayoutHeader<T>.row(classes: String = String.empty, block: MdlLayoutHeaderRow.() -> Unit = {})
         = this + MdlLayoutHeaderRow(classes).apply(block)
 
+fun <T : Element, E : Element> IMdlLayoutHeader<E>.row(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlLayoutHeaderRow<T>.() -> Unit = {}): IMdlLayoutHeaderRow<T>
+        = this + object : MdlLayoutHeaderRowBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlLayoutHeaderRow<T>.layoutTitle(
         title: String,
         classes: String = String.empty,
