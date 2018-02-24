@@ -40,6 +40,13 @@ fun MdlLayout.content(
         body: MdlLayoutContent.() -> Unit = {})
         = this + MdlLayoutContent(title, classes, { this@content.content = this; body() })
 
+fun <T : Element> MdlLayout.content(
+        element: T,
+        title: String = String.empty,
+        classes: String = String.empty,
+        block: IMdlLayoutContent<T>.() -> Unit = {}): IMdlLayoutContent<T>
+        = this + object : MdlLayoutContentBase<T>(element, title, classes) {}.also { this.content = it; it.block() }
+
 fun MdlLayout.drawer(classes: String = String.empty, block: MdlLayoutDrawer.() -> Unit = {})
         = this + MdlLayoutDrawer(classes).also { this.drawer = it; it.block() }
 
