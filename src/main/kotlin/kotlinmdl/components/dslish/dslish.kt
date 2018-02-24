@@ -181,7 +181,7 @@ fun <T : Element> IMdlNav<T>.link(
 fun <T : Element> IMdlNav<T>.externalLink(
         href: String? = null,
         classes: String = String.empty,
-        block: MdlNavLink.() -> Unit = {}) = this + MdlNavLink(href, ATarget.blank, classes).apply(block)
+        block: MdlNavLink.() -> Unit = {}) = this.link(href, ATarget.blank, classes).apply(block)
 //endregion
 
 //region Element Extensions
