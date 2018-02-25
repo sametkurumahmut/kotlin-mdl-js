@@ -62,6 +62,53 @@ fun <T : Element> IMdlComponent<T>.invertToggleClassOfThis(
                 true)
 
 /**
+ * Update and initial element is @param element.
+ */
+fun <T, E : Element> IMdlComponent<E>.replaceNewClassOf(element: Element, initialValue: T, setOnInit: Boolean = true)
+        = this.replaceNewClassOf(element, element, initialValue, setOnInit)
+
+/**
+ * Update element is @param element.
+ * Initial element is @param initialElement.
+ */
+fun <T, E : Element> IMdlComponent<E>.replaceNewClassOf(
+        element: Element,
+        initialElement: Element,
+        initialValue: T,
+        setOnInit: Boolean = true) =
+        this.replaceNewClassDelegatedBackingProperty(
+                initialElement,
+                initialValue,
+                { oldValue, newValue ->
+                    oldValue?.also { element.classList.remove(it.toString()) }
+                    newValue?.also { element.classList.add(it.toString()) }
+                },
+                setOnInit)
+
+/**
+ * Update and initial element is self.
+ */
+fun <T, E : Element> IMdlComponent<E>.replaceNewClassOfThis(initialValue: T, setOnInit: Boolean = true)
+        = this.replaceNewClassOfThis(this.element, initialValue, setOnInit)
+
+/**
+ * Update element is self.
+ * Initial element is @param initialElement.
+ */
+fun <T, E : Element> IMdlComponent<E>.replaceNewClassOfThis(
+        initialElement: Element,
+        initialValue: T,
+        setOnInit: Boolean = true) =
+        this.replaceNewClassDelegatedBackingProperty(
+                initialElement,
+                initialValue,
+                { oldValue, newValue ->
+                    oldValue?.also { this.element.classList.remove(it.toString()) }
+                    newValue?.also { this.element.classList.add(it.toString()) }
+                },
+                setOnInit)
+
+/**
  * Update and initial element is element of @param component.
  */
 fun <T : IMdlComponent<E2>, P : IMdlComponent<E3>?, E1 : Element, E2 : Element, E3 : Element> IMdlComponent<E1>.replaceOrAppendChildOf(
@@ -532,6 +579,16 @@ private fun <T : Node?, E : Element> IMdlComponent<E>.appendChildDelegatedBackin
                 initialChildNode,
                 onSet,
                 { if (setOnInit && it != null) initialNode?.appendChild(it) })
+
+private fun <T, E : Element> IMdlComponent<E>.replaceNewClassDelegatedBackingProperty(
+        initialElement: Element,
+        initialValue: T,
+        onSet: (oldValue: T, newValue: T) -> Unit = { _, _ -> },
+        setOnInit: Boolean = true) =
+        this.delegatedBackingProperty(
+                initialValue,
+                onSet,
+                { if (setOnInit && it != null) initialElement.classList.add(it.toString()) })
 
 private fun <T : IMaterialIcon?, E : Element> IMdlComponent<E>.setTextContentDelegatedBackingProperty(
         initialNode: Node,
