@@ -1,8 +1,13 @@
 package kotlinmdl.components.dslish
 
 import kotlinmdl.components.*
+import kotlinmdl.components.style.IMdlMaterialIcon
+import kotlinmdl.components.style.MdlMaterialIcon
+import kotlinmdl.components.style.MdlMaterialIconBase
 import kotlinmdl.extensions.plus
 import kotlinmdl.internal.extensions.empty
+import kotlinmdl.material.style.IMaterialIcon
+import kotlinmdl.style.IMdlTextColor
 import kotlinx.html.ATarget
 import org.w3c.dom.Element
 
@@ -194,6 +199,20 @@ fun <T : Element> IMdlNav<T>.externalLink(
         href: String? = null,
         classes: String = String.empty,
         block: MdlNavLink.() -> Unit = {}) = this.link(href, ATarget.blank, classes).apply(block)
+
+fun <T : Element> IMdlComponent<T>.materialIcon(
+        icon: IMaterialIcon,
+        color: IMdlTextColor? = null,
+        classes: String = String.empty,
+        block: MdlMaterialIcon.() -> Unit = {}) = this + MdlMaterialIcon(icon, color, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.materialIcon(
+        element: T,
+        icon: IMaterialIcon,
+        color: IMdlTextColor? = null,
+        classes: String = String.empty,
+        block: IMdlMaterialIcon<T>.() -> Unit = {}): IMdlMaterialIcon<T>
+        = this + object : MdlMaterialIconBase<T>(element, icon, color, classes) {}.apply(block)
 //endregion
 
 //region Element Extensions
@@ -224,6 +243,20 @@ fun <T : Element> Element.mdlLayoutTitle(
         classes: String = String.empty,
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.apply(block)
+
+fun Element.mdlMaterialIcon(
+        icon: IMaterialIcon,
+        color: IMdlTextColor? = null,
+        classes: String = String.empty,
+        block: MdlMaterialIcon.() -> Unit = {}) = this + MdlMaterialIcon(icon, color, classes).apply(block)
+
+fun <T : Element> Element.mdlMaterialIcon(
+        element: T,
+        icon: IMaterialIcon,
+        color: IMdlTextColor? = null,
+        classes: String = String.empty,
+        block: IMdlMaterialIcon<T>.() -> Unit = {}): IMdlMaterialIcon<T>
+        = this + object : MdlMaterialIconBase<T>(element, icon, color, classes) {}.apply(block)
 
 fun Element.mdlNav(classes: String = String.empty, block: MdlNav.() -> Unit = {}) = this + MdlNav(classes).apply(block)
 
