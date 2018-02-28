@@ -12,6 +12,18 @@ import kotlinx.html.ATarget
 import org.w3c.dom.Element
 
 //region Mdl Component Extensions
+fun <T : Element> IMdlComponent<T>.grid(
+        hasSpacing: Boolean = true,
+        classes: String = String.empty,
+        block: MdlGrid.() -> Unit = {}) = this + MdlGrid(hasSpacing, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.grid(
+        element: T,
+        hasSpacing: Boolean = true,
+        classes: String = String.empty,
+        block: IMdlGrid<T>.() -> Unit = {}): IMdlGrid<T>
+        = this + object : MdlGridBase<T>(element, hasSpacing, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.layout(classes: String = String.empty, block: MdlLayout.() -> Unit = {})
         = this + MdlLayout(classes).apply(block)
 
@@ -216,6 +228,16 @@ fun <T : Element, E : Element> IMdlComponent<E>.materialIcon(
 //endregion
 
 //region Element Extensions
+fun Element.mdlGrid(hasSpacing: Boolean = true, classes: String = String.empty, block: MdlGrid.() -> Unit = {})
+        = this + MdlGrid(hasSpacing, classes).apply(block)
+
+fun <T : Element> Element.mdlGrid(
+        element: T,
+        hasSpacing: Boolean = true,
+        classes: String = String.empty,
+        block: IMdlGrid<T>.() -> Unit = {}): IMdlGrid<T>
+        = this + object : MdlGridBase<T>(element, hasSpacing, classes) {}.apply(block)
+
 fun Element.mdlLayout(classes: String = String.empty, block: MdlLayout.() -> Unit = {})
         = this + MdlLayout(classes).apply(block)
 
