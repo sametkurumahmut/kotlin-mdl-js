@@ -7,7 +7,7 @@ import kotlinmdl.components.style.MdlMaterialIconBase
 import kotlinmdl.extensions.plus
 import kotlinmdl.internal.extensions.empty
 import kotlinmdl.material.style.IMaterialIcon
-import kotlinmdl.style.IMdlTextColor
+import kotlinmdl.style.*
 import kotlinx.html.ATarget
 import org.w3c.dom.Element
 
@@ -61,6 +61,27 @@ fun <T : Element, E : Element> IMdlComponent<E>.nav(
         element: T,
         classes: String = String.empty,
         block: IMdlNav<T>.() -> Unit = {}): IMdlNav<T> = this + object : MdlNavBase<T>(element, classes) {}.apply(block)
+
+fun <T : Element> IMdlGrid<T>.cell(
+        colSize: IMdlCellColSize? = null,
+        desktopColSize: IMdlDesktopCellColSize? = null,
+        tabletColSize: IMdlTabletCellColSize? = null,
+        phoneColSize: IMdlPhoneCellColSize? = null,
+        classes: String = String.empty,
+        block: MdlCell.() -> Unit = {})
+        = this + MdlCell(colSize, desktopColSize, tabletColSize, phoneColSize, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlGrid<E>.cell(
+        element: T,
+        colSize: IMdlCellColSize? = null,
+        desktopColSize: IMdlDesktopCellColSize? = null,
+        tabletColSize: IMdlTabletCellColSize? = null,
+        phoneColSize: IMdlPhoneCellColSize? = null,
+        classes: String = String.empty,
+        block: IMdlCell<T>.() -> Unit = {}): IMdlCell<T> =
+        this +
+                object : MdlCellBase<T>(element, colSize, desktopColSize, tabletColSize, phoneColSize, classes) {}
+                        .apply(block)
 
 fun <T : Element> IMdlLayout<T>.content(
         title: String = String.empty,
