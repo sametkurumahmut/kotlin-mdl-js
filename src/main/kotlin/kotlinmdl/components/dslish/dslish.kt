@@ -4,6 +4,7 @@ import kotlinmdl.components.*
 import kotlinmdl.components.style.IMdlMaterialIcon
 import kotlinmdl.components.style.MdlMaterialIcon
 import kotlinmdl.components.style.MdlMaterialIconBase
+import kotlinmdl.config.MdlConfig
 import kotlinmdl.extensions.plus
 import kotlinmdl.internal.extensions.empty
 import kotlinmdl.material.style.IMaterialIcon
@@ -61,6 +62,18 @@ fun <T : Element, E : Element> IMdlComponent<E>.nav(
         element: T,
         classes: String = String.empty,
         block: IMdlNav<T>.() -> Unit = {}): IMdlNav<T> = this + object : MdlNavBase<T>(element, classes) {}.apply(block)
+
+fun <T : Element> IMdlComponent<T>.tabs(
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlTabs.() -> Unit = {}) = this + MdlTabs(hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.tabs(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlTabs<T>.() -> Unit = {}): IMdlTabs<T>
+        = this + object : MdlTabsBase<T>(element, hasRippleEffect, classes) {}.apply(block)
 
 fun <T : Element> IMdlGrid<T>.cell(
         colSize: IMdlCellColSize? = null,
@@ -307,4 +320,16 @@ fun <T : Element> Element.mdlNav(
         element: T,
         classes: String = String.empty,
         block: IMdlNav<T>.() -> Unit = {}): IMdlNav<T> = this + object : MdlNavBase<T>(element, classes) {}.apply(block)
+
+fun Element.mdlTabs(
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlTabs.() -> Unit = {}) = this + MdlTabs(hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlTabs(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlTabs<T>.() -> Unit = {}): IMdlTabs<T>
+        = this + object : MdlTabsBase<T>(element, hasRippleEffect, classes) {}.apply(block)
 //endregion
