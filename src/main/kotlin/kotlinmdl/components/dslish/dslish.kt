@@ -246,6 +246,20 @@ fun <T : Element> IMdlNav<T>.externalLink(
         classes: String = String.empty,
         block: MdlNavLink.() -> Unit = {}) = this.link(href, ATarget.blank, classes).apply(block)
 
+fun <T : Element> IMdlTabs<T>.panel(
+        id: String,
+        isActive: Boolean = false,
+        classes: String = String.empty,
+        block: MdlTabsPanel.() -> Unit = {}) = this + MdlTabsPanel(id, isActive, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlTabs<E>.panel(
+        element: T,
+        id: String,
+        isActive: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlTabsPanel<T>.() -> Unit = {}): IMdlTabsPanel<T>
+        = this + object : MdlTabsPanelBase<T>(element, id, isActive, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.materialIcon(
         icon: IMaterialIcon,
         color: IMdlTextColor? = null,
