@@ -260,6 +260,15 @@ fun <T : Element, E : Element> IMdlTabs<E>.panel(
         block: IMdlTabsPanel<T>.() -> Unit = {}): IMdlTabsPanel<T>
         = this + object : MdlTabsPanelBase<T>(element, id, isActive, classes) {}.apply(block)
 
+fun <T : Element> IMdlTabs<T>.tabBar(classes: String = String.empty, block: MdlTabsTabBar.() -> Unit = {})
+        = this + MdlTabsTabBar(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlTabs<E>.tabBar(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlTabsTabBar<T>.() -> Unit = {}): IMdlTabsTabBar<T>
+        = this + object : MdlTabsTabBarBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.materialIcon(
         icon: IMaterialIcon,
         color: IMdlTextColor? = null,
