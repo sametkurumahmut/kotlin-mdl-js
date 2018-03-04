@@ -269,6 +269,19 @@ fun <T : Element, E : Element> IMdlTabs<E>.tabBar(
         block: IMdlTabsTabBar<T>.() -> Unit = {}): IMdlTabsTabBar<T>
         = this + object : MdlTabsTabBarBase<T>(element, classes) {}.apply(block)
 
+fun <T : Element> IMdlTabsTabBar<T>.tab(
+        hrefId: String,
+        isActive: Boolean = false,
+        classes: String = String.empty,
+        block: MdlTabsTab.() -> Unit = {}) = this + MdlTabsTab(hrefId, isActive, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlTabsTabBar<E>.tab(
+        element: T,
+        isActive: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlTabsTab<T>.() -> Unit = {}): IMdlTabsTab<T>
+        = this + object : MdlTabsTabBase<T>(element, isActive, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.materialIcon(
         icon: IMaterialIcon,
         color: IMdlTextColor? = null,
