@@ -2,7 +2,7 @@ group 'com.sametkurumahmut.kotlinmdl'
 version '0.1.0'
 
 buildscript {
-    ext.kotlinVersion = '1.2.21'
+    ext.kotlinVersion = '1.2.30'
     repositories {
         mavenCentral()
     }
@@ -16,7 +16,7 @@ apply plugin: 'kotlin2js'
 repositories {
     mavenCentral()
     maven {
-        url  "http://dl.bintray.com/kotlin/kotlinx.html/"
+        url "http://dl.bintray.com/kotlin/kotlinx.html/"
     }
 }
 
