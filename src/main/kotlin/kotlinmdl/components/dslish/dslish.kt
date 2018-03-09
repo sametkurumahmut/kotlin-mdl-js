@@ -235,6 +235,32 @@ fun <T : Element, E : Element> IMdlLayoutHeaderRow<E>.layoutTitle(
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.also { this.layoutTitle = it; it.block() }
 
+fun <T : Element> IMdlMegaFooterVerticalSection<T>.leftSection(
+        classes: String = String.empty,
+        block: MdlMegaFooterLeftSection.() -> Unit = {})
+        = this + MdlMegaFooterLeftSection(classes).also { this.leftSection = it; it.block() }
+
+fun <T : Element, E : Element> IMdlMegaFooterVerticalSection<E>.leftSection(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMegaFooterLeftSection<T>.() -> Unit = {}): IMdlMegaFooterLeftSection<T> =
+        this + object : MdlMegaFooterLeftSectionBase<T>(element, classes) {}.also { this.leftSection = it; it.block() }
+
+fun <T : Element> IMdlMegaFooterVerticalSection<T>.rightSection(
+        classes: String = String.empty,
+        block: MdlMegaFooterRightSection.() -> Unit = {})
+        = this + MdlMegaFooterRightSection(classes).also { this.rightSection = it; it.block() }
+
+fun <T : Element, E : Element> IMdlMegaFooterVerticalSection<E>.rightSection(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMegaFooterRightSection<T>.() -> Unit = {}): IMdlMegaFooterRightSection<T> =
+        this +
+                object : MdlMegaFooterRightSectionBase<T>(element, classes) {}.also {
+                    this.rightSection = it
+                    it.block()
+                }
+
 fun <T : Element> IMdlNav<T>.link(
         href: String? = null,
         target: String? = null,
