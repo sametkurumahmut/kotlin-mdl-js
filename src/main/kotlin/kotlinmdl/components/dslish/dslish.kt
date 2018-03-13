@@ -55,6 +55,15 @@ fun <T : Element, E : Element> IMdlComponent<E>.layoutTitle(
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.megaFooter(classes: String = String.empty, block: MdlMegaFooter.() -> Unit = {})
+        = this + MdlMegaFooter(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.megaFooter(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMegaFooter<T>.() -> Unit = {}): IMdlMegaFooter<T>
+        = this + object : MdlMegaFooterBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.nav(classes: String = String.empty, block: MdlNav.() -> Unit = {})
         = this + MdlNav(classes).apply(block)
 
@@ -375,6 +384,15 @@ fun <T : Element> Element.mdlMaterialIcon(
         classes: String = String.empty,
         block: IMdlMaterialIcon<T>.() -> Unit = {}): IMdlMaterialIcon<T>
         = this + object : MdlMaterialIconBase<T>(element, icon, color, classes) {}.apply(block)
+
+fun Element.mdlMegaFooter(classes: String = String.empty, block: MdlMegaFooter.() -> Unit = {})
+        = this + MdlMegaFooter(classes).apply(block)
+
+fun <T : Element> Element.mdlMegaFooter(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMegaFooter<T>.() -> Unit = {}): IMdlMegaFooter<T>
+        = this + object : MdlMegaFooterBase<T>(element, classes) {}.apply(block)
 
 fun Element.mdlNav(classes: String = String.empty, block: MdlNav.() -> Unit = {}) = this + MdlNav(classes).apply(block)
 
