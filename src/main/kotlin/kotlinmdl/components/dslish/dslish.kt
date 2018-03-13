@@ -244,6 +244,47 @@ fun <T : Element, E : Element> IMdlLayoutHeaderRow<E>.layoutTitle(
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.also { this.layoutTitle = it; it.block() }
 
+fun <T : Element> IMdlMegaFooter<T>.bottomSection(
+        classes: String = String.empty,
+        block: MdlMegaFooterBottomSection.() -> Unit = {})
+        = this + MdlMegaFooterBottomSection(classes).also { this.bottomSection = it; it.block() }
+
+fun <T : Element, E : Element> IMdlMegaFooter<E>.bottomSection(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMegaFooterBottomSection<T>.() -> Unit = {}): IMdlMegaFooterBottomSection<T> =
+        this +
+                object : MdlMegaFooterBottomSectionBase<T>(element, classes) {}.also {
+                    this.bottomSection = it
+                    it.block()
+                }
+
+fun <T : Element> IMdlMegaFooter<T>.middleSection(
+        classes: String = String.empty,
+        block: MdlMegaFooterMiddleSection.() -> Unit = {})
+        = this + MdlMegaFooterMiddleSection(classes).also { this.middleSection = it; it.block() }
+
+fun <T : Element, E : Element> IMdlMegaFooter<E>.middleSection(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMegaFooterMiddleSection<T>.() -> Unit = {}): IMdlMegaFooterMiddleSection<T> =
+        this +
+                object : MdlMegaFooterMiddleSectionBase<T>(element, classes) {}.also {
+                    this.middleSection = it
+                    it.block()
+                }
+
+fun <T : Element> IMdlMegaFooter<T>.topSection(
+        classes: String = String.empty,
+        block: MdlMegaFooterTopSection.() -> Unit = {})
+        = this + MdlMegaFooterTopSection(classes).also { this.topSection = it; it.block() }
+
+fun <T : Element, E : Element> IMdlMegaFooter<E>.topSection(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMegaFooterTopSection<T>.() -> Unit = {}): IMdlMegaFooterTopSection<T>
+        = this + object : MdlMegaFooterTopSectionBase<T>(element, classes) {}.also { this.topSection = it; it.block() }
+
 fun <T : Element> IMdlMegaFooterVerticalSection<T>.leftSection(
         classes: String = String.empty,
         block: MdlMegaFooterLeftSection.() -> Unit = {})
