@@ -285,6 +285,17 @@ fun <T : Element, E : Element> IMdlMegaFooter<E>.topSection(
         block: IMdlMegaFooterTopSection<T>.() -> Unit = {}): IMdlMegaFooterTopSection<T>
         = this + object : MdlMegaFooterTopSectionBase<T>(element, classes) {}.also { this.topSection = it; it.block() }
 
+fun <T : Element> IMdlMegaFooterVerticalSection<T>.dropDownSection(
+        classes: String = String.empty,
+        block: MdlMegaFooterDropdownSection.() -> Unit = {})
+        = this + MdlMegaFooterDropdownSection(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlMegaFooterVerticalSection<E>.dropDownSection(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMegaFooterDropdownSection<T>.() -> Unit = {}): IMdlMegaFooterDropdownSection<T>
+        = this + object : MdlMegaFooterDropdownSectionBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlMegaFooterVerticalSection<T>.leftSection(
         classes: String = String.empty,
         block: MdlMegaFooterLeftSection.() -> Unit = {})
