@@ -10,6 +10,9 @@ import kotlinmdl.internal.extensions.empty
 import kotlinmdl.material.style.IMaterialIcon
 import kotlinmdl.style.*
 import kotlinx.html.ATarget
+import kotlinx.html.InputFormEncType
+import kotlinx.html.InputFormMethod
+import kotlinx.html.InputType
 import org.w3c.dom.Element
 
 //region Mdl Component Extensions
@@ -284,6 +287,43 @@ fun <T : Element, E : Element> IMdlMegaFooter<E>.topSection(
         classes: String = String.empty,
         block: IMdlMegaFooterTopSection<T>.() -> Unit = {}): IMdlMegaFooterTopSection<T>
         = this + object : MdlMegaFooterTopSectionBase<T>(element, classes) {}.also { this.topSection = it; it.block() }
+
+fun <T : Element> IMdlMegaFooterDropdownSection<T>.heading(
+        text: String,
+        classes: String = String.empty,
+        block: MdlMegaFooterHeading.() -> Unit = {})
+        = this + MdlMegaFooterHeading(text, classes).also { this.heading = it; it.block() }
+
+fun <T : Element, E : Element> IMdlMegaFooterDropdownSection<E>.heading(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlMegaFooterHeading<T>.() -> Unit = {}): IMdlMegaFooterHeading<T>
+        = this + object : MdlMegaFooterHeadingBase<T>(element, text, classes) {}.also { this.heading = it; it.block() }
+
+fun <T : Element> IMdlMegaFooterDropdownSection<T>.headingCheckBox(
+        type: InputType? = InputType.checkBox,
+        formEncType: InputFormEncType? = null,
+        formMethod: InputFormMethod? = null,
+        name: String? = null,
+        isChecked: Boolean = true,
+        classes: String = String.empty,
+        block: MdlMegaFooterHeadingCheckBox.() -> Unit = {}) =
+        this +
+                MdlMegaFooterHeadingCheckBox(type, formEncType, formMethod, name, isChecked, classes).also {
+                    this.headingCheckBox = it
+                    it.block()
+                }
+
+fun <T : Element, E : Element> IMdlMegaFooterDropdownSection<E>.headingCheckBox(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMegaFooterHeadingCheckBox<T>.() -> Unit = {}): IMdlMegaFooterHeadingCheckBox<T> =
+        this +
+                object : MdlMegaFooterHeadingCheckBoxBase<T>(element, classes) {}.also {
+                    this.headingCheckBox = it
+                    it.block()
+                }
 
 fun <T : Element> IMdlMegaFooterVerticalSection<T>.dropDownSection(
         classes: String = String.empty,
