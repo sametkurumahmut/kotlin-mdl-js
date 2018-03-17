@@ -9,10 +9,7 @@ import kotlinmdl.extensions.plus
 import kotlinmdl.internal.extensions.empty
 import kotlinmdl.material.style.IMaterialIcon
 import kotlinmdl.style.*
-import kotlinx.html.ATarget
-import kotlinx.html.InputFormEncType
-import kotlinx.html.InputFormMethod
-import kotlinx.html.InputType
+import kotlinx.html.*
 import org.w3c.dom.Element
 
 //region Mdl Component Extensions
@@ -324,6 +321,15 @@ fun <T : Element, E : Element> IMdlMegaFooterDropdownSection<E>.headingCheckBox(
                     this.headingCheckBox = it
                     it.block()
                 }
+
+fun <T : Element> IMdlMegaFooterSection<T>.socialButton(
+        formEncType: ButtonFormEncType? = null,
+        formMethod: ButtonFormMethod? = null,
+        name: String? = null,
+        type: ButtonType? = null,
+        classes: String = String.empty,
+        block: MdlMegaFooterSocialButton.() -> Unit = {})
+        = this + MdlMegaFooterSocialButton(formEncType, formMethod, name, type, classes).apply(block)
 
 fun <T : Element> IMdlMegaFooterVerticalSection<T>.dropDownSection(
         classes: String = String.empty,
