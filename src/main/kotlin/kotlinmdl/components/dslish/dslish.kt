@@ -322,6 +322,16 @@ fun <T : Element, E : Element> IMdlMegaFooterDropdownSection<E>.headingCheckBox(
                     it.block()
                 }
 
+fun <T : Element> IMdlMegaFooterSection<T>.linkList(
+        classes: String = String.empty,
+        block: MdlMegaFooterLinkList.() -> Unit = {}) = this + MdlMegaFooterLinkList(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlMegaFooterSection<E>.linkList(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMegaFooterLinkList<T>.() -> Unit = {}): IMdlMegaFooterLinkList<T>
+        = this + object : MdlMegaFooterLinkListBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlMegaFooterSection<T>.socialButton(
         formEncType: ButtonFormEncType? = null,
         formMethod: ButtonFormMethod? = null,
