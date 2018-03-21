@@ -64,6 +64,15 @@ fun <T : Element, E : Element> IMdlComponent<E>.megaFooter(
         block: IMdlMegaFooter<T>.() -> Unit = {}): IMdlMegaFooter<T>
         = this + object : MdlMegaFooterBase<T>(element, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.miniFooter(classes: String = String.empty, block: MdlMiniFooter.() -> Unit = {})
+        = this + MdlMiniFooter(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.miniFooter(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMiniFooter<T>.() -> Unit = {}): IMdlMiniFooter<T>
+        = this + object : MdlMiniFooterBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.nav(classes: String = String.empty, block: MdlNav.() -> Unit = {})
         = this + MdlNav(classes).apply(block)
 
@@ -501,6 +510,15 @@ fun <T : Element> Element.mdlMegaFooter(
         classes: String = String.empty,
         block: IMdlMegaFooter<T>.() -> Unit = {}): IMdlMegaFooter<T>
         = this + object : MdlMegaFooterBase<T>(element, classes) {}.apply(block)
+
+fun Element.mdlMiniFooter(classes: String = String.empty, block: MdlMiniFooter.() -> Unit = {})
+        = this + MdlMiniFooter(classes).apply(block)
+
+fun <T : Element> Element.mdlMiniFooter(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMiniFooter<T>.() -> Unit = {}): IMdlMiniFooter<T>
+        = this + object : MdlMiniFooterBase<T>(element, classes) {}.apply(block)
 
 fun Element.mdlNav(classes: String = String.empty, block: MdlNav.() -> Unit = {}) = this + MdlNav(classes).apply(block)
 
