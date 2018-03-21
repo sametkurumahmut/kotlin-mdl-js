@@ -387,6 +387,32 @@ fun <T : Element, E : Element> IMdlMegaFooterVerticalSection<E>.rightSection(
                     it.block()
                 }
 
+fun <T : Element> IMdlMiniFooter<T>.leftSection(
+        classes: String = String.empty,
+        block: MdlMiniFooterLeftSection.() -> Unit = {})
+        = this + MdlMiniFooterLeftSection(classes).also { this.leftSection = it; it.block() }
+
+fun <T : Element, E : Element> IMdlMiniFooter<T>.leftSection(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMiniFooterLeftSection<T>.() -> Unit = {}): IMdlMiniFooterLeftSection<T> =
+        this + object : MdlMiniFooterLeftSectionBase<T>(element, classes) {}.also { this.leftSection = it; it.block() }
+
+fun <T : Element> IMdlMiniFooter<T>.rightSection(
+        classes: String = String.empty,
+        block: MdlMiniFooterRightSection.() -> Unit = {})
+        = this + MdlMiniFooterRightSection(classes).also { this.rightSection = it; it.block() }
+
+fun <T : Element, E : Element> IMdlMiniFooter<T>.rightSection(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMiniFooterRightSection<T>.() -> Unit = {}): IMdlMiniFooterRightSection<T> =
+        this +
+                object : MdlMiniFooterRightSectionBase<T>(element, classes) {}.also {
+                    this.rightSection = it
+                    it.block()
+                }
+
 fun <T : Element> IMdlNav<T>.link(
         href: String? = null,
         target: String? = null,
