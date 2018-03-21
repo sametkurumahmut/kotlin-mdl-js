@@ -64,6 +64,15 @@ fun <T : Element, E : Element> IMdlComponent<E>.megaFooter(
         block: IMdlMegaFooter<T>.() -> Unit = {}): IMdlMegaFooter<T>
         = this + object : MdlMegaFooterBase<T>(element, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.miniFooter(classes: String = String.empty, block: MdlMiniFooter.() -> Unit = {})
+        = this + MdlMiniFooter(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.miniFooter(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMiniFooter<T>.() -> Unit = {}): IMdlMiniFooter<T>
+        = this + object : MdlMiniFooterBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.nav(classes: String = String.empty, block: MdlNav.() -> Unit = {})
         = this + MdlNav(classes).apply(block)
 
@@ -378,6 +387,32 @@ fun <T : Element, E : Element> IMdlMegaFooterVerticalSection<E>.rightSection(
                     it.block()
                 }
 
+fun <T : Element> IMdlMiniFooter<T>.leftSection(
+        classes: String = String.empty,
+        block: MdlMiniFooterLeftSection.() -> Unit = {})
+        = this + MdlMiniFooterLeftSection(classes).also { this.leftSection = it; it.block() }
+
+fun <T : Element, E : Element> IMdlMiniFooter<T>.leftSection(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMiniFooterLeftSection<T>.() -> Unit = {}): IMdlMiniFooterLeftSection<T> =
+        this + object : MdlMiniFooterLeftSectionBase<T>(element, classes) {}.also { this.leftSection = it; it.block() }
+
+fun <T : Element> IMdlMiniFooter<T>.rightSection(
+        classes: String = String.empty,
+        block: MdlMiniFooterRightSection.() -> Unit = {})
+        = this + MdlMiniFooterRightSection(classes).also { this.rightSection = it; it.block() }
+
+fun <T : Element, E : Element> IMdlMiniFooter<T>.rightSection(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMiniFooterRightSection<T>.() -> Unit = {}): IMdlMiniFooterRightSection<T> =
+        this +
+                object : MdlMiniFooterRightSectionBase<T>(element, classes) {}.also {
+                    this.rightSection = it
+                    it.block()
+                }
+
 fun <T : Element> IMdlNav<T>.link(
         href: String? = null,
         target: String? = null,
@@ -501,6 +536,15 @@ fun <T : Element> Element.mdlMegaFooter(
         classes: String = String.empty,
         block: IMdlMegaFooter<T>.() -> Unit = {}): IMdlMegaFooter<T>
         = this + object : MdlMegaFooterBase<T>(element, classes) {}.apply(block)
+
+fun Element.mdlMiniFooter(classes: String = String.empty, block: MdlMiniFooter.() -> Unit = {})
+        = this + MdlMiniFooter(classes).apply(block)
+
+fun <T : Element> Element.mdlMiniFooter(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMiniFooter<T>.() -> Unit = {}): IMdlMiniFooter<T>
+        = this + object : MdlMiniFooterBase<T>(element, classes) {}.apply(block)
 
 fun Element.mdlNav(classes: String = String.empty, block: MdlNav.() -> Unit = {}) = this + MdlNav(classes).apply(block)
 
