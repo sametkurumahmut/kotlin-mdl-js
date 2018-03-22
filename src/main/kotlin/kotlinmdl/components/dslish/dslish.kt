@@ -413,6 +413,16 @@ fun <T : Element, E : Element> IMdlMiniFooter<T>.rightSection(
                     it.block()
                 }
 
+fun <T : Element> IMdlMiniFooterSection<T>.linkList(
+        classes: String = String.empty,
+        block: MdlMiniFooterLinkList.() -> Unit = {}) = this + MdlMiniFooterLinkList(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlMiniFooterSection<E>.linkList(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlMiniFooterLinkList<T>.() -> Unit = {}): IMdlMiniFooterLinkList<T>
+        = this + object : MdlMiniFooterLinkListBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlNav<T>.link(
         href: String? = null,
         target: String? = null,
