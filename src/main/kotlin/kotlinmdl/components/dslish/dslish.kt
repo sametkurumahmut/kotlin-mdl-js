@@ -423,6 +423,15 @@ fun <T : Element, E : Element> IMdlMiniFooterSection<E>.linkList(
         block: IMdlMiniFooterLinkList<T>.() -> Unit = {}): IMdlMiniFooterLinkList<T>
         = this + object : MdlMiniFooterLinkListBase<T>(element, classes) {}.apply(block)
 
+fun <T : Element> IMdlMiniFooterSection<T>.socialButton(
+        formEncType: ButtonFormEncType? = null,
+        formMethod: ButtonFormMethod? = null,
+        name: String? = null,
+        type: ButtonType? = null,
+        classes: String = String.empty,
+        block: MdlMiniFooterSocialButton.() -> Unit = {})
+        = this + MdlMiniFooterSocialButton(formEncType, formMethod, name, type, classes).apply(block)
+
 fun <T : Element> IMdlNav<T>.link(
         href: String? = null,
         target: String? = null,
