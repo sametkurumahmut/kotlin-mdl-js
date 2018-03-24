@@ -34,6 +34,15 @@ fun <T : Element, E : Element> IMdlComponent<E>.layout(
         block: IMdlLayout<T>.() -> Unit = {}): IMdlLayout<T>
         = this + object : MdlLayoutBase<T>(element, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.layoutIcon(classes: String = String.empty, block: MdlLayoutIcon.() -> Unit = {})
+        = this + MdlLayoutIcon(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.layoutIcon(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlLayoutIcon<T>.() -> Unit = {}): IMdlLayoutIcon<T>
+        = this + object : MdlLayoutIconBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.layoutSpacer(classes: String = String.empty, block: MdlLayoutSpacer.() -> Unit = {})
         = this + MdlLayoutSpacer(classes).apply(block)
 
@@ -513,6 +522,15 @@ fun <T : Element> Element.mdlLayout(
         classes: String = String.empty,
         block: IMdlLayout<T>.() -> Unit = {}) : IMdlLayout<T>
         = this + object : MdlLayoutBase<T>(element, classes) {}.apply(block)
+
+fun Element.mdlLayoutIcon(classes: String = String.empty, block: MdlLayoutIcon.() -> Unit = {})
+        = this + MdlLayoutIcon(classes).apply(block)
+
+fun <T : Element> Element.mdlLayoutIcon(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlLayoutIcon<T>.() -> Unit = {}): IMdlLayoutIcon<T>
+        = this + object : MdlLayoutIconBase<T>(element, classes) {}.apply(block)
 
 fun Element.mdlLayoutSpacer(classes: String = String.empty, block: MdlLayoutSpacer.() -> Unit = {})
         = this + MdlLayoutSpacer(classes).apply(block)
