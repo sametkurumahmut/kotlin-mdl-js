@@ -64,6 +64,15 @@ fun <T : Element, E : Element> IMdlComponent<E>.layoutTitle(
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.logo(classes: String = String.empty, block: MdlLogo.() -> Unit = {})
+        = this + MdlLogo(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.logo(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlLogo<T>.() -> Unit = {}): IMdlLogo<T>
+        = this + object : MdlLogoBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.megaFooter(classes: String = String.empty, block: MdlMegaFooter.() -> Unit = {})
         = this + MdlMegaFooter(classes).apply(block)
 
@@ -550,6 +559,15 @@ fun <T : Element> Element.mdlLayoutTitle(
         classes: String = String.empty,
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.apply(block)
+
+fun Element.mdlLogo(classes: String = String.empty, block: MdlLogo.() -> Unit = {})
+        = this + MdlLogo(classes).apply(block)
+
+fun <T : Element> Element.mdlLogo(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlLogo<T>.() -> Unit = {}): IMdlLogo<T>
+        = this + object : MdlLogoBase<T>(element, classes) {}.apply(block)
 
 fun Element.mdlMaterialIcon(
         icon: IMaterialIcon,
