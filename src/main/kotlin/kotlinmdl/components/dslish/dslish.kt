@@ -258,6 +258,18 @@ fun <T : Element, E : Element> IMdlLayoutHeader<E>.row(
         block: IMdlLayoutHeaderRow<T>.() -> Unit = {}): IMdlLayoutHeaderRow<T>
         = this + object : MdlLayoutHeaderRowBase<T>(element, classes) {}.apply(block)
 
+fun <T : Element> IMdlLayoutHeader<T>.tabBar(
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlLayoutTabBar.() -> Unit = {}) = this + MdlLayoutTabBar(hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlLayoutHeader<E>.tabBar(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlLayoutTabBar<T>.() -> Unit = {}): IMdlLayoutTabBar<T>
+        = this + object : MdlLayoutTabBarBase<T>(element, hasRippleEffect, classes) {}.apply(block)
+
 fun <T : Element> IMdlLayoutHeaderRow<T>.layoutTitle(
         title: String,
         classes: String = String.empty,
