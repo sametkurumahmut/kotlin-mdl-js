@@ -283,6 +283,19 @@ fun <T : Element, E : Element> IMdlLayoutHeaderRow<E>.layoutTitle(
         block: IMdlLayoutTitle<T>.() -> Unit = {}): IMdlLayoutTitle<T>
         = this + object : MdlLayoutTitleBase<T>(element, title, classes) {}.also { this.layoutTitle = it; it.block() }
 
+fun <T : Element> IMdlLayoutTabBar<T>.tab(
+        hrefId: String,
+        isActive: Boolean = false,
+        classes: String = String.empty,
+        block: MdlLayoutTab.() -> Unit = {}) = this + MdlLayoutTab(hrefId, isActive, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlLayoutTabBar<E>.tab(
+        element: T,
+        isActive: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlLayoutTab<T>.() -> Unit = {}): IMdlLayoutTab<T>
+        = this + object : MdlLayoutTabBase<T>(element, isActive, classes) {}.apply(block)
+
 fun <T : Element> IMdlMegaFooter<T>.bottomSection(
         classes: String = String.empty,
         block: MdlMegaFooterBottomSection.() -> Unit = {})
