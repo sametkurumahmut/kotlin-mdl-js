@@ -236,6 +236,20 @@ fun <T : Element, E : Element> IMdlLayout<E>.waterfallHeader(
                     it.block()
                 }
 
+fun <T : Element> IMdlLayoutContent<T>.tabPanel(
+        id: String,
+        isActive: Boolean = false,
+        classes: String = String.empty,
+        block: MdlLayoutTabPanel.() -> Unit = {}) = this + MdlLayoutTabPanel(id, isActive, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlLayoutContent<E>.tabPanel(
+        element: T,
+        id: String,
+        isActive: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlLayoutTabPanel<T>.() -> Unit = {}): IMdlLayoutTabPanel<T>
+        = this + object : MdlLayoutTabPanelBase<T>(element, id, isActive, classes) {}.apply(block)
+
 fun <T : Element> IMdlLayoutDrawer<T>.layoutTitle(
         title: String,
         classes: String = String.empty,
