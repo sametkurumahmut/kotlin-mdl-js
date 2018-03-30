@@ -64,6 +64,66 @@ fun <T : Element> IMdlComponent<T>.invertToggleClassOfThis(
 /**
  * Update and initial element is @param element.
  */
+fun <T, E : Element> IMdlComponent<E>.invertToggleClassOfWhen(
+        element: Element,
+        cssClass: String,
+        checkValue: T,
+        initialValue: T,
+        setOnInit: Boolean = true)
+        = this.invertToggleClassOfWhen(element, element, cssClass, checkValue, initialValue, setOnInit)
+
+/**
+ * Update element is @param element.
+ * Initial element is @param initialElement.
+ */
+fun <T, E : Element> IMdlComponent<E>.invertToggleClassOfWhen(
+        element: Element,
+        initialElement: Element,
+        cssClass: String,
+        checkValue: T,
+        initialValue: T,
+        setOnInit: Boolean = true) =
+        this.toggleClassWhenDelegatedBackingProperty(
+                initialElement,
+                cssClass,
+                checkValue,
+                initialValue,
+                { _, newValue -> toggleClass(element, cssClass, checkValue == newValue) },
+                setOnInit,
+                true)
+
+/**
+ * Update and initial element is self.
+ */
+fun <T, E : Element> IMdlComponent<E>.invertToggleClassOfThisWhen(
+        cssClass: String,
+        checkValue: T,
+        initialValue: T,
+        setOnInit: Boolean = true)
+        = this.invertToggleClassOfThisWhen(this.element, cssClass, checkValue, initialValue, setOnInit)
+
+/**
+ * Update element is self.
+ * Initial element is @param initialElement.
+ */
+fun <T, E : Element> IMdlComponent<E>.invertToggleClassOfThisWhen(
+        initialElement: Element,
+        cssClass: String,
+        checkValue: T,
+        initialValue: T,
+        setOnInit: Boolean = true) =
+        this.toggleClassWhenDelegatedBackingProperty(
+                initialElement,
+                cssClass,
+                checkValue,
+                initialValue,
+                { _, newValue -> toggleClass(this.element, cssClass, checkValue == newValue) },
+                setOnInit,
+                true)
+
+/**
+ * Update and initial element is @param element.
+ */
 fun <T, E : Element> IMdlComponent<E>.replaceNewClassOf(element: Element, initialValue: T, setOnInit: Boolean = true)
         = this.replaceNewClassOf(element, element, initialValue, setOnInit)
 
@@ -557,6 +617,64 @@ fun <T : Element> IMdlComponent<T>.toggleClassOfThis(
                 { this.element.classList.contains(cssClass) },
                 { toggleClass(this.element, cssClass, it) },
                 setOnInit)
+
+/**
+ * Update and initial element is @param element.
+ */
+fun <T, E : Element> IMdlComponent<E>.toggleClassOfWhen(
+        element: Element,
+        cssClass: String,
+        checkValue: T,
+        initialValue: T,
+        setOnInit: Boolean = true)
+        = this.toggleClassOfWhen(element, element, cssClass, checkValue, initialValue, setOnInit)
+
+/**
+ * Update element is @param element.
+ * Initial element is @param initialElement.
+ */
+fun <T, E : Element> IMdlComponent<E>.toggleClassOfWhen(
+        element: Element,
+        initialElement: Element,
+        cssClass: String,
+        checkValue: T,
+        initialValue: T,
+        setOnInit: Boolean = true) =
+        this.toggleClassWhenDelegatedBackingProperty(
+                initialElement,
+                cssClass,
+                checkValue,
+                initialValue,
+                { _, newValue -> toggleClass(element, cssClass, checkValue == newValue) },
+                setOnInit)
+
+/**
+ * Update and initial element is self.
+ */
+fun <T, E : Element> IMdlComponent<E>.toggleClassOfThisWhen(
+        cssClass: String,
+        checkValue: T,
+        initialValue: T,
+        setOnInit: Boolean = true)
+        = this.toggleClassOfThisWhen(this.element, cssClass, checkValue, initialValue, setOnInit)
+
+/**
+ * Update element is self.
+ * Initial element is @param initialElement.
+ */
+fun <T, E : Element> IMdlComponent<E>.toggleClassOfThisWhen(
+        initialElement: Element,
+        cssClass: String,
+        checkValue: T,
+        initialValue: T,
+        setOnInit: Boolean = true) =
+        this.toggleClassWhenDelegatedBackingProperty(
+                initialElement,
+                cssClass,
+                checkValue,
+                initialValue,
+                { _, newValue -> toggleClass(this.element, cssClass, checkValue == newValue) },
+                setOnInit)
 //endregion
 
 //region Private Extension Methods
@@ -624,4 +742,17 @@ private fun <T : Element> IMdlComponent<T>.toggleClassDelegatedProperty(
                 onGet,
                 onSet,
                 { if (setOnInit) toggleClass(initialElement, cssClass, initialValue, isInverted) })
+
+private fun <T, E : Element> IMdlComponent<E>.toggleClassWhenDelegatedBackingProperty(
+        initialElement: Element,
+        cssClass: String,
+        checkValue: T,
+        initialValue: T,
+        onSet: (oldValue: T, newValue: T) -> Unit = { _, _ -> },
+        setOnInit: Boolean = true,
+        isInverted: Boolean = false) =
+        this.delegatedBackingProperty(
+                initialValue,
+                onSet,
+                { if (setOnInit) toggleClass(initialElement, cssClass, checkValue == initialValue, isInverted) })
 //endregion

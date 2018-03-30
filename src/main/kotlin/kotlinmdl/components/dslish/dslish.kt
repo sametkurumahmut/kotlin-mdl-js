@@ -13,6 +13,25 @@ import kotlinx.html.*
 import org.w3c.dom.Element
 
 //region Mdl Component Extensions
+fun <T : Element> IMdlComponent<T>.fixedTabLayout(classes: String = String.empty, block: MdlTabLayout.() -> Unit = {})
+        = this + MdlTabLayout(MdlTabLayoutTabMode.FIXED, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.fixedTabLayout(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlTabLayout<T>.() -> Unit = {}): IMdlTabLayout<T>
+        = this + object : MdlTabLayoutBase<T>(element, MdlTabLayoutTabMode.FIXED, classes) {}.apply(block)
+
+fun <T : Element> IMdlComponent<T>.scrollableTabLayout(
+        classes: String = String.empty,
+        block: MdlTabLayout.() -> Unit = {}) = this + MdlTabLayout(MdlTabLayoutTabMode.SCROLLABLE, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.scrollableTabLayout(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlTabLayout<T>.() -> Unit = {}): IMdlTabLayout<T>
+        = this + object : MdlTabLayoutBase<T>(element, MdlTabLayoutTabMode.SCROLLABLE, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.grid(
         hasSpacing: Boolean = true,
         classes: String = String.empty,
@@ -552,6 +571,24 @@ fun <T : Element, E : Element> IMdlComponent<E>.materialIcon(
 //endregion
 
 //region Element Extensions
+fun Element.mdlFixedTabLayout(classes: String = String.empty, block: MdlTabLayout.() -> Unit = {})
+        = this + MdlTabLayout(MdlTabLayoutTabMode.FIXED, classes).apply(block)
+
+fun <T : Element> Element.mdlFixedTabLayout(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlTabLayout<T>.() -> Unit = {}): IMdlTabLayout<T>
+        = this + object : MdlTabLayoutBase<T>(element, MdlTabLayoutTabMode.FIXED, classes) {}.apply(block)
+
+fun Element.mdlScrollableTabLayout(classes: String = String.empty, block: MdlTabLayout.() -> Unit = {})
+        = this + MdlTabLayout(MdlTabLayoutTabMode.SCROLLABLE, classes).apply(block)
+
+fun <T : Element> Element.mdlScrollableTabLayout(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlTabLayout<T>.() -> Unit = {}): IMdlTabLayout<T>
+        = this + object : MdlTabLayoutBase<T>(element, MdlTabLayoutTabMode.SCROLLABLE, classes) {}.apply(block)
+
 fun Element.mdlGrid(hasSpacing: Boolean = true, classes: String = String.empty, block: MdlGrid.() -> Unit = {})
         = this + MdlGrid(hasSpacing, classes).apply(block)
 
