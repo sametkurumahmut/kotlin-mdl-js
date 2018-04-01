@@ -13,6 +13,20 @@ import kotlinx.html.*
 import org.w3c.dom.Element
 
 //region Mdl Component Extensions
+fun <T : Element> IMdlComponent<T>.chip(
+        hasContact: Boolean = false,
+        isDeletable: Boolean = false,
+        classes: String = String.empty,
+        block: MdlChip.() -> Unit = {}) = this + MdlChip(hasContact, isDeletable, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.chip(
+        element: T,
+        hasContact: Boolean = false,
+        isDeletable: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlChip<T>.() -> Unit = {}): IMdlChip<T>
+        = this + object : MdlChipBase<T>(element, hasContact, isDeletable, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.fixedTabLayout(classes: String = String.empty, block: MdlTabLayout.() -> Unit = {})
         = this + MdlTabLayout(MdlTabLayoutTabMode.FIXED, classes).apply(block)
 
@@ -571,6 +585,20 @@ fun <T : Element, E : Element> IMdlComponent<E>.materialIcon(
 //endregion
 
 //region Element Extensions
+fun Element.mdlChip(
+        hasContact: Boolean = false,
+        isDeletable: Boolean = false,
+        classes: String = String.empty,
+        block: MdlChip.() -> Unit = {}) = this + MdlChip(hasContact, isDeletable, classes).apply(block)
+
+fun <T : Element> Element.mdlChip(
+        element: T,
+        hasContact: Boolean = false,
+        isDeletable: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlChip<T>.() -> Unit = {}): IMdlChip<T>
+        = this + object : MdlChipBase<T>(element, hasContact, isDeletable, classes) {}.apply(block)
+
 fun Element.mdlFixedTabLayout(classes: String = String.empty, block: MdlTabLayout.() -> Unit = {})
         = this + MdlTabLayout(MdlTabLayoutTabMode.FIXED, classes).apply(block)
 
