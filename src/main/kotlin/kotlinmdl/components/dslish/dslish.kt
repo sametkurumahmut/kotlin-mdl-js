@@ -13,6 +13,16 @@ import kotlinx.html.*
 import org.w3c.dom.Element
 
 //region Mdl Component Extensions
+fun <T : Element> IMdlChip<T>.text(text: String, classes: String = String.empty, block: MdlChipText.() -> Unit = {})
+        = this + MdlChipText(text, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlChip<E>.text(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlChipText<T>.() -> Unit = {}): IMdlChipText<T>
+        = this + object : MdlChipTextBase<T>(element, text, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.chip(
         hasContact: Boolean = false,
         isDeletable: Boolean = false,
