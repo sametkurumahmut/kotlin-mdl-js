@@ -4,6 +4,7 @@ import kotlinmdl.components.*
 import kotlinmdl.components.style.IMdlMaterialIcon
 import kotlinmdl.components.style.MdlMaterialIcon
 import kotlinmdl.components.style.MdlMaterialIconBase
+import kotlinmdl.components.style.MdlMaterialIcons
 import kotlinmdl.config.MdlConfig
 import kotlinmdl.extensions.plus
 import kotlinmdl.internal.extensions.empty
@@ -13,6 +14,13 @@ import kotlinx.html.*
 import org.w3c.dom.Element
 
 //region Mdl Component Extensions
+fun <T : Element, E : Element> IMdlChip<E>.action(
+        element: T,
+        icon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty,
+        block: IMdlChipAction<T>.() -> Unit = {}): IMdlChipAction<T>
+        = this + object : MdlChipActionBase<T>(element, icon, classes) {}.apply(block)
+
 fun <T : Element> IMdlChip<T>.text(text: String, classes: String = String.empty, block: MdlChipText.() -> Unit = {})
         = this + MdlChipText(text, classes).apply(block)
 
