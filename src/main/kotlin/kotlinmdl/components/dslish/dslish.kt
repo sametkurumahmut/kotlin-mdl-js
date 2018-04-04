@@ -21,6 +21,16 @@ fun <T : Element, E : Element> IMdlChip<E>.action(
         block: IMdlChipAction<T>.() -> Unit = {}): IMdlChipAction<T>
         = this + object : MdlChipActionBase<T>(element, icon, classes) {}.apply(block)
 
+fun <T : Element> IMdlChip<T>.actionButton(
+        formEncType: ButtonFormEncType? = null,
+        formMethod: ButtonFormMethod? = null,
+        name: String? = null,
+        type: ButtonType? = ButtonType.button,
+        icon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty,
+        block: MdlChipActionButton.() -> Unit = {})
+        = this + MdlChipActionButton(formEncType, formMethod, name, type, icon, classes).apply(block)
+
 fun <T : Element> IMdlChip<T>.text(text: String, classes: String = String.empty, block: MdlChipText.() -> Unit = {})
         = this + MdlChipText(text, classes).apply(block)
 
