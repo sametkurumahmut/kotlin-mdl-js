@@ -31,6 +31,19 @@ fun <T : Element> IMdlChip<T>.actionButton(
         block: MdlChipActionButton.() -> Unit = {})
         = this + MdlChipActionButton(formEncType, formMethod, name, type, icon, classes).apply(block)
 
+fun <T : Element> IMdlChip<T>.actionLink(
+        href: String? = null,
+        target: String? = null,
+        icon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty,
+        block: MdlChipActionLink.() -> Unit = {}) = this + MdlChipActionLink(href, target, icon, classes).apply(block)
+
+fun <T : Element> IMdlChip<T>.actionExternalLink(
+        href: String? = null,
+        icon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty,
+        block: MdlChipActionLink.() -> Unit = {}) = this.actionLink(href, ATarget.blank, icon, classes).apply(block)
+
 fun <T : Element> IMdlChip<T>.text(text: String, classes: String = String.empty, block: MdlChipText.() -> Unit = {})
         = this + MdlChipText(text, classes).apply(block)
 
