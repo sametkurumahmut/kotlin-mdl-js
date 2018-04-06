@@ -44,6 +44,15 @@ fun <T : Element> IMdlChip<T>.actionExternalLink(
         classes: String = String.empty,
         block: MdlChipActionLink.() -> Unit = {}) = this.actionLink(href, ATarget.blank, icon, classes).apply(block)
 
+fun <T : Element> IMdlChip<T>.contact(classes: String = String.empty, block: MdlChipContact.() -> Unit = {})
+        = this + MdlChipContact(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlChip<E>.contact(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlChipContact<T>.() -> Unit = {}): IMdlChipContact<T>
+        = this + object : MdlChipContactBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlChip<T>.text(text: String, classes: String = String.empty, block: MdlChipText.() -> Unit = {})
         = this + MdlChipText(text, classes).apply(block)
 
