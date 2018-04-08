@@ -8,6 +8,7 @@ import kotlinmdl.components.style.MdlMaterialIcons
 import kotlinmdl.config.MdlConfig
 import kotlinmdl.extensions.plus
 import kotlinmdl.internal.extensions.empty
+import kotlinmdl.internal.extensions.replaceOrAppendExistingChildOfThis
 import kotlinmdl.material.style.IMaterialIcon
 import kotlinmdl.style.*
 import kotlinx.html.*
@@ -79,6 +80,23 @@ fun <T : Element, E : Element> IMdlChip<E>.text(
         classes: String = String.empty,
         block: IMdlChipText<T>.() -> Unit = {}): IMdlChipText<T>
         = this + object : MdlChipTextBase<T>(element, text, classes) {}.apply(block)
+
+fun <T : Element> IMdlComponent<T>.basicChip(
+        text: String,
+        classes: String = String.empty,
+        block: MdlBasicChip.() -> Unit = {}) = this + MdlBasicChip(text, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.basicChip(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlBasicChip<T>.() -> Unit = {}): IMdlBasicChip<T> =
+        this +
+                object : MdlBasicChipBase<T>(element, classes = classes) {
+
+                    override var text: IMdlChipText<Element>
+                            by this.replaceOrAppendExistingChildOfThis(element, MdlChipText(text))
+                }.apply(block)
 
 fun <T : Element> IMdlComponent<T>.chip(
         hasContact: Boolean = false,
@@ -652,6 +670,21 @@ fun <T : Element, E : Element> IMdlComponent<E>.materialIcon(
 //endregion
 
 //region Element Extensions
+fun Element.mdlBasicChip(text: String, classes: String = String.empty, block: MdlBasicChip.() -> Unit = {})
+        = this + MdlBasicChip(text, classes).apply(block)
+
+fun <T : Element> Element.mdlBasicChip(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlBasicChip<T>.() -> Unit = {}): IMdlBasicChip<T> =
+        this +
+                object : MdlBasicChipBase<T>(element, classes = classes) {
+
+                    override var text: IMdlChipText<Element>
+                            by this.replaceOrAppendExistingChildOfThis(element, MdlChipText(text))
+                }.apply(block)
+
 fun Element.mdlChip(
         hasContact: Boolean = false,
         isDeletable: Boolean = false,
