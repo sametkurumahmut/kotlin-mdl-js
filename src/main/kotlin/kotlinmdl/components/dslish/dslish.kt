@@ -71,6 +71,12 @@ fun <T : Element, E : Element> IMdlChip<E>.contact(
         block: IMdlChipContact<T>.() -> Unit = {}): IMdlChipContact<T>
         = this + object : MdlChipContactBase<T>(element, classes) {}.apply(block)
 
+fun <T : Element> IMdlChip<T>.contactImage(
+        alt: String? = null,
+        src: String? = null,
+        classes: String = String.empty,
+        block: MdlChipContactImage.() -> Unit = {}) = this + MdlChipContactImage(alt, src, classes).apply(block)
+
 fun <T : Element> IMdlChip<T>.text(text: String, classes: String = String.empty, block: MdlChipText.() -> Unit = {})
         = this + MdlChipText(text, classes).apply(block)
 
