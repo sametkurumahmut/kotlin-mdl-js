@@ -118,6 +118,22 @@ fun <T : Element, E : Element> IMdlComponent<E>.chip(
         block: IMdlChip<T>.() -> Unit = {}): IMdlChip<T>
         = this + object : MdlChipBase<T>(element, hasContact, isDeletable, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.contactImageChip(
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        classes: String = String.empty, block: MdlContactImageChip.() -> Unit = {})
+        = this + MdlContactImageChip(text, contactAlt, contactSrc, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.contactImageChip(
+        element: T,
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        classes: String = String.empty,
+        block: IMdlContactChip<T>.() -> Unit = {}): IMdlContactChip<T>
+        = this + customContactImageChip(element, text, contactAlt, contactSrc, classes, block)
+
 fun <T : Element> IMdlComponent<T>.fixedTabLayout(classes: String = String.empty, block: MdlTabLayout.() -> Unit = {})
         = this + MdlTabLayout(MdlTabLayoutTabMode.FIXED, classes).apply(block)
 
@@ -705,6 +721,22 @@ fun <T : Element> Element.mdlChip(
         block: IMdlChip<T>.() -> Unit = {}): IMdlChip<T>
         = this + object : MdlChipBase<T>(element, hasContact, isDeletable, classes) {}.apply(block)
 
+fun Element.mdlContactImageChip(
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        classes: String = String.empty, block: MdlContactImageChip.() -> Unit = {})
+        = this + MdlContactImageChip(text, contactAlt, contactSrc, classes).apply(block)
+
+fun <T : Element> Element.mdlContactImageChip(
+        element: T,
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        classes: String = String.empty,
+        block: IMdlContactChip<T>.() -> Unit = {}): IMdlContactChip<T>
+        = this + customContactImageChip(element, text, contactAlt, contactSrc, classes, block)
+
 fun Element.mdlFixedTabLayout(classes: String = String.empty, block: MdlTabLayout.() -> Unit = {})
         = this + MdlTabLayout(MdlTabLayoutTabMode.FIXED, classes).apply(block)
 
@@ -829,4 +861,22 @@ fun <T : Element> Element.mdlTabs(
         classes: String = String.empty,
         block: IMdlTabs<T>.() -> Unit = {}): IMdlTabs<T>
         = this + object : MdlTabsBase<T>(element, hasRippleEffect, classes) {}.apply(block)
+//endregion
+
+//region Private Methods
+private fun <T : Element> customContactImageChip(
+        element: T,
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        classes: String = String.empty,
+        block: IMdlContactChip<T>.() -> Unit = {}) =
+        object : MdlContactChipBase<T>(element, classes) {
+
+            override var contact: IMdlChipContact<Element>
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlChipContactImage(contactAlt, contactSrc))
+
+            override var text: IMdlChipText<Element>
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlChipText(text))
+        }.apply(block)
 //endregion
