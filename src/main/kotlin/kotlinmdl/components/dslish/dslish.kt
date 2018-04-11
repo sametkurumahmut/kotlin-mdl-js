@@ -118,6 +118,25 @@ fun <T : Element, E : Element> IMdlComponent<E>.chip(
         block: IMdlChip<T>.() -> Unit = {}): IMdlChip<T>
         = this + object : MdlChipBase<T>(element, hasContact, isDeletable, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.contactChip(
+        text: String,
+        contactText: String,
+        contactColor: IMdlTextColor? = null,
+        contactBackgroundColor: IMdlBackgroundColor? = null,
+        classes: String = String.empty,
+        block: MdlContactChip.() -> Unit = {})
+        = this + MdlContactChip(text, contactText, contactColor, contactBackgroundColor, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.contactChip(
+        element: T,
+        text: String,
+        contactText: String,
+        contactColor: IMdlTextColor? = null,
+        contactBackgroundColor: IMdlBackgroundColor? = null,
+        classes: String = String.empty,
+        block: IMdlBasicContactChip<T>.() -> Unit = {}): IMdlBasicContactChip<T>
+        = this + customContactChip(element, text, contactText, contactColor, contactBackgroundColor, classes, block)
+
 fun <T : Element> IMdlComponent<T>.contactImageChip(
         text: String,
         contactAlt: String? = null,
@@ -721,6 +740,25 @@ fun <T : Element> Element.mdlChip(
         block: IMdlChip<T>.() -> Unit = {}): IMdlChip<T>
         = this + object : MdlChipBase<T>(element, hasContact, isDeletable, classes) {}.apply(block)
 
+fun Element.mdlContactChip(
+        text: String,
+        contactText: String,
+        contactColor: IMdlTextColor? = null,
+        contactBackgroundColor: IMdlBackgroundColor? = null,
+        classes: String = String.empty,
+        block: MdlContactChip.() -> Unit = {})
+        = this + MdlContactChip(text, contactText, contactColor, contactBackgroundColor, classes).apply(block)
+
+fun <T : Element> Element.mdlContactChip(
+        element: T,
+        text: String,
+        contactText: String,
+        contactColor: IMdlTextColor? = null,
+        contactBackgroundColor: IMdlBackgroundColor? = null,
+        classes: String = String.empty,
+        block: IMdlBasicContactChip<T>.() -> Unit = {}): IMdlBasicContactChip<T>
+        = this + customContactChip(element, text, contactText, contactColor, contactBackgroundColor, classes, block)
+
 fun Element.mdlContactImageChip(
         text: String,
         contactAlt: String? = null,
@@ -864,6 +902,25 @@ fun <T : Element> Element.mdlTabs(
 //endregion
 
 //region Private Methods
+private fun <T : Element> customContactChip(
+        element: T,
+        text: String,
+        contactText: String,
+        contactColor: IMdlTextColor? = null,
+        contactBackgroundColor: IMdlBackgroundColor? = null,
+        classes: String = String.empty,
+        block: IMdlBasicContactChip<T>.() -> Unit = {}) =
+        object : MdlBasicContactChipBase<T>(element, classes) {
+
+            override var contact: IMdlChipBasicContact<Element>
+                    by this.replaceOrAppendExistingChildOfThis(
+                            element,
+                            MdlChipBasicContact(contactText, contactColor, contactBackgroundColor))
+
+            override var text: IMdlChipText<Element>
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlChipText(text))
+        }.apply(block)
+
 private fun <T : Element> customContactImageChip(
         element: T,
         text: String,
