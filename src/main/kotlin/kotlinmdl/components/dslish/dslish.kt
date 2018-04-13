@@ -128,6 +128,15 @@ fun <T : Element, E : Element> IMdlComponent<E>.chip(
         block: IMdlChip<T>.() -> Unit = {}): IMdlChip<T>
         = this + object : MdlChipBase<T>(element, hasContact, isDeletable, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.chipButton(
+        formEncType: ButtonFormEncType? = null,
+        formMethod: ButtonFormMethod? = null,
+        name: String? = null,
+        type: ButtonType? = ButtonType.button,
+        classes: String = String.empty,
+        block: MdlChipButton.() -> Unit = {})
+        = this + MdlChipButton(formEncType, formMethod, name, type, classes).apply(block)
+
 fun <T : Element> IMdlComponent<T>.contactChip(
         text: String,
         contactText: String,
@@ -759,6 +768,15 @@ fun <T : Element> Element.mdlChip(
         classes: String = String.empty,
         block: IMdlChip<T>.() -> Unit = {}): IMdlChip<T>
         = this + object : MdlChipBase<T>(element, hasContact, isDeletable, classes) {}.apply(block)
+
+fun Element.mdlChipButton(
+        formEncType: ButtonFormEncType? = null,
+        formMethod: ButtonFormMethod? = null,
+        name: String? = null,
+        type: ButtonType? = ButtonType.button,
+        classes: String = String.empty,
+        block: MdlChipButton.() -> Unit = {})
+        = this + MdlChipButton(formEncType, formMethod, name, type, classes).apply(block)
 
 fun Element.mdlContactChip(
         text: String,
