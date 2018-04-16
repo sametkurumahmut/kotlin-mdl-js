@@ -252,6 +252,82 @@ fun <T : Element, E : Element> IMdlComponent<E>.deletableContactImageChip(
                 classes,
                 block)
 
+fun <T : Element> IMdlComponent<T>.deletableContactImageChipLink(
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        actionHref: String? = null,
+        actionTarget: String? = null,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty, block: MdlDeletableContactImageChipLink.() -> Unit = {}) =
+        this + MdlDeletableContactImageChipLink(
+                text,
+                contactAlt,
+                contactSrc,
+                actionHref,
+                actionTarget,
+                actionIcon,
+                classes)
+                .apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.deletableContactImageChipLink(
+        element: T,
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        actionHref: String? = null,
+        actionTarget: String? = null,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty,
+        block: IMdlDeletableContactChip<T>.() -> Unit = {}): IMdlDeletableContactChip<T> =
+        this + customDeletableContactImageChipLink(
+                element,
+                text,
+                contactAlt,
+                contactSrc,
+                actionHref,
+                actionTarget,
+                actionIcon,
+                classes,
+                block)
+
+fun <T : Element> IMdlComponent<T>.deletableContactImageChipExternalLink(
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        actionHref: String? = null,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty, block: MdlDeletableContactImageChipLink.() -> Unit = {}) =
+        this.deletableContactImageChipLink(
+                text,
+                contactAlt,
+                contactSrc,
+                actionHref,
+                ATarget.blank,
+                actionIcon,
+                classes)
+                .apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.deletableContactImageChipExternalLink(
+        element: T,
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        actionHref: String? = null,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty,
+        block: IMdlDeletableContactChip<T>.() -> Unit = {}): IMdlDeletableContactChip<T> =
+        this.deletableContactImageChipLink(
+                element,
+                text,
+                contactAlt,
+                contactSrc,
+                actionHref,
+                ATarget.blank,
+                actionIcon,
+                classes,
+                block)
+
 fun <T : Element> IMdlComponent<T>.fixedTabLayout(classes: String = String.empty, block: MdlTabLayout.() -> Unit = {})
         = this + MdlTabLayout(MdlTabLayoutTabMode.FIXED, classes).apply(block)
 
@@ -979,6 +1055,82 @@ fun <T : Element> Element.mdlDeletableContactImageChip(
                 classes,
                 block)
 
+fun Element.mdlDeletableContactImageChipLink(
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        actionHref: String? = null,
+        actionTarget: String? = null,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty, block: MdlDeletableContactImageChipLink.() -> Unit = {}) =
+        this + MdlDeletableContactImageChipLink(
+                text,
+                contactAlt,
+                contactSrc,
+                actionHref,
+                actionTarget,
+                actionIcon,
+                classes)
+                .apply(block)
+
+fun <T : Element> Element.mdlDeletableContactImageChipLink(
+        element: T,
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        actionHref: String? = null,
+        actionTarget: String? = null,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty,
+        block: IMdlDeletableContactChip<T>.() -> Unit = {}): IMdlDeletableContactChip<T> =
+        this + customDeletableContactImageChipLink(
+                element,
+                text,
+                contactAlt,
+                contactSrc,
+                actionHref,
+                actionTarget,
+                actionIcon,
+                classes,
+                block)
+
+fun Element.mdlDeletableContactImageChipExternalLink(
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        actionHref: String? = null,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty, block: MdlDeletableContactImageChipLink.() -> Unit = {}) =
+        this.mdlDeletableContactImageChipLink(
+                text,
+                contactAlt,
+                contactSrc,
+                actionHref,
+                ATarget.blank,
+                actionIcon,
+                classes)
+                .apply(block)
+
+fun <T : Element> Element.mdlDeletableContactImageChipExternalLink(
+        element: T,
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        actionHref: String? = null,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty,
+        block: IMdlDeletableContactChip<T>.() -> Unit = {}): IMdlDeletableContactChip<T> =
+        this.mdlDeletableContactImageChipLink(
+                element,
+                text,
+                contactAlt,
+                contactSrc,
+                actionHref,
+                ATarget.blank,
+                actionIcon,
+                classes,
+                block)
+
 fun Element.mdlFixedTabLayout(classes: String = String.empty, block: MdlTabLayout.() -> Unit = {})
         = this + MdlTabLayout(MdlTabLayoutTabMode.FIXED, classes).apply(block)
 
@@ -1184,5 +1336,28 @@ private fun <T : Element> customDeletableContactImageChip(
             override var action: IMdlChipAction<Element> by this.replaceOrAppendExistingChildOfThis(
                     element,
                     MdlChipActionButton(actionFormEncType, actionFormMethod, actionName, actionType, actionIcon))
+        }.apply(block)
+
+private fun <T : Element> customDeletableContactImageChipLink(
+        element: T,
+        text: String,
+        contactAlt: String? = null,
+        contactSrc: String? = null,
+        actionHref: String? = null,
+        actionTarget: String? = null,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty,
+        block: IMdlDeletableContactChip<T>.() -> Unit = {}) =
+        object : MdlDeletableContactChipBase<T>(element, classes) {
+
+            override var contact: IMdlChipContact<Element>
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlChipContactImage(contactAlt, contactSrc))
+
+            override var text: IMdlChipText<Element>
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlChipText(text))
+
+            override var action: IMdlChipAction<Element> by this.replaceOrAppendExistingChildOfThis(
+                    element,
+                    MdlChipActionLink(actionHref, actionTarget, actionIcon))
         }.apply(block)
 //endregion
