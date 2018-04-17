@@ -205,6 +205,57 @@ fun <T : Element, E : Element> IMdlComponent<E>.deletableChip(
                 classes,
                 block)
 
+fun <T : Element> IMdlComponent<T>.deletableContactChip(
+        text: String,
+        contactText: String,
+        contactColor: IMdlTextColor? = null,
+        contactBackgroundColor: IMdlBackgroundColor? = null,
+        actionFormEncType: ButtonFormEncType? = null,
+        actionFormMethod: ButtonFormMethod? = null,
+        actionName: String? = null,
+        actionType: ButtonType? = ButtonType.button,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty, block: MdlDeletableContactChip.() -> Unit = {}) =
+        this + MdlDeletableContactChip(
+                text,
+                contactText,
+                contactColor,
+                contactBackgroundColor,
+                actionFormEncType,
+                actionFormMethod,
+                actionName,
+                actionType,
+                actionIcon,
+                classes)
+                .apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.deletableContactChip(
+        element: T,
+        text: String,
+        contactText: String,
+        contactColor: IMdlTextColor? = null,
+        contactBackgroundColor: IMdlBackgroundColor? = null,
+        actionFormEncType: ButtonFormEncType? = null,
+        actionFormMethod: ButtonFormMethod? = null,
+        actionName: String? = null,
+        actionType: ButtonType? = ButtonType.button,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty,
+        block: IMdlBasicContactChip<T>.() -> Unit = {}): IMdlBasicContactChip<T> =
+        this + customDeletableContactChip(
+                element,
+                text,
+                contactText,
+                contactColor,
+                contactBackgroundColor,
+                actionFormEncType,
+                actionFormMethod,
+                actionName,
+                actionType,
+                actionIcon,
+                classes,
+                block)
+
 fun <T : Element> IMdlComponent<T>.deletableContactImageChip(
         text: String,
         contactAlt: String? = null,
@@ -1008,6 +1059,57 @@ fun <T : Element> Element.mdlDeletableChip(
                 classes,
                 block)
 
+fun Element.mdlDeletableContactChip(
+        text: String,
+        contactText: String,
+        contactColor: IMdlTextColor? = null,
+        contactBackgroundColor: IMdlBackgroundColor? = null,
+        actionFormEncType: ButtonFormEncType? = null,
+        actionFormMethod: ButtonFormMethod? = null,
+        actionName: String? = null,
+        actionType: ButtonType? = ButtonType.button,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty, block: MdlDeletableContactChip.() -> Unit = {}) =
+        this + MdlDeletableContactChip(
+                text,
+                contactText,
+                contactColor,
+                contactBackgroundColor,
+                actionFormEncType,
+                actionFormMethod,
+                actionName,
+                actionType,
+                actionIcon,
+                classes)
+                .apply(block)
+
+fun <T : Element> Element.mdlDeletableContactChip(
+        element: T,
+        text: String,
+        contactText: String,
+        contactColor: IMdlTextColor? = null,
+        contactBackgroundColor: IMdlBackgroundColor? = null,
+        actionFormEncType: ButtonFormEncType? = null,
+        actionFormMethod: ButtonFormMethod? = null,
+        actionName: String? = null,
+        actionType: ButtonType? = ButtonType.button,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty,
+        block: IMdlBasicContactChip<T>.() -> Unit = {}): IMdlBasicContactChip<T> =
+        this + customDeletableContactChip(
+                element,
+                text,
+                contactText,
+                contactColor,
+                contactBackgroundColor,
+                actionFormEncType,
+                actionFormMethod,
+                actionName,
+                actionType,
+                actionIcon,
+                classes,
+                block)
+
 fun Element.mdlDeletableContactImageChip(
         text: String,
         contactAlt: String? = null,
@@ -1304,6 +1406,33 @@ private fun <T : Element> customDeletableChip(
         classes: String = String.empty,
         block: IMdlDeletableChip<T>.() -> Unit = {}) =
         object : MdlDeletableChipBase<T>(element, classes) {
+
+            override var text: IMdlChipText<Element>
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlChipText(text))
+
+            override var action: IMdlChipAction<Element> by this.replaceOrAppendExistingChildOfThis(
+                    element,
+                    MdlChipActionButton(actionFormEncType, actionFormMethod, actionName, actionType, actionIcon))
+        }.apply(block)
+
+private fun <T : Element> customDeletableContactChip(
+        element: T,
+        text: String,
+        contactText: String,
+        contactColor: IMdlTextColor? = null,
+        contactBackgroundColor: IMdlBackgroundColor? = null,
+        actionFormEncType: ButtonFormEncType? = null,
+        actionFormMethod: ButtonFormMethod? = null,
+        actionName: String? = null,
+        actionType: ButtonType? = ButtonType.button,
+        actionIcon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
+        classes: String = String.empty,
+        block: IMdlDeletableBasicContactChip<T>.() -> Unit = {}) =
+        object : MdlDeletableBasicContactChipBase<T>(element, classes) {
+
+            override var contact: IMdlChipBasicContact<Element> by this.replaceOrAppendExistingChildOfThis(
+                    element,
+                    MdlChipBasicContact(contactText, contactColor, contactBackgroundColor))
 
             override var text: IMdlChipText<Element>
                     by this.replaceOrAppendExistingChildOfThis(element, MdlChipText(text))
