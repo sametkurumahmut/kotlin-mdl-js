@@ -106,6 +106,23 @@ fun <T : Element, E : Element> IMdlComponent<E>.button(
         block: IMdlButton<T>.() -> Unit = {}): IMdlButton<T>
         = this + object : MdlButtonBase<T>(element, buttonColor, hasRippleEffect, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.buttonLink(
+        href: String? = null,
+        target: String? = null,
+        buttonColor: IMdlButtonColor? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlButtonLink.() -> Unit = {})
+        = this + MdlButtonLink(href, target, buttonColor, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> IMdlComponent<T>.buttonExternalLink(
+        href: String? = null,
+        buttonColor: IMdlButtonColor? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlButtonLink.() -> Unit = {})
+        = this.buttonLink(href, ATarget.blank, buttonColor, hasRippleEffect, classes).apply(block)
+
 fun <T : Element> IMdlComponent<T>.coloredButton(
         formEncType: ButtonFormEncType? = null,
         formMethod: ButtonFormMethod? = null,
@@ -1109,6 +1126,23 @@ fun <T : Element> Element.mdlButton(
         classes: String = String.empty,
         block: IMdlButton<T>.() -> Unit = {}): IMdlButton<T>
         = this + object : MdlButtonBase<T>(element, buttonColor, hasRippleEffect, classes) {}.apply(block)
+
+fun Element.mdlButtonLink(
+        href: String? = null,
+        target: String? = null,
+        buttonColor: IMdlButtonColor? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlButtonLink.() -> Unit = {})
+        = this + MdlButtonLink(href, target, buttonColor, hasRippleEffect, classes).apply(block)
+
+fun Element.mdlButtonExternalLink(
+        href: String? = null,
+        buttonColor: IMdlButtonColor? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlButtonLink.() -> Unit = {})
+        = this.mdlButtonLink(href, ATarget.blank, buttonColor, hasRippleEffect, classes).apply(block)
 
 fun Element.mdlColoredButton(
         formEncType: ButtonFormEncType? = null,
