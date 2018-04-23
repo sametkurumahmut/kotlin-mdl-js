@@ -106,6 +106,23 @@ fun <T : Element, E : Element> IMdlComponent<E>.button(
         block: IMdlButton<T>.() -> Unit = {}): IMdlButton<T>
         = this + object : MdlButtonBase<T>(element, buttonColor, hasRippleEffect, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.coloredButton(
+        formEncType: ButtonFormEncType? = null,
+        formMethod: ButtonFormMethod? = null,
+        name: String? = null,
+        type: ButtonType? = ButtonType.button,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlColoredButton.() -> Unit = {})
+        = this + MdlColoredButton(formEncType, formMethod, name, type, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.coloredButton(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlButton<T>.() -> Unit = {}): IMdlButton<T>
+        = this + object : MdlButtonBase<T>(element, MdlButtonColor.COLORED, hasRippleEffect, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.basicButtonChip(
         text: String,
         formEncType: ButtonFormEncType? = null,
@@ -1092,6 +1109,23 @@ fun <T : Element> Element.mdlButton(
         classes: String = String.empty,
         block: IMdlButton<T>.() -> Unit = {}): IMdlButton<T>
         = this + object : MdlButtonBase<T>(element, buttonColor, hasRippleEffect, classes) {}.apply(block)
+
+fun Element.mdlColoredButton(
+        formEncType: ButtonFormEncType? = null,
+        formMethod: ButtonFormMethod? = null,
+        name: String? = null,
+        type: ButtonType? = ButtonType.button,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlColoredButton.() -> Unit = {})
+        = this + MdlColoredButton(formEncType, formMethod, name, type, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlColoredButton(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlButton<T>.() -> Unit = {}): IMdlButton<T>
+        = this + object : MdlButtonBase<T>(element, MdlButtonColor.COLORED, hasRippleEffect, classes) {}.apply(block)
 
 fun Element.mdlBasicButtonChip(
         text: String,
