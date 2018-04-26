@@ -155,6 +155,17 @@ fun <T : Element> IMdlComponent<T>.coloredButtonExternalLink(
         block: MdlColoredButtonLink.() -> Unit = {})
         = this.coloredButtonLink(href, ATarget.blank, hasRippleEffect, classes).apply(block)
 
+fun <T : Element> IMdlComponent<T>.fabButton(
+        icon: IMdlMaterialIcon<Element>? = null,
+        formEncType: ButtonFormEncType? = null,
+        formMethod: ButtonFormMethod? = null,
+        name: String? = null,
+        type: ButtonType? = ButtonType.button,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlFloatingActionButton.() -> Unit = {}) =
+        this + MdlFloatingActionButton(icon, formEncType, formMethod, name, type, hasRippleEffect, classes).apply(block)
+
 fun <T : Element> IMdlComponent<T>.basicButtonChip(
         text: String,
         formEncType: ButtonFormEncType? = null,
@@ -1190,6 +1201,17 @@ fun Element.mdlColoredButtonExternalLink(
         classes: String = String.empty,
         block: MdlColoredButtonLink.() -> Unit = {})
         = this.mdlColoredButtonLink(href, ATarget.blank, hasRippleEffect, classes).apply(block)
+
+fun Element.mdlFabButton(
+        icon: IMdlMaterialIcon<Element>? = null,
+        formEncType: ButtonFormEncType? = null,
+        formMethod: ButtonFormMethod? = null,
+        name: String? = null,
+        type: ButtonType? = ButtonType.button,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlFloatingActionButton.() -> Unit = {}) =
+        this + MdlFloatingActionButton(icon, formEncType, formMethod, name, type, hasRippleEffect, classes).apply(block)
 
 fun Element.mdlBasicButtonChip(
         text: String,
