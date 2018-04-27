@@ -166,6 +166,23 @@ fun <T : Element> IMdlComponent<T>.fabButton(
         block: MdlFloatingActionButton.() -> Unit = {}) =
         this + MdlFloatingActionButton(icon, formEncType, formMethod, name, type, hasRippleEffect, classes).apply(block)
 
+fun <T : Element> IMdlComponent<T>.fabButtonLink(
+        icon: IMdlMaterialIcon<Element>? = null,
+        href: String? = null,
+        target: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlFloatingActionButtonLink.() -> Unit = {})
+        = this + MdlFloatingActionButtonLink(icon, href, target, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> IMdlComponent<T>.fabButtonExternalLink(
+        icon: IMdlMaterialIcon<Element>? = null,
+        href: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlFloatingActionButtonLink.() -> Unit = {})
+        = this.fabButtonLink(icon, href, ATarget.blank, hasRippleEffect, classes).apply(block)
+
 fun <T : Element> IMdlComponent<T>.basicButtonChip(
         text: String,
         formEncType: ButtonFormEncType? = null,
@@ -1212,6 +1229,23 @@ fun Element.mdlFabButton(
         classes: String = String.empty,
         block: MdlFloatingActionButton.() -> Unit = {}) =
         this + MdlFloatingActionButton(icon, formEncType, formMethod, name, type, hasRippleEffect, classes).apply(block)
+
+fun Element.mdlFabButtonLink(
+        icon: IMdlMaterialIcon<Element>? = null,
+        href: String? = null,
+        target: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlFloatingActionButtonLink.() -> Unit = {})
+        = this + MdlFloatingActionButtonLink(icon, href, target, hasRippleEffect, classes).apply(block)
+
+fun Element.mdlFabButtonExternalLink(
+        icon: IMdlMaterialIcon<Element>? = null,
+        href: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlFloatingActionButtonLink.() -> Unit = {})
+        = this.mdlFabButtonLink(icon, href, ATarget.blank, hasRippleEffect, classes).apply(block)
 
 fun Element.mdlBasicButtonChip(
         text: String,
