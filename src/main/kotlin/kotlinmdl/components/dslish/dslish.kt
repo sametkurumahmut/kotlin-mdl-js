@@ -168,6 +168,23 @@ fun <T : Element> IMdlComponent<T>.coloredFabButton(
                 MdlColoredFloatingActionButton(icon, formEncType, formMethod, name, type, hasRippleEffect, classes)
                         .apply(block)
 
+fun <T : Element> IMdlComponent<T>.coloredFabButtonLink(
+        icon: IMdlMaterialIcon<Element>? = null,
+        href: String? = null,
+        target: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlColoredFloatingActionButtonLink.() -> Unit = {})
+        = this + MdlColoredFloatingActionButtonLink(icon, href, target, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> IMdlComponent<T>.coloredFabButtonExternalLink(
+        icon: IMdlMaterialIcon<Element>? = null,
+        href: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlColoredFloatingActionButtonLink.() -> Unit = {})
+        = this.coloredFabButtonLink(icon, href, ATarget.blank, hasRippleEffect, classes).apply(block)
+
 fun <T : Element> IMdlComponent<T>.fabButton(
         icon: IMdlMaterialIcon<Element>? = null,
         formEncType: ButtonFormEncType? = null,
@@ -1244,6 +1261,23 @@ fun Element.mdlColoredFabButton(
         this +
                 MdlColoredFloatingActionButton(icon, formEncType, formMethod, name, type, hasRippleEffect, classes)
                         .apply(block)
+
+fun Element.mdlColoredFabButtonLink(
+        icon: IMdlMaterialIcon<Element>? = null,
+        href: String? = null,
+        target: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlColoredFloatingActionButtonLink.() -> Unit = {})
+        = this + MdlColoredFloatingActionButtonLink(icon, href, target, hasRippleEffect, classes).apply(block)
+
+fun Element.mdlColoredFabButtonExternalLink(
+        icon: IMdlMaterialIcon<Element>? = null,
+        href: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlColoredFloatingActionButtonLink.() -> Unit = {})
+        = this.mdlColoredFabButtonLink(icon, href, ATarget.blank, hasRippleEffect, classes).apply(block)
 
 fun Element.mdlFabButton(
         icon: IMdlMaterialIcon<Element>? = null,
