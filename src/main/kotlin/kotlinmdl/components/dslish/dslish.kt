@@ -348,6 +348,25 @@ fun <T : Element> IMdlComponent<T>.iconButtonExternalLink(
         block: MdlIconButtonLink.() -> Unit = {})
         = this.iconButtonLink(icon, href, ATarget.blank, hasRippleEffect, classes).apply(block)
 
+fun <T : Element> IMdlComponent<T>.coloredRaisedButton(
+        formEncType: ButtonFormEncType? = null,
+        formMethod: ButtonFormMethod? = null,
+        name: String? = null,
+        type: ButtonType? = ButtonType.button,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlColoredRaisedButton.() -> Unit = {})
+        = this + MdlColoredRaisedButton(formEncType, formMethod, name, type, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.coloredRaisedButton(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlRaisedButton<T>.() -> Unit = {}): IMdlRaisedButton<T> =
+        this +
+                object : MdlRaisedButtonBase<T>(element, MdlButtonColor.COLORED, hasRippleEffect, classes) {}
+                        .apply(block)
+
 fun <T : Element> IMdlComponent<T>.raisedButton(
         formEncType: ButtonFormEncType? = null,
         formMethod: ButtonFormMethod? = null,
@@ -1609,6 +1628,24 @@ fun Element.mdlIconButtonExternalLink(
         classes: String = String.empty,
         block: MdlIconButtonLink.() -> Unit = {})
         = this.mdlIconButtonLink(icon, href, ATarget.blank, hasRippleEffect, classes).apply(block)
+
+fun Element.mdlColoredRaisedButton(
+        formEncType: ButtonFormEncType? = null,
+        formMethod: ButtonFormMethod? = null,
+        name: String? = null,
+        type: ButtonType? = ButtonType.button,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlColoredRaisedButton.() -> Unit = {})
+        = this + MdlColoredRaisedButton(formEncType, formMethod, name, type, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlColoredRaisedButton(
+        element: T,
+        buttonColor: IMdlButtonColor? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlRaisedButton<T>.() -> Unit = {}): IMdlRaisedButton<T>
+        = this + object : MdlRaisedButtonBase<T>(element, buttonColor, hasRippleEffect, classes) {}.apply(block)
 
 fun Element.mdlRaisedButton(
         formEncType: ButtonFormEncType? = null,
