@@ -366,6 +366,21 @@ fun <T : Element, E : Element> IMdlComponent<E>.raisedButton(
         block: IMdlRaisedButton<T>.() -> Unit = {}): IMdlRaisedButton<T>
         = this + object : MdlRaisedButtonBase<T>(element, buttonColor, hasRippleEffect, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.raisedButtonLink(
+        href: String? = null,
+        target: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlRaisedButtonLink.() -> Unit = {})
+        = this + MdlRaisedButtonLink(href, target, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> IMdlComponent<T>.raisedButtonExternalLink(
+        href: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlRaisedButtonLink.() -> Unit = {})
+        = this.raisedButtonLink(href, ATarget.blank, hasRippleEffect, classes).apply(block)
+
 fun <T : Element> IMdlComponent<T>.basicButtonChip(
         text: String,
         formEncType: ButtonFormEncType? = null,
@@ -1612,6 +1627,21 @@ fun <T : Element> Element.mdlRaisedButton(
         classes: String = String.empty,
         block: IMdlRaisedButton<T>.() -> Unit = {}): IMdlRaisedButton<T>
         = this + object : MdlRaisedButtonBase<T>(element, buttonColor, hasRippleEffect, classes) {}.apply(block)
+
+fun Element.mdlRaisedButtonLink(
+        href: String? = null,
+        target: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlRaisedButtonLink.() -> Unit = {})
+        = this + MdlRaisedButtonLink(href, target, hasRippleEffect, classes).apply(block)
+
+fun Element.mdlRaisedButtonExternalLink(
+        href: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlRaisedButtonLink.() -> Unit = {})
+        = this.mdlRaisedButtonLink(href, ATarget.blank, hasRippleEffect, classes).apply(block)
 
 fun Element.mdlBasicButtonChip(
         text: String,
