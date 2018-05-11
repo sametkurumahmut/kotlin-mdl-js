@@ -367,6 +367,21 @@ fun <T : Element, E : Element> IMdlComponent<E>.coloredRaisedButton(
                 object : MdlRaisedButtonBase<T>(element, MdlButtonColor.COLORED, hasRippleEffect, classes) {}
                         .apply(block)
 
+fun <T : Element> IMdlComponent<T>.coloredRaisedButtonLink(
+        href: String? = null,
+        target: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlColoredRaisedButtonLink.() -> Unit = {})
+        = this + MdlColoredRaisedButtonLink(href, target, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> IMdlComponent<T>.coloredRaisedButtonExternalLink(
+        href: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlColoredRaisedButtonLink.() -> Unit = {})
+        = this.coloredRaisedButtonLink(href, ATarget.blank, hasRippleEffect, classes).apply(block)
+
 fun <T : Element> IMdlComponent<T>.raisedButton(
         formEncType: ButtonFormEncType? = null,
         formMethod: ButtonFormMethod? = null,
@@ -1646,6 +1661,21 @@ fun <T : Element> Element.mdlColoredRaisedButton(
         classes: String = String.empty,
         block: IMdlRaisedButton<T>.() -> Unit = {}): IMdlRaisedButton<T>
         = this + object : MdlRaisedButtonBase<T>(element, buttonColor, hasRippleEffect, classes) {}.apply(block)
+
+fun Element.mdlColoredRaisedButtonLink(
+        href: String? = null,
+        target: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlColoredRaisedButtonLink.() -> Unit = {})
+        = this + MdlColoredRaisedButtonLink(href, target, hasRippleEffect, classes).apply(block)
+
+fun Element.mdlColoredRaisedButtonExternalLink(
+        href: String? = null,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlColoredRaisedButtonLink.() -> Unit = {})
+        = this.mdlColoredRaisedButtonLink(href, ATarget.blank, hasRippleEffect, classes).apply(block)
 
 fun Element.mdlRaisedButton(
         formEncType: ButtonFormEncType? = null,
