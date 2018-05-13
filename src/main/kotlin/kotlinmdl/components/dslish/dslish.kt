@@ -415,6 +415,18 @@ fun <T : Element> IMdlComponent<T>.raisedButtonExternalLink(
         block: MdlRaisedButtonLink.() -> Unit = {})
         = this.raisedButtonLink(href, ATarget.blank, hasRippleEffect, classes).apply(block)
 
+fun <T : Element> IMdlComponent<T>.card(
+        shadow: IMdlShadow? = MdlShadow.DP2,
+        classes: String = String.empty,
+        block: MdlCard.() -> Unit = {}) = this + MdlCard(shadow, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.card(
+        element: T,
+        shadow: IMdlShadow? = MdlShadow.DP2,
+        classes: String = String.empty,
+        block: IMdlCard<T>.() -> Unit = {}): IMdlCard<T>
+        = this + object : MdlCardBase<T>(element, shadow, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.basicButtonChip(
         text: String,
         formEncType: ButtonFormEncType? = null,
@@ -1709,6 +1721,16 @@ fun Element.mdlRaisedButtonExternalLink(
         classes: String = String.empty,
         block: MdlRaisedButtonLink.() -> Unit = {})
         = this.mdlRaisedButtonLink(href, ATarget.blank, hasRippleEffect, classes).apply(block)
+
+fun Element.mdlCard(shadow: IMdlShadow? = MdlShadow.DP2, classes: String = String.empty, block: MdlCard.() -> Unit = {})
+        = this + MdlCard(shadow, classes).apply(block)
+
+fun <T : Element> Element.mdlCard(
+        element: T,
+        shadow: IMdlShadow? = MdlShadow.DP2,
+        classes: String = String.empty,
+        block: IMdlCard<T>.() -> Unit = {}): IMdlCard<T>
+        = this + object : MdlCardBase<T>(element, shadow, classes) {}.apply(block)
 
 fun Element.mdlBasicButtonChip(
         text: String,
