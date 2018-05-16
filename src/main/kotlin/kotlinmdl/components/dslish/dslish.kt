@@ -15,6 +15,20 @@ import kotlinx.html.*
 import org.w3c.dom.Element
 
 //region Mdl Component Extensions
+fun <T : Element> IMdlCard<T>.actions(
+        hasBorder: Boolean = false,
+        isExpandable: Boolean = false,
+        classes: String = String.empty,
+        block: MdlCardActions.() -> Unit = {}) = this + MdlCardActions(hasBorder, isExpandable, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlCard<E>.actions(
+        element: T,
+        hasBorder: Boolean = false,
+        isExpandable: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlCardActions<T>.() -> Unit = {}): IMdlCardActions<T>
+        = this + object : MdlCardActionsBase<T>(element, hasBorder, isExpandable, classes) {}.apply(block)
+
 fun <T : Element> IMdlCard<T>.supportingText(
         text: String,
         hasBorder: Boolean = false,
