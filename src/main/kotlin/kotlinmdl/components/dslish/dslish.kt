@@ -29,6 +29,15 @@ fun <T : Element, E : Element> IMdlCard<E>.actions(
         block: IMdlCardActions<T>.() -> Unit = {}): IMdlCardActions<T>
         = this + object : MdlCardActionsBase<T>(element, hasBorder, isExpandable, classes) {}.apply(block)
 
+fun <T : Element> IMdlCard<T>.menu(classes: String = String.empty, block: MdlCardMenu.() -> Unit = {})
+        = this + MdlCardMenu(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlCard<E>.menu(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlCardMenu<T>.() -> Unit = {}): IMdlCardMenu<T>
+        = this + object : MdlCardMenuBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlCard<T>.supportingText(
         text: String,
         hasBorder: Boolean = false,
