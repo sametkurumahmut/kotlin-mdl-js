@@ -29,6 +29,15 @@ fun <T : Element, E : Element> IMdlCard<E>.actions(
         block: IMdlCardActions<T>.() -> Unit = {}): IMdlCardActions<T>
         = this + object : MdlCardActionsBase<T>(element, hasBorder, isExpandable, classes) {}.apply(block)
 
+fun <T : Element> IMdlCard<T>.media(classes: String = String.empty, block: MdlCardMedia.() -> Unit = {})
+        = this + MdlCardMedia(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlCard<E>.media(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlCardMedia<T>.() -> Unit = {}): IMdlCardMedia<T>
+        = this + object : MdlCardMediaBase<T>(element, classes) {}.apply(block)
+
 fun <T : Element> IMdlCard<T>.menu(classes: String = String.empty, block: MdlCardMenu.() -> Unit = {})
         = this + MdlCardMenu(classes).apply(block)
 
