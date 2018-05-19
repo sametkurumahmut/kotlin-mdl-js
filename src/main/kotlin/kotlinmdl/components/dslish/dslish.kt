@@ -95,6 +95,13 @@ fun <T : Element> IMdlCardTitle<T>.text(
         classes: String = String.empty,
         block: MdlCardTitleText.() -> Unit = {}) = this + MdlCardTitleText(text, classes).apply(block)
 
+fun <T : Element, E : Element> IMdlCardTitle<E>.text(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlCardTitleText<T>.() -> Unit = {}): IMdlCardTitleText<T>
+        = this + object : MdlCardTitleTextBase<T>(element, text, classes) {}.apply(block)
+
 fun <T : Element, E : Element> IMdlChip<E>.action(
         element: T,
         icon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
