@@ -78,6 +78,18 @@ fun <T : Element, E : Element> IMdlCard<E>.title(
         block: IMdlCardTitle<T>.() -> Unit = {}): IMdlCardTitle<T>
         = this + object : MdlCardTitleBase<T>(element, hasBorder, isExpandable, classes) {}.apply(block)
 
+fun <T : Element> IMdlCardTitle<T>.subtitleText(
+        text: String,
+        classes: String = String.empty,
+        block: MdlCardSubtitleText.() -> Unit = {}) = this + MdlCardSubtitleText(text, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlCardTitle<E>.subtitleText(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlCardSubtitleText<T>.() -> Unit = {}): IMdlCardSubtitleText<T>
+        = this + object : MdlCardSubtitleTextBase<T>(element, text, classes) {}.apply(block)
+
 fun <T : Element> IMdlCardTitle<T>.text(
         text: String,
         classes: String = String.empty,
