@@ -78,6 +78,69 @@ fun <T : Element, E : Element> IMdlCard<E>.title(
         block: IMdlCardTitle<T>.() -> Unit = {}): IMdlCardTitle<T>
         = this + object : MdlCardTitleBase<T>(element, hasBorder, isExpandable, classes) {}.apply(block)
 
+fun <T : Element> IMdlCardCell<T>.actions(
+        hasBorder: Boolean = false,
+        isExpandable: Boolean = false,
+        classes: String = String.empty,
+        block: MdlCardActions.() -> Unit = {}) = this + MdlCardActions(hasBorder, isExpandable, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlCardCell<E>.actions(
+        element: T,
+        hasBorder: Boolean = false,
+        isExpandable: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlCardActions<T>.() -> Unit = {}): IMdlCardActions<T>
+        = this + object : MdlCardActionsBase<T>(element, hasBorder, isExpandable, classes) {}.apply(block)
+
+fun <T : Element> IMdlCardCell<T>.media(classes: String = String.empty, block: MdlCardMedia.() -> Unit = {})
+        = this + MdlCardMedia(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlCardCell<E>.media(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlCardMedia<T>.() -> Unit = {}): IMdlCardMedia<T>
+        = this + object : MdlCardMediaBase<T>(element, classes) {}.apply(block)
+
+fun <T : Element> IMdlCardCell<T>.menu(classes: String = String.empty, block: MdlCardMenu.() -> Unit = {})
+        = this + MdlCardMenu(classes).apply(block)
+
+fun <T : Element, E : Element> IMdlCardCell<E>.menu(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlCardMenu<T>.() -> Unit = {}): IMdlCardMenu<T>
+        = this + object : MdlCardMenuBase<T>(element, classes) {}.apply(block)
+
+fun <T : Element> IMdlCardCell<T>.supportingText(
+        text: String,
+        hasBorder: Boolean = false,
+        isExpandable: Boolean = false,
+        classes: String = String.empty,
+        block: MdlCardSupportingText.() -> Unit = {})
+        = this + MdlCardSupportingText(text, hasBorder, isExpandable, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlCardCell<E>.supportingText(
+        element: T,
+        text: String,
+        hasBorder: Boolean = false,
+        isExpandable: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlCardSupportingText<T>.() -> Unit = {}): IMdlCardSupportingText<T>
+        = this + object : MdlCardSupportingTextBase<T>(element, text, hasBorder, isExpandable, classes) {}.apply(block)
+
+fun <T : Element> IMdlCardCell<T>.title(
+        hasBorder: Boolean = false,
+        isExpandable: Boolean = false,
+        classes: String = String.empty,
+        block: MdlCardTitle.() -> Unit = {}) = this + MdlCardTitle(hasBorder, isExpandable, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlCardCell<E>.title(
+        element: T,
+        hasBorder: Boolean = false,
+        isExpandable: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlCardTitle<T>.() -> Unit = {}): IMdlCardTitle<T>
+        = this + object : MdlCardTitleBase<T>(element, hasBorder, isExpandable, classes) {}.apply(block)
+
 fun <T : Element> IMdlCardTitle<T>.subtitleText(
         text: String,
         classes: String = String.empty,
@@ -1040,6 +1103,36 @@ fun <T : Element, E : Element> IMdlComponent<E>.tabs(
         classes: String = String.empty,
         block: IMdlTabs<T>.() -> Unit = {}): IMdlTabs<T>
         = this + object : MdlTabsBase<T>(element, hasRippleEffect, classes) {}.apply(block)
+
+fun <T : Element> IMdlGrid<T>.cardCell(
+        colSize: IMdlCellColSize? = null,
+        desktopColSize: IMdlDesktopCellColSize? = null,
+        tabletColSize: IMdlTabletCellColSize? = null,
+        phoneColSize: IMdlPhoneCellColSize? = null,
+        shadow: IMdlShadow? = MdlShadow.DP2,
+        classes: String = String.empty,
+        block: MdlCardCell.() -> Unit = {})
+        = this + MdlCardCell(colSize, desktopColSize, tabletColSize, phoneColSize, shadow, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlGrid<E>.cardCell(
+        element: T,
+        colSize: IMdlCellColSize? = null,
+        desktopColSize: IMdlDesktopCellColSize? = null,
+        tabletColSize: IMdlTabletCellColSize? = null,
+        phoneColSize: IMdlPhoneCellColSize? = null,
+        shadow: IMdlShadow? = MdlShadow.DP2,
+        classes: String = String.empty,
+        block: IMdlCardCell<T>.() -> Unit = {}): IMdlCardCell<T> =
+        this +
+                object : MdlCardCellBase<T>(
+                        element,
+                        colSize,
+                        desktopColSize,
+                        tabletColSize,
+                        phoneColSize,
+                        shadow,
+                        classes) {}
+                        .apply(block)
 
 fun <T : Element> IMdlGrid<T>.cell(
         colSize: IMdlCellColSize? = null,
