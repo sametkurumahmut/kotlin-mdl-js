@@ -64,6 +64,8 @@ sealed class MaterialShade : IMaterialShade {
         class A700 : Accent() {
             override val value = "A700"
         }
+
+        override val defaultValue = "A200"
     }
 
     override fun toString() = this.value
