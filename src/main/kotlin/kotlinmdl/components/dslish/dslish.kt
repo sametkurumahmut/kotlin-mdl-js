@@ -1104,6 +1104,20 @@ fun <T : Element, E : Element> IMdlComponent<E>.tabs(
         block: IMdlTabs<T>.() -> Unit = {}): IMdlTabs<T>
         = this + object : MdlTabsBase<T>(element, hasRippleEffect, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.textField(
+        hasFloatingLabel: Boolean = false,
+        isExpandable: Boolean = false,
+        classes: String = String.empty,
+        block: MdlTextField.() -> Unit = {}) = this + MdlTextField(hasFloatingLabel, isExpandable, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.textField(
+        element: T,
+        hasFloatingLabel: Boolean = false,
+        isExpandable: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlTextField<T>.() -> Unit = {}): IMdlTextField<T>
+        = this + object : MdlTextFieldBase<T>(element, hasFloatingLabel, isExpandable, classes) {}.apply(block)
+
 fun <T : Element> IMdlGrid<T>.cardCell(
         colSize: IMdlCellColSize? = null,
         desktopColSize: IMdlDesktopCellColSize? = null,
@@ -2450,6 +2464,20 @@ fun <T : Element> Element.mdlTabs(
         classes: String = String.empty,
         block: IMdlTabs<T>.() -> Unit = {}): IMdlTabs<T>
         = this + object : MdlTabsBase<T>(element, hasRippleEffect, classes) {}.apply(block)
+
+fun <T : Element> Element.mdlTextField(
+        hasFloatingLabel: Boolean = false,
+        isExpandable: Boolean = false,
+        classes: String = String.empty,
+        block: MdlTextField.() -> Unit = {}) = this + MdlTextField(hasFloatingLabel, isExpandable, classes).apply(block)
+
+fun <T : Element> Element.mdlTextField(
+        element: T,
+        hasFloatingLabel: Boolean = false,
+        isExpandable: Boolean = false,
+        classes: String = String.empty,
+        block: IMdlTextField<T>.() -> Unit = {}): IMdlTextField<T>
+        = this + object : MdlTextFieldBase<T>(element, hasFloatingLabel, isExpandable, classes) {}.apply(block)
 //endregion
 
 //region Private Methods
