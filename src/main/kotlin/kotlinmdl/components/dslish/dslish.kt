@@ -1573,6 +1573,24 @@ fun <T : Element, E : Element> IMdlTabsTabBar<E>.tab(
         block: IMdlTabsTab<T>.() -> Unit = {}): IMdlTabsTab<T>
         = this + object : MdlTabsTabBase<T>(element, isActive, classes) {}.apply(block)
 
+fun <T : Element> IMdlTextField<T>.input(
+        id: String,
+        pattern: String? = null,
+        type: InputType? = InputType.text,
+        formEncType: InputFormEncType? = null,
+        formMethod: InputFormMethod? = null,
+        name: String? = null,
+        classes: String = String.empty,
+        block: MdlTextFieldInput.() -> Unit = {})
+        = this + MdlTextFieldInput(id, pattern, type, formEncType, formMethod, name, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlTextField<E>.input(
+        element: T,
+        id: String,
+        classes: String = String.empty,
+        block: IMdlTextFieldInput<T>.() -> Unit = {}): IMdlTextFieldInput<T>
+        = this + object : MdlTextFieldInputBase<T>(element, id, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.materialIcon(
         icon: IMaterialIcon,
         color: IMdlTextColor? = null,
