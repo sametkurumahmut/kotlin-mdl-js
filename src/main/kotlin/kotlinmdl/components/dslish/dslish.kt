@@ -1591,6 +1591,19 @@ fun <T : Element, E : Element> IMdlTextField<E>.input(
         block: IMdlTextFieldInput<T>.() -> Unit = {}): IMdlTextFieldInput<T>
         = this + object : MdlTextFieldInputBase<T>(element, id, classes) {}.apply(block)
 
+fun <T : Element> IMdlTextField<T>.label(
+        text: String,
+        htmlFor: String,
+        classes: String = String.empty,
+        block: MdlTextFieldLabel.() -> Unit = {}) = this + MdlTextFieldLabel(text, htmlFor, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlTextField<E>.label(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlTextFieldLabel<T>.() -> Unit = {}): IMdlTextFieldLabel<T>
+        = this + object : MdlTextFieldLabelBase<T>(element, text, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.materialIcon(
         icon: IMaterialIcon,
         color: IMdlTextColor? = null,
