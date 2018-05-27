@@ -1573,6 +1573,18 @@ fun <T : Element, E : Element> IMdlTabsTabBar<E>.tab(
         block: IMdlTabsTab<T>.() -> Unit = {}): IMdlTabsTab<T>
         = this + object : MdlTabsTabBase<T>(element, isActive, classes) {}.apply(block)
 
+fun <T : Element> IMdlTextField<T>.error(
+        text: String,
+        classes: String = String.empty,
+        block: MdlTextFieldError.() -> Unit = {}) = this + MdlTextFieldError(text, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlTextField<E>.error(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlTextFieldError<T>.() -> Unit = {}): IMdlTextFieldError<T>
+        = this + object : MdlTextFieldErrorBase<T>(element, text, classes) {}.apply(block)
+
 fun <T : Element> IMdlTextField<T>.input(
         id: String,
         pattern: String? = null,
