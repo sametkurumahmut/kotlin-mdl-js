@@ -1612,6 +1612,16 @@ fun <T : Element> IMdlTextField<T>.inputTextArea(
         block: MdlTextFieldInputTextArea.() -> Unit = {})
         = this + MdlTextFieldInputTextArea(id, rows, cols, wrap, classes).apply(block)
 
+fun <T : Element> IMdlTextField<T>.numericInput(
+        id: String,
+        type: InputType? = InputType.text,
+        formEncType: InputFormEncType? = null,
+        formMethod: InputFormMethod? = null,
+        name: String? = null,
+        classes: String = String.empty,
+        block: MdlTextFieldNumericInput.() -> Unit = {})
+        = this + MdlTextFieldNumericInput(id, type, formEncType, formMethod, name, classes).apply(block)
+
 fun <T : Element> IMdlTextField<T>.label(
         text: String,
         htmlFor: String,
