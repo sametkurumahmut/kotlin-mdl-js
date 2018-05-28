@@ -1603,6 +1603,15 @@ fun <T : Element, E : Element> IMdlTextField<E>.input(
         block: IMdlTextFieldInput<T>.() -> Unit = {}): IMdlTextFieldInput<T>
         = this + object : MdlTextFieldInputBase<T>(element, id, classes) {}.apply(block)
 
+fun <T : Element> IMdlTextField<T>.inputTextArea(
+        id: String,
+        rows: Int? = null,
+        cols: Int? = null,
+        wrap: TextAreaWrap? = null,
+        classes: String = String.empty,
+        block: MdlTextFieldInputTextArea.() -> Unit = {})
+        = this + MdlTextFieldInputTextArea(id, rows, cols, wrap, classes).apply(block)
+
 fun <T : Element> IMdlTextField<T>.label(
         text: String,
         htmlFor: String,
