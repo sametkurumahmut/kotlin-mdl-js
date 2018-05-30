@@ -1585,6 +1585,21 @@ fun <T : Element, E : Element> IMdlTextField<E>.error(
         block: IMdlTextFieldError<T>.() -> Unit = {}): IMdlTextFieldError<T>
         = this + object : MdlTextFieldErrorBase<T>(element, text, classes) {}.apply(block)
 
+fun <T : Element> IMdlTextField<T>.expandableHolder(
+        classes: String = String.empty,
+        block: MdlTextFieldExpandableHolder.() -> Unit = {})
+        = this + MdlTextFieldExpandableHolder(classes).also { this.isExpandable = true; it.block() }
+
+fun <T : Element, E : Element> IMdlTextField<E>.expandableHolder(
+        element: T,
+        classes: String = String.empty,
+        block: IMdlTextFieldExpandableHolder<T>.() -> Unit = {}): IMdlTextFieldExpandableHolder<T> =
+        this +
+                object : MdlTextFieldExpandableHolderBase<T>(element, classes) {}.also {
+                    this.isExpandable = true
+                    it.block()
+                }
+
 fun <T : Element> IMdlTextField<T>.input(
         id: String,
         pattern: String? = null,
