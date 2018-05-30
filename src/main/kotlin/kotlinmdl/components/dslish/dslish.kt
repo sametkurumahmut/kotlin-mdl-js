@@ -1650,6 +1650,68 @@ fun <T : Element, E : Element> IMdlTextField<E>.label(
         block: IMdlTextFieldLabel<T>.() -> Unit = {}): IMdlTextFieldLabel<T>
         = this + object : MdlTextFieldLabelBase<T>(element, text, classes) {}.apply(block)
 
+fun <T : Element> IMdlTextFieldExpandableHolder<T>.error(
+        text: String,
+        classes: String = String.empty,
+        block: MdlTextFieldError.() -> Unit = {}) = this + MdlTextFieldError(text, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlTextFieldExpandableHolder<E>.error(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlTextFieldError<T>.() -> Unit = {}): IMdlTextFieldError<T>
+        = this + object : MdlTextFieldErrorBase<T>(element, text, classes) {}.apply(block)
+
+fun <T : Element> IMdlTextFieldExpandableHolder<T>.input(
+        id: String,
+        pattern: String? = null,
+        type: InputType? = InputType.text,
+        formEncType: InputFormEncType? = null,
+        formMethod: InputFormMethod? = null,
+        name: String? = null,
+        classes: String = String.empty,
+        block: MdlTextFieldInput.() -> Unit = {})
+        = this + MdlTextFieldInput(id, pattern, type, formEncType, formMethod, name, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlTextFieldExpandableHolder<E>.input(
+        element: T,
+        id: String,
+        classes: String = String.empty,
+        block: IMdlTextFieldInput<T>.() -> Unit = {}): IMdlTextFieldInput<T>
+        = this + object : MdlTextFieldInputBase<T>(element, id, classes) {}.apply(block)
+
+fun <T : Element> IMdlTextFieldExpandableHolder<T>.inputTextArea(
+        id: String,
+        rows: Int? = null,
+        cols: Int? = null,
+        wrap: TextAreaWrap? = null,
+        classes: String = String.empty,
+        block: MdlTextFieldInputTextArea.() -> Unit = {})
+        = this + MdlTextFieldInputTextArea(id, rows, cols, wrap, classes).apply(block)
+
+fun <T : Element> IMdlTextFieldExpandableHolder<T>.numericInput(
+        id: String,
+        type: InputType? = InputType.text,
+        formEncType: InputFormEncType? = null,
+        formMethod: InputFormMethod? = null,
+        name: String? = null,
+        classes: String = String.empty,
+        block: MdlTextFieldNumericInput.() -> Unit = {})
+        = this + MdlTextFieldNumericInput(id, type, formEncType, formMethod, name, classes).apply(block)
+
+fun <T : Element> IMdlTextFieldExpandableHolder<T>.label(
+        text: String,
+        htmlFor: String,
+        classes: String = String.empty,
+        block: MdlTextFieldLabel.() -> Unit = {}) = this + MdlTextFieldLabel(text, htmlFor, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlTextFieldExpandableHolder<E>.label(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlTextFieldLabel<T>.() -> Unit = {}): IMdlTextFieldLabel<T>
+        = this + object : MdlTextFieldLabelBase<T>(element, text, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.materialIcon(
         icon: IMaterialIcon,
         color: IMdlTextColor? = null,
