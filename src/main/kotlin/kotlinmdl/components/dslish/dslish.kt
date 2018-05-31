@@ -1104,6 +1104,37 @@ fun <T : Element, E : Element> IMdlComponent<E>.tabs(
         block: IMdlTabs<T>.() -> Unit = {}): IMdlTabs<T>
         = this + object : MdlTabsBase<T>(element, hasRippleEffect, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.basicTextField(
+        id: String,
+        labelText: String,
+        classes: String = String.empty,
+        block: MdlBasicTextField.() -> Unit = {}) = this + MdlBasicTextField(id, labelText, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.basicTextField(
+        element: T,
+        id: String,
+        labelText: String,
+        classes: String = String.empty,
+        block: IMdlBasicTextField<T>.() -> Unit = {}): IMdlBasicTextField<T>
+        = this + customBasicTextField(element, id, labelText, classes) {}.apply(block)
+
+fun <T : Element> IMdlComponent<T>.basicTextField(
+        id: String,
+        labelText: String,
+        errorText: String,
+        classes: String = String.empty,
+        block: MdlBasicTextField.() -> Unit = {})
+        = this + MdlBasicTextField(id, labelText, errorText, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.basicTextField(
+        element: T,
+        id: String,
+        labelText: String,
+        errorText: String,
+        classes: String = String.empty,
+        block: IMdlBasicTextField<T>.() -> Unit = {}): IMdlBasicTextField<T>
+        = this + customBasicTextField(element, id, labelText, errorText, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.textField(
         hasFloatingLabel: Boolean = false,
         isExpandable: Boolean = false,
@@ -2604,6 +2635,37 @@ fun <T : Element> Element.mdlTabs(
         block: IMdlTabs<T>.() -> Unit = {}): IMdlTabs<T>
         = this + object : MdlTabsBase<T>(element, hasRippleEffect, classes) {}.apply(block)
 
+fun Element.mdlBasicTextField(
+        id: String,
+        labelText: String,
+        classes: String = String.empty,
+        block: MdlBasicTextField.() -> Unit = {}) = this + MdlBasicTextField(id, labelText, classes).apply(block)
+
+fun <T : Element> Element.mdlBasicTextField(
+        element: T,
+        id: String,
+        labelText: String,
+        classes: String = String.empty,
+        block: IMdlBasicTextField<T>.() -> Unit = {}): IMdlBasicTextField<T>
+        = this + customBasicTextField(element, id, labelText, classes) {}.apply(block)
+
+fun Element.mdlBasicTextField(
+        id: String,
+        labelText: String,
+        errorText: String,
+        classes: String = String.empty,
+        block: MdlBasicTextField.() -> Unit = {})
+        = this + MdlBasicTextField(id, labelText, errorText, classes).apply(block)
+
+fun <T : Element> Element.mdlBasicTextField(
+        element: T,
+        id: String,
+        labelText: String,
+        errorText: String,
+        classes: String = String.empty,
+        block: IMdlBasicTextField<T>.() -> Unit = {}): IMdlBasicTextField<T>
+        = this + customBasicTextField(element, id, labelText, errorText, classes) {}.apply(block)
+
 fun <T : Element> Element.mdlTextField(
         hasFloatingLabel: Boolean = false,
         isExpandable: Boolean = false,
@@ -2620,6 +2682,43 @@ fun <T : Element> Element.mdlTextField(
 //endregion
 
 //region Private Methods
+private fun <T : Element> customBasicTextField(
+        element: T,
+        id: String,
+        labelText: String,
+        classes: String = String.empty,
+        block: IMdlBasicTextField<T>.() -> Unit = {}) =
+        object : MdlBasicTextFieldBase<T>(element, classes = classes) {
+
+            override var input: IMdlTextFieldInput<Element>
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlTextFieldInput(id))
+
+            override var label: IMdlTextFieldLabel<Element>?
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlTextFieldLabel(labelText, id))
+
+            override var error: IMdlTextFieldError<Element>?
+                    by this.replaceOrAppendExistingChildOfThis(element, initialChildComponent = null)
+        }.apply(block)
+
+private fun <T : Element> customBasicTextField(
+        element: T,
+        id: String,
+        labelText: String,
+        errorText: String,
+        classes: String = String.empty,
+        block: IMdlBasicTextField<T>.() -> Unit = {}) =
+        object : MdlBasicTextFieldBase<T>(element, classes = classes) {
+
+            override var input: IMdlTextFieldInput<Element>
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlTextFieldInput(id))
+
+            override var label: IMdlTextFieldLabel<Element>?
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlTextFieldLabel(labelText, id))
+
+            override var error: IMdlTextFieldError<Element>?
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlTextFieldError(errorText))
+        }.apply(block)
+
 private fun <T : Element> customContactChip(
         element: T,
         text: String,
