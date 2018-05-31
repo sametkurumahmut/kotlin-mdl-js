@@ -1135,6 +1135,27 @@ fun <T : Element, E : Element> IMdlComponent<E>.basicTextField(
         block: IMdlBasicTextField<T>.() -> Unit = {}): IMdlBasicTextField<T>
         = this + customBasicTextField(element, id, labelText, errorText, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.basicTextFieldTextArea(
+        id: String,
+        labelText: String,
+        rows: Int? = null,
+        cols: Int? = null,
+        wrap: TextAreaWrap? = null,
+        classes: String = String.empty,
+        block: MdlBasicTextFieldTextArea.() -> Unit = {})
+        = this + MdlBasicTextFieldTextArea(id, labelText, rows, cols, wrap, classes).apply(block)
+
+fun <T : Element> IMdlComponent<T>.basicTextFieldTextArea(
+        id: String,
+        labelText: String,
+        errorText: String,
+        rows: Int? = null,
+        cols: Int? = null,
+        wrap: TextAreaWrap? = null,
+        classes: String = String.empty,
+        block: MdlBasicTextFieldTextArea.() -> Unit = {})
+        = this + MdlBasicTextFieldTextArea(id, labelText, errorText, rows, cols, wrap, classes).apply(block)
+
 fun <T : Element> IMdlComponent<T>.textField(
         hasFloatingLabel: Boolean = false,
         isExpandable: Boolean = false,
@@ -2665,6 +2686,27 @@ fun <T : Element> Element.mdlBasicTextField(
         classes: String = String.empty,
         block: IMdlBasicTextField<T>.() -> Unit = {}): IMdlBasicTextField<T>
         = this + customBasicTextField(element, id, labelText, errorText, classes) {}.apply(block)
+
+fun Element.mdlBasicTextFieldTextArea(
+        id: String,
+        labelText: String,
+        rows: Int? = null,
+        cols: Int? = null,
+        wrap: TextAreaWrap? = null,
+        classes: String = String.empty,
+        block: MdlBasicTextFieldTextArea.() -> Unit = {})
+        = this + MdlBasicTextFieldTextArea(id, labelText, rows, cols, wrap, classes).apply(block)
+
+fun Element.mdlBasicTextFieldTextArea(
+        id: String,
+        labelText: String,
+        errorText: String,
+        rows: Int? = null,
+        cols: Int? = null,
+        wrap: TextAreaWrap? = null,
+        classes: String = String.empty,
+        block: MdlBasicTextFieldTextArea.() -> Unit = {})
+        = this + MdlBasicTextFieldTextArea(id, labelText, errorText, rows, cols, wrap, classes).apply(block)
 
 fun <T : Element> Element.mdlTextField(
         hasFloatingLabel: Boolean = false,
