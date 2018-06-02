@@ -1156,6 +1156,38 @@ fun <T : Element> IMdlComponent<T>.basicTextFieldTextArea(
         block: MdlBasicTextFieldTextArea.() -> Unit = {})
         = this + MdlBasicTextFieldTextArea(id, labelText, errorText, rows, cols, wrap, classes).apply(block)
 
+fun <T : Element> IMdlComponent<T>.basicNumericTextField(
+        id: String,
+        labelText: String,
+        classes: String = String.empty,
+        block: MdlBasicNumericTextField.() -> Unit = {})
+        = this + MdlBasicNumericTextField(id, labelText, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.basicNumericTextField(
+        element: T,
+        id: String,
+        labelText: String,
+        classes: String = String.empty,
+        block: IMdlBasicTextField<T>.() -> Unit = {}): IMdlBasicTextField<T>
+        = this + customBasicNumericTextField(element, id, labelText, classes) {}.apply(block)
+
+fun <T : Element> IMdlComponent<T>.basicNumericTextField(
+        id: String,
+        labelText: String,
+        errorText: String,
+        classes: String = String.empty,
+        block: MdlBasicNumericTextField.() -> Unit = {})
+        = this + MdlBasicNumericTextField(id, labelText, errorText, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.basicNumericTextField(
+        element: T,
+        id: String,
+        labelText: String,
+        errorText: String,
+        classes: String = String.empty,
+        block: IMdlBasicTextField<T>.() -> Unit = {}): IMdlBasicTextField<T>
+        = this + customBasicNumericTextField(element, id, labelText, errorText, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.textField(
         hasFloatingLabel: Boolean = false,
         isExpandable: Boolean = false,
@@ -2708,6 +2740,38 @@ fun Element.mdlBasicTextFieldTextArea(
         block: MdlBasicTextFieldTextArea.() -> Unit = {})
         = this + MdlBasicTextFieldTextArea(id, labelText, errorText, rows, cols, wrap, classes).apply(block)
 
+fun Element.mdlBasicNumericTextField(
+        id: String,
+        labelText: String,
+        classes: String = String.empty,
+        block: MdlBasicNumericTextField.() -> Unit = {})
+        = this + MdlBasicNumericTextField(id, labelText, classes).apply(block)
+
+fun <T : Element> Element.mdlBasicNumericTextField(
+        element: T,
+        id: String,
+        labelText: String,
+        classes: String = String.empty,
+        block: IMdlBasicTextField<T>.() -> Unit = {}): IMdlBasicTextField<T>
+        = this + customBasicNumericTextField(element, id, labelText, classes) {}.apply(block)
+
+fun Element.mdlBasicNumericTextField(
+        id: String,
+        labelText: String,
+        errorText: String,
+        classes: String = String.empty,
+        block: MdlBasicNumericTextField.() -> Unit = {})
+        = this + MdlBasicNumericTextField(id, labelText, errorText, classes).apply(block)
+
+fun <T : Element> Element.mdlBasicNumericTextField(
+        element: T,
+        id: String,
+        labelText: String,
+        errorText: String,
+        classes: String = String.empty,
+        block: IMdlBasicTextField<T>.() -> Unit = {}): IMdlBasicTextField<T>
+        = this + customBasicNumericTextField(element, id, labelText, errorText, classes) {}.apply(block)
+
 fun <T : Element> Element.mdlTextField(
         hasFloatingLabel: Boolean = false,
         isExpandable: Boolean = false,
@@ -2724,6 +2788,43 @@ fun <T : Element> Element.mdlTextField(
 //endregion
 
 //region Private Methods
+private fun <T : Element> customBasicNumericTextField(
+        element: T,
+        id: String,
+        labelText: String,
+        classes: String = String.empty,
+        block: IMdlBasicTextField<T>.() -> Unit = {}) =
+        object : MdlBasicTextFieldBase<T>(element, classes = classes) {
+
+            override var input: IMdlTextFieldInput<Element>
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlTextFieldNumericInput(id))
+
+            override var label: IMdlTextFieldLabel<Element>?
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlTextFieldLabel(labelText, id))
+
+            override var error: IMdlTextFieldError<Element>?
+                    by this.replaceOrAppendExistingChildOfThis(element, initialChildComponent = null)
+        }.apply(block)
+
+private fun <T : Element> customBasicNumericTextField(
+        element: T,
+        id: String,
+        labelText: String,
+        errorText: String,
+        classes: String = String.empty,
+        block: IMdlBasicTextField<T>.() -> Unit = {}) =
+        object : MdlBasicTextFieldBase<T>(element, classes = classes) {
+
+            override var input: IMdlTextFieldInput<Element>
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlTextFieldNumericInput(id))
+
+            override var label: IMdlTextFieldLabel<Element>?
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlTextFieldLabel(labelText, id))
+
+            override var error: IMdlTextFieldError<Element>?
+                    by this.replaceOrAppendExistingChildOfThis(element, MdlTextFieldError(errorText))
+        }.apply(block)
+
 private fun <T : Element> customBasicTextField(
         element: T,
         id: String,
