@@ -577,6 +577,19 @@ fun <T : Element, E : Element> IMdlComponent<E>.card(
         block: IMdlCard<T>.() -> Unit = {}): IMdlCard<T>
         = this + object : MdlCardBase<T>(element, shadow, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.checkbox(
+        htmlFor: String,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlCheckBox.() -> Unit = {}) = this + MdlCheckBox(htmlFor, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.checkbox(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlCheckBox<T>.() -> Unit = {}): IMdlCheckBox<T>
+        = this + object : MdlCheckBoxBase<T>(element, hasRippleEffect, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.basicButtonChip(
         text: String,
         formEncType: ButtonFormEncType? = null,
@@ -2148,6 +2161,19 @@ fun <T : Element> Element.mdlCard(
         classes: String = String.empty,
         block: IMdlCard<T>.() -> Unit = {}): IMdlCard<T>
         = this + object : MdlCardBase<T>(element, shadow, classes) {}.apply(block)
+
+fun Element.mdlCheckbox(
+        htmlFor: String,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlCheckBox.() -> Unit = {}) = this + MdlCheckBox(htmlFor, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlCheckbox(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlCheckBox<T>.() -> Unit = {}): IMdlCheckBox<T>
+        = this + object : MdlCheckBoxBase<T>(element, hasRippleEffect, classes) {}.apply(block)
 
 fun Element.mdlBasicButtonChip(
         text: String,
