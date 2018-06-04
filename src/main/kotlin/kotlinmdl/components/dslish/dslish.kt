@@ -165,6 +165,24 @@ fun <T : Element, E : Element> IMdlCardTitle<E>.text(
         block: IMdlCardTitleText<T>.() -> Unit = {}): IMdlCardTitleText<T>
         = this + object : MdlCardTitleTextBase<T>(element, text, classes) {}.apply(block)
 
+fun <T : Element> IMdlCheckBox<T>.input(
+        id: String,
+        isChecked: Boolean = false,
+        type: InputType? = InputType.checkBox,
+        formEncType: InputFormEncType? = null,
+        formMethod: InputFormMethod? = null,
+        name: String? = null,
+        classes: String = String.empty,
+        block: MdlCheckBoxInput.() -> Unit = {})
+        = this + MdlCheckBoxInput(id, isChecked, type, formEncType, formMethod, name, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlCheckBox<E>.input(
+        element: T,
+        id: String,
+        classes: String = String.empty,
+        block: IMdlCheckBoxInput<T>.() -> Unit = {}): IMdlCheckBoxInput<T>
+        = this + object : MdlCheckBoxInputBase<T>(element, id, classes) {}.apply(block)
+
 fun <T : Element, E : Element> IMdlChip<E>.action(
         element: T,
         icon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
