@@ -183,6 +183,18 @@ fun <T : Element, E : Element> IMdlCheckBox<E>.input(
         block: IMdlCheckBoxInput<T>.() -> Unit = {}): IMdlCheckBoxInput<T>
         = this + object : MdlCheckBoxInputBase<T>(element, id, classes) {}.apply(block)
 
+fun <T : Element> IMdlCheckBox<T>.label(
+        text: String,
+        classes: String = String.empty,
+        block: MdlCheckBoxLabel.() -> Unit = {}) = this + MdlCheckBoxLabel(text, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlCheckBox<E>.label(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlCheckBoxLabel<T>.() -> Unit = {}): IMdlCheckBoxLabel<T>
+        = this + object : MdlCheckBoxLabelBase<T>(element, text, classes) {}.apply(block)
+
 fun <T : Element, E : Element> IMdlChip<E>.action(
         element: T,
         icon: IMdlMaterialIcon<Element>? = MdlMaterialIcons.cancel(),
