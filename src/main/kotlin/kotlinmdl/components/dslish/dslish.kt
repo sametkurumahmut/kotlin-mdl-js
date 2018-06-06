@@ -607,6 +607,44 @@ fun <T : Element, E : Element> IMdlComponent<E>.card(
         block: IMdlCard<T>.() -> Unit = {}): IMdlCard<T>
         = this + object : MdlCardBase<T>(element, shadow, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.basicCheckbox(
+        id: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicCheckBox.() -> Unit = {})
+        = this + MdlBasicCheckBox(id, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.basicCheckbox(
+        element: T,
+        id: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicCheckBox<T>.() -> Unit = {}): IMdlBasicCheckBox<T> =
+        this + object : MdlBasicCheckBoxBase<T>(element, id, isChecked, null, hasRippleEffect, classes) {}.apply(block)
+
+fun <T : Element> IMdlComponent<T>.basicCheckbox(
+        id: String,
+        labelText: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicCheckBox.() -> Unit = {})
+        = this + MdlBasicCheckBox(id, labelText, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.basicCheckbox(
+        element: T,
+        id: String,
+        labelText: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicCheckBox<T>.() -> Unit = {}): IMdlBasicCheckBox<T> =
+        this +
+                object : MdlBasicCheckBoxBase<T>(element, id, labelText, isChecked, hasRippleEffect, classes) {}
+                        .apply(block)
+
 fun <T : Element> IMdlComponent<T>.checkbox(
         htmlFor: String,
         hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
@@ -2191,6 +2229,44 @@ fun <T : Element> Element.mdlCard(
         classes: String = String.empty,
         block: IMdlCard<T>.() -> Unit = {}): IMdlCard<T>
         = this + object : MdlCardBase<T>(element, shadow, classes) {}.apply(block)
+
+fun Element.mdlBasicCheckbox(
+        id: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicCheckBox.() -> Unit = {})
+        = this + MdlBasicCheckBox(id, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlBasicCheckbox(
+        element: T,
+        id: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicCheckBox<T>.() -> Unit = {}): IMdlBasicCheckBox<T> =
+        this + object : MdlBasicCheckBoxBase<T>(element, id, isChecked, null, hasRippleEffect, classes) {}.apply(block)
+
+fun Element.mdlBasicCheckbox(
+        id: String,
+        labelText: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicCheckBox.() -> Unit = {})
+        = this + MdlBasicCheckBox(id, labelText, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlBasicCheckbox(
+        element: T,
+        id: String,
+        labelText: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicCheckBox<T>.() -> Unit = {}): IMdlBasicCheckBox<T> =
+        this +
+                object : MdlBasicCheckBoxBase<T>(element, id, labelText, isChecked, hasRippleEffect, classes) {}
+                        .apply(block)
 
 fun Element.mdlCheckbox(
         htmlFor: String,
