@@ -1173,6 +1173,19 @@ fun <T : Element, E : Element> IMdlComponent<E>.nav(
         classes: String = String.empty,
         block: IMdlNav<T>.() -> Unit = {}): IMdlNav<T> = this + object : MdlNavBase<T>(element, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.radio(
+        htmlFor: String,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlRadio.() -> Unit = {}) = this + MdlRadio(htmlFor, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.radio(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlRadio<T>.() -> Unit = {}): IMdlRadio<T>
+        = this + object : MdlRadioBase<T>(element, hasRippleEffect, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.tabs(
         hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
         classes: String = String.empty,
@@ -2807,6 +2820,19 @@ fun <T : Element> Element.mdlNav(
         element: T,
         classes: String = String.empty,
         block: IMdlNav<T>.() -> Unit = {}): IMdlNav<T> = this + object : MdlNavBase<T>(element, classes) {}.apply(block)
+
+fun Element.mdlRadio(
+        htmlFor: String,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlRadio.() -> Unit = {}) = this + MdlRadio(htmlFor, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlRadio(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlRadio<T>.() -> Unit = {}): IMdlRadio<T>
+        = this + object : MdlRadioBase<T>(element, hasRippleEffect, classes) {}.apply(block)
 
 fun Element.mdlTabs(
         hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
