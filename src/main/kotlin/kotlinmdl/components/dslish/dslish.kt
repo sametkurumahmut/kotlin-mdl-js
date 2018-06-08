@@ -1715,6 +1715,24 @@ fun <T : Element> IMdlNav<T>.externalLink(
         classes: String = String.empty,
         block: MdlNavLink.() -> Unit = {}) = this.link(href, ATarget.blank, classes).apply(block)
 
+fun <T : Element> IMdlRadio<T>.button(
+        id: String,
+        isChecked: Boolean = false,
+        type: InputType? = InputType.radio,
+        formEncType: InputFormEncType? = null,
+        formMethod: InputFormMethod? = null,
+        name: String? = null,
+        classes: String = String.empty,
+        block: MdlRadioButton.() -> Unit = {})
+        = this + MdlRadioButton(id, isChecked, type, formEncType, formMethod, name, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlRadio<E>.button(
+        element: T,
+        id: String,
+        classes: String = String.empty,
+        block: IMdlRadioButton<T>.() -> Unit = {}): IMdlRadioButton<T>
+        = this + object : MdlRadioButtonBase<T>(element, id, classes) {}.apply(block)
+
 fun <T : Element> IMdlTabs<T>.panel(
         id: String,
         isActive: Boolean = false,
