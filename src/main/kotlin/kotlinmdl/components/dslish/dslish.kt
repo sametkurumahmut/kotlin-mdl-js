@@ -1173,6 +1173,51 @@ fun <T : Element, E : Element> IMdlComponent<E>.nav(
         classes: String = String.empty,
         block: IMdlNav<T>.() -> Unit = {}): IMdlNav<T> = this + object : MdlNavBase<T>(element, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.basicRadio(
+        id: String,
+        buttonName: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicRadio.() -> Unit = {})
+        = this + MdlBasicRadio(id, buttonName, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.basicRadio(
+        element: T,
+        id: String,
+        buttonName: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicRadio<T>.() -> Unit = {}): IMdlBasicRadio<T> =
+        this +
+                object : MdlBasicRadioBase<T>(element, id, buttonName, isChecked, null, hasRippleEffect, classes) {}
+                        .apply(block)
+
+fun <T : Element> IMdlComponent<T>.basicRadio(
+        id: String,
+        labelText: String,
+        buttonName: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicRadio.() -> Unit = {})
+        = this + MdlBasicRadio(id, labelText, buttonName, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.basicRadio(
+        element: T,
+        id: String,
+        labelText: String,
+        buttonName: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicRadio<T>.() -> Unit = {}): IMdlBasicRadio<T> =
+        this +
+                object :
+                        MdlBasicRadioBase<T>(element, id, labelText, buttonName, isChecked, hasRippleEffect, classes) {}
+                        .apply(block)
+
 fun <T : Element> IMdlComponent<T>.radio(
         htmlFor: String,
         hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
@@ -2850,6 +2895,51 @@ fun <T : Element> Element.mdlNav(
         element: T,
         classes: String = String.empty,
         block: IMdlNav<T>.() -> Unit = {}): IMdlNav<T> = this + object : MdlNavBase<T>(element, classes) {}.apply(block)
+
+fun Element.mdlBasicRadio(
+        id: String,
+        buttonName: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicRadio.() -> Unit = {})
+        = this + MdlBasicRadio(id, buttonName, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlBasicRadio(
+        element: T,
+        id: String,
+        buttonName: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicRadio<T>.() -> Unit = {}): IMdlBasicRadio<T> =
+        this +
+                object : MdlBasicRadioBase<T>(element, id, buttonName, isChecked, null, hasRippleEffect, classes) {}
+                        .apply(block)
+
+fun Element.mdlBasicRadio(
+        id: String,
+        labelText: String,
+        buttonName: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicRadio.() -> Unit = {})
+        = this + MdlBasicRadio(id, labelText, buttonName, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlBasicRadio(
+        element: T,
+        id: String,
+        labelText: String,
+        buttonName: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicRadio<T>.() -> Unit = {}): IMdlBasicRadio<T> =
+        this +
+                object :
+                        MdlBasicRadioBase<T>(element, id, labelText, buttonName, isChecked, hasRippleEffect, classes) {}
+                        .apply(block)
 
 fun Element.mdlRadio(
         htmlFor: String,
