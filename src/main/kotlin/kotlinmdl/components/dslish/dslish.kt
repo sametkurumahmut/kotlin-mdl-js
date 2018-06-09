@@ -1733,6 +1733,18 @@ fun <T : Element, E : Element> IMdlRadio<E>.button(
         block: IMdlRadioButton<T>.() -> Unit = {}): IMdlRadioButton<T>
         = this + object : MdlRadioButtonBase<T>(element, id, classes) {}.apply(block)
 
+fun <T : Element> IMdlRadio<T>.label(
+        text: String,
+        classes: String = String.empty,
+        block: MdlRadioLabel.() -> Unit = {}) = this + MdlRadioLabel(text, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlRadio<E>.label(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlRadioLabel<T>.() -> Unit = {}): IMdlRadioLabel<T>
+        = this + object : MdlRadioLabelBase<T>(element, text, classes) {}.apply(block)
+
 fun <T : Element> IMdlTabs<T>.panel(
         id: String,
         isActive: Boolean = false,
