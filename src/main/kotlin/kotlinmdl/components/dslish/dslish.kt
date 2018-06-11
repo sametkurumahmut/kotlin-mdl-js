@@ -1099,6 +1099,19 @@ fun <T : Element, E : Element> IMdlComponent<E>.grid(
         block: IMdlGrid<T>.() -> Unit = {}): IMdlGrid<T>
         = this + object : MdlGridBase<T>(element, hasSpacing, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.iconToggle(
+        htmlFor: String,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlIconToggle.() -> Unit = {}) = this + MdlIconToggle(htmlFor, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.iconToggle(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlIconToggle<T>.() -> Unit = {}): IMdlIconToggle<T>
+        = this + object : MdlIconToggleBase<T>(element, hasRippleEffect, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.layout(classes: String = String.empty, block: MdlLayout.() -> Unit = {})
         = this + MdlLayout(classes).apply(block)
 
@@ -2810,6 +2823,19 @@ fun <T : Element> Element.mdlGrid(
         classes: String = String.empty,
         block: IMdlGrid<T>.() -> Unit = {}): IMdlGrid<T>
         = this + object : MdlGridBase<T>(element, hasSpacing, classes) {}.apply(block)
+
+fun Element.mdlIconToggle(
+        htmlFor: String,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlIconToggle.() -> Unit = {}) = this + MdlIconToggle(htmlFor, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlIconToggle(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlIconToggle<T>.() -> Unit = {}): IMdlIconToggle<T>
+        = this + object : MdlIconToggleBase<T>(element, hasRippleEffect, classes) {}.apply(block)
 
 fun Element.mdlLayout(classes: String = String.empty, block: MdlLayout.() -> Unit = {})
         = this + MdlLayout(classes).apply(block)
