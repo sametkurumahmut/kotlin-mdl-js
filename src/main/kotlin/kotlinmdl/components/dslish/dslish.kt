@@ -1405,6 +1405,24 @@ fun <T : Element, E : Element> IMdlGrid<E>.cell(
                 object : MdlCellBase<T>(element, colSize, desktopColSize, tabletColSize, phoneColSize, classes) {}
                         .apply(block)
 
+fun <T : Element> IMdlIconToggle<T>.input(
+        id: String,
+        isChecked: Boolean = false,
+        type: InputType? = InputType.checkBox,
+        formEncType: InputFormEncType? = null,
+        formMethod: InputFormMethod? = null,
+        name: String? = null,
+        classes: String = String.empty,
+        block: MdlIconToggleInput.() -> Unit = {})
+        = this + MdlIconToggleInput(id, isChecked, type, formEncType, formMethod, name, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlIconToggle<E>.input(
+        element: T,
+        id: String,
+        classes: String = String.empty,
+        block: IMdlIconToggleInput<T>.() -> Unit = {}): IMdlIconToggleInput<T>
+        = this + object : MdlIconToggleInputBase<T>(element, id, classes) {}.apply(block)
+
 fun <T : Element> IMdlLayout<T>.content(
         title: String = String.empty,
         classes: String = String.empty,
