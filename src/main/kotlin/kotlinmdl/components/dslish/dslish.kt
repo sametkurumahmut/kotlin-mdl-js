@@ -1423,6 +1423,20 @@ fun <T : Element, E : Element> IMdlIconToggle<E>.input(
         block: IMdlIconToggleInput<T>.() -> Unit = {}): IMdlIconToggleInput<T>
         = this + object : MdlIconToggleInputBase<T>(element, id, classes) {}.apply(block)
 
+fun <T : Element> IMdlIconToggle<T>.label(
+        icon: IMaterialIcon,
+        color: IMdlTextColor? = null,
+        classes: String = String.empty,
+        block: MdlIconToggleLabel.() -> Unit = {}) = this + MdlIconToggleLabel(icon, color, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlIconToggle<E>.label(
+        element: T,
+        icon: IMaterialIcon,
+        color: IMdlTextColor? = null,
+        classes: String = String.empty,
+        block: IMdlIconToggleLabel<T>.() -> Unit = {}): IMdlIconToggleLabel<T>
+        = this + object : MdlIconToggleLabelBase<T>(element, icon, color, classes) {}.apply(block)
+
 fun <T : Element> IMdlLayout<T>.content(
         title: String = String.empty,
         classes: String = String.empty,
