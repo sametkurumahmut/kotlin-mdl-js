@@ -1099,6 +1099,35 @@ fun <T : Element, E : Element> IMdlComponent<E>.grid(
         block: IMdlGrid<T>.() -> Unit = {}): IMdlGrid<T>
         = this + object : MdlGridBase<T>(element, hasSpacing, classes) {}.apply(block)
 
+fun <T : Element> IMdlComponent<T>.basicIconToggle(
+        id: String,
+        labelIcon: IMaterialIcon,
+        labelColor: IMdlTextColor? = null,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicIconToggle.() -> Unit = {})
+        = this + MdlBasicIconToggle(id, labelIcon, labelColor, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.basicIconToggle(
+        element: T,
+        id: String,
+        labelIcon: IMaterialIcon,
+        labelColor: IMdlTextColor? = null,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicIconToggle<T>.() -> Unit = {}): IMdlBasicIconToggle<T> =
+        this + object : MdlBasicIconToggleBase<T>(
+                element,
+                id,
+                labelIcon,
+                labelColor,
+                isChecked,
+                hasRippleEffect,
+                classes) {}
+                .apply(block)
+
 fun <T : Element> IMdlComponent<T>.iconToggle(
         htmlFor: String,
         hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
@@ -2855,6 +2884,35 @@ fun <T : Element> Element.mdlGrid(
         classes: String = String.empty,
         block: IMdlGrid<T>.() -> Unit = {}): IMdlGrid<T>
         = this + object : MdlGridBase<T>(element, hasSpacing, classes) {}.apply(block)
+
+fun Element.mdlBasicIconToggle(
+        id: String,
+        labelIcon: IMaterialIcon,
+        labelColor: IMdlTextColor? = null,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicIconToggle.() -> Unit = {})
+        = this + MdlBasicIconToggle(id, labelIcon, labelColor, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlBasicIconToggle(
+        element: T,
+        id: String,
+        labelIcon: IMaterialIcon,
+        labelColor: IMdlTextColor? = null,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicIconToggle<T>.() -> Unit = {}): IMdlBasicIconToggle<T> =
+        this + object : MdlBasicIconToggleBase<T>(
+                element,
+                id,
+                labelIcon,
+                labelColor,
+                isChecked,
+                hasRippleEffect,
+                classes) {}
+                .apply(block)
 
 fun Element.mdlIconToggle(
         htmlFor: String,
