@@ -1068,6 +1068,19 @@ fun <T : Element, E : Element> IMdlComponent<E>.deletableContactImageChipExterna
                 classes,
                 block)
 
+fun <T : Element> IMdlComponent<T>.switch(
+        htmlFor: String,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlSwitch.() -> Unit = {}) = this + MdlSwitch(htmlFor, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.switch(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlSwitch<T>.() -> Unit = {}): IMdlSwitch<T>
+        = this + object : MdlSwitchBase<T>(element, hasRippleEffect, classes) {}.apply(block)
+
 fun <T : Element> IMdlComponent<T>.fixedTabLayout(classes: String = String.empty, block: MdlTabLayout.() -> Unit = {})
         = this + MdlTabLayout(MdlTabLayoutTabMode.FIXED, classes).apply(block)
 
@@ -2856,6 +2869,19 @@ fun <T : Element> Element.mdlDeletableContactImageChipExternalLink(
                 actionIcon,
                 classes,
                 block)
+
+fun Element.mdlSwitch(
+        htmlFor: String,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlSwitch.() -> Unit = {}) = this + MdlSwitch(htmlFor, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlSwitch(
+        element: T,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlSwitch<T>.() -> Unit = {}): IMdlSwitch<T>
+        = this + object : MdlSwitchBase<T>(element, hasRippleEffect, classes) {}.apply(block)
 
 fun Element.mdlFixedTabLayout(classes: String = String.empty, block: MdlTabLayout.() -> Unit = {})
         = this + MdlTabLayout(MdlTabLayoutTabMode.FIXED, classes).apply(block)
