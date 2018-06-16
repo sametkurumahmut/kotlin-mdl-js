@@ -1877,6 +1877,24 @@ fun <T : Element, E : Element> IMdlRadio<E>.label(
         block: IMdlRadioLabel<T>.() -> Unit = {}): IMdlRadioLabel<T>
         = this + object : MdlRadioLabelBase<T>(element, text, classes) {}.apply(block)
 
+fun <T : Element> IMdlSwitch<T>.input(
+        id: String,
+        isChecked: Boolean = false,
+        type: InputType? = InputType.checkBox,
+        formEncType: InputFormEncType? = null,
+        formMethod: InputFormMethod? = null,
+        name: String? = null,
+        classes: String = String.empty,
+        block: MdlSwitchInput.() -> Unit = {})
+        = this + MdlSwitchInput(id, isChecked, type, formEncType, formMethod, name, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlSwitch<E>.input(
+        element: T,
+        id: String,
+        classes: String = String.empty,
+        block: IMdlSwitchInput<T>.() -> Unit = {}): IMdlSwitchInput<T>
+        = this + object : MdlSwitchInputBase<T>(element, id, classes) {}.apply(block)
+
 fun <T : Element> IMdlTabs<T>.panel(
         id: String,
         isActive: Boolean = false,
