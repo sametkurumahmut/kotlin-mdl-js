@@ -1895,6 +1895,18 @@ fun <T : Element, E : Element> IMdlSwitch<E>.input(
         block: IMdlSwitchInput<T>.() -> Unit = {}): IMdlSwitchInput<T>
         = this + object : MdlSwitchInputBase<T>(element, id, classes) {}.apply(block)
 
+fun <T : Element> IMdlSwitch<T>.label(
+        text: String,
+        classes: String = String.empty,
+        block: MdlSwitchLabel.() -> Unit = {}) = this + MdlSwitchLabel(text, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlSwitch<E>.label(
+        element: T,
+        text: String,
+        classes: String = String.empty,
+        block: IMdlSwitchLabel<T>.() -> Unit = {}): IMdlSwitchLabel<T>
+        = this + object : MdlSwitchLabelBase<T>(element, text, classes) {}.apply(block)
+
 fun <T : Element> IMdlTabs<T>.panel(
         id: String,
         isActive: Boolean = false,
