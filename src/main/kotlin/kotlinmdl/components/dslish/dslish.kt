@@ -1068,6 +1068,46 @@ fun <T : Element, E : Element> IMdlComponent<E>.deletableContactImageChipExterna
                 classes,
                 block)
 
+fun <T : Element> IMdlComponent<T>.basicSwitch(
+        id: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicSwitch.() -> Unit = {})
+        = this + MdlBasicSwitch(id, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.basicSwitch(
+        element: T,
+        id: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicSwitch<T>.() -> Unit = {}): IMdlBasicSwitch<T> =
+        this +
+                object : MdlBasicSwitchBase<T>(element, id, isChecked, null, hasRippleEffect, classes) {}
+                        .apply(block)
+
+fun <T : Element> IMdlComponent<T>.basicSwitch(
+        id: String,
+        labelText: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicSwitch.() -> Unit = {})
+        = this + MdlBasicSwitch(id, labelText, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element, E : Element> IMdlComponent<E>.basicSwitch(
+        element: T,
+        id: String,
+        labelText: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicSwitch<T>.() -> Unit = {}): IMdlBasicSwitch<T> =
+        this +
+                object : MdlBasicSwitchBase<T>(element, id, labelText, isChecked, hasRippleEffect, classes) {}
+                        .apply(block)
+
 fun <T : Element> IMdlComponent<T>.switch(
         htmlFor: String,
         hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
@@ -2899,6 +2939,46 @@ fun <T : Element> Element.mdlDeletableContactImageChipExternalLink(
                 actionIcon,
                 classes,
                 block)
+
+fun Element.mdlBasicSwitch(
+        id: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicSwitch.() -> Unit = {})
+        = this + MdlBasicSwitch(id, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlBasicSwitch(
+        element: T,
+        id: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicSwitch<T>.() -> Unit = {}): IMdlBasicSwitch<T> =
+        this +
+                object : MdlBasicSwitchBase<T>(element, id, isChecked, null, hasRippleEffect, classes) {}
+                        .apply(block)
+
+fun Element.mdlBasicSwitch(
+        id: String,
+        labelText: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: MdlBasicSwitch.() -> Unit = {})
+        = this + MdlBasicSwitch(id, labelText, isChecked, hasRippleEffect, classes).apply(block)
+
+fun <T : Element> Element.mdlBasicSwitch(
+        element: T,
+        id: String,
+        labelText: String,
+        isChecked: Boolean = false,
+        hasRippleEffect: Boolean = MdlConfig.hasRippleEffect,
+        classes: String = String.empty,
+        block: IMdlBasicSwitch<T>.() -> Unit = {}): IMdlBasicSwitch<T> =
+        this +
+                object : MdlBasicSwitchBase<T>(element, id, labelText, isChecked, hasRippleEffect, classes) {}
+                        .apply(block)
 
 fun Element.mdlSwitch(
         htmlFor: String,
