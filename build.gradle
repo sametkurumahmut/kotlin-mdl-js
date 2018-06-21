@@ -1,4 +1,10 @@
 buildscript {
+    ext.developerFullName = 'Samet Kurumahmut'
+    ext.developerEmail = 'samet.kurumahmut@gmail.com'
+    ext.developerBintrayUserName = 'sametkurumahmut'
+    ext.developerGithubUserName = 'sametkurumahmut'
+    ext.developerGithubProjectName = 'kotlin-mdl-js'
+
     ext.projectName = 'kotlin-mdl-js'
     ext.projectDescription = 'Kotlin Material Design Lite - A Kotlin library which is a wrapper for Material Design Lite provides DSL to build HTML for web development using Kotlinx.html library.'
     ext.projectGroup = 'com.sametkurumahmut.kotlinx'
