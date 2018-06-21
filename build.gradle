@@ -1,8 +1,15 @@
-group 'com.sametkurumahmut.kotlinmdl'
-version '0.1.0'
-
 buildscript {
+    ext.projectName = 'kotlin-mdl-js'
+    ext.projectDescription = 'Kotlin Material Design Lite - A Kotlin library which is a wrapper for Material Design Lite provides DSL to build HTML for web development using Kotlinx.html library.'
+    ext.projectGroup = 'com.sametkurumahmut.kotlinx'
+    ext.projectArtifact = 'kotlin-mdl-js'
+    ext.projectVersion = '0.1.0'
+    ext.projectLicense = 'The Apache Software License, Version 2.0'
+    ext.projectLicenseTag = 'Apache-2.0'
+    ext.projectLicenseUrl = 'https://www.apache.org/licenses/LICENSE-2.0'
+
     ext.kotlinVersion = '1.2.50'
+
     repositories {
         mavenCentral()
     }
@@ -10,6 +17,9 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
+
+group projectGroup
+version projectVersion
 
 apply plugin: 'kotlin2js'
 
